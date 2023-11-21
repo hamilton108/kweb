@@ -1,0 +1,182 @@
+CostPlaceChanged: ({ deviations = [
+        { costPlaceId = Just 49, costPlaces = [
+                { cpId = 39, cpName = "Avdeling 2/Felles 1020/KNA 12"
+                },
+                { cpId = 49, cpName = "Avdeling 3/Felles 1040/KNA 40"
+                }
+            ], deviationIn = "-", deviationOut = "-", isSelected = False, name = "Asle Tarvik", oid = 60, presentId = Nothing, reasonIn = "659", reasonOut = "-5", regTimeIn = { date = "2023-03-07", time = "08:00"
+            }, regTimeOut = { date = "2023-03-08", time = "11:39"
+            }, toHourBank = Just "0,00", watchEnd = { date = "", time = ""
+            }, watchId = Nothing, watchStart = { date = "", time = ""
+            }
+        },
+        { costPlaceId = Nothing, costPlaces = [
+                { cpId = 39, cpName = "Avdeling 2/Felles 1020/KNA 12"
+                }
+            ], deviationIn = "-", deviationOut = "-", isSelected = False, name = "Solveig Restad", oid = 66, presentId = Nothing, reasonIn = "372", reasonOut = "-5", regTimeIn = { date = "2023-03-09", time = "08:00"
+            }, regTimeOut = { date = "2023-03-09", time = "09:52"
+            }, toHourBank = Just "0,00", watchEnd = { date = "", time = ""
+            }, watchId = Nothing, watchStart = { date = "", time = ""
+            }
+        },
+        { costPlaceId = Just -1, costPlaces = [
+                { cpId = 39, cpName = "Avdeling 2/Felles 1020/KNA 12"
+                },
+                { cpId = 49, cpName = "Avdeling 3/Felles 1040/KNA 40"
+                },
+                { cpId = 59, cpName = "Avdeling 4/Felles 1050/KNA 59"
+                }
+            ], deviationIn = "-", deviationOut = "-", isSelected = False, name = "Trine Lie", oid = 69, presentId = Nothing, reasonIn = "659", reasonOut = "-5", regTimeIn = { date = "2023-03-09", time = "12:05"
+            }, regTimeOut = { date = "2023-03-09", time = "12:27"
+            }, toHourBank = Just "0,00", watchEnd = { date = "", time = ""
+            }, watchId = Nothing, watchStart = { date = "", time = ""
+            }
+        },
+        { costPlaceId = Nothing, costPlaces = [
+                { cpId = 39, cpName = "Avdeling 2/Felles 1020/KNA 12"
+                }
+            ], deviationIn = "-", deviationOut = "-", isSelected = False, name = "Trine Lie", oid = 70, presentId = Nothing, reasonIn = "660", reasonOut = "372", regTimeIn = { date = "2023-03-09", time = "14:03"
+            }, regTimeOut = { date = "2023-03-09", time = "16:10"
+            }, toHourBank = Just "0,00", watchEnd = { date = "", time = ""
+            }, watchId = Nothing, watchStart = { date = "", time = ""
+            }
+        }
+    ], dlgAlert = DialogHidden, dlgEdit = DialogVisible, flags = { userid = "kaidan", wid = "39"
+    }, reasonsIn = [
+        { txt = "Normal arbeidstid", val = "-5"
+        },
+        { txt = "Utrykning", val = "192"
+        },
+        { txt = "Møte frivillig", val = "372"
+        },
+        { txt = "Ekstrapersonell", val = "659"
+        },
+        { txt = "Opplæring", val = "660"
+        },
+        { txt = "Ekstra pga uro", val = "661"
+        },
+        { txt = "Møte pålagt", val = "759"
+        },
+        { txt = "Utrykning2", val = "962"
+        }
+    ], reasonsOut = [
+        { txt = "Normal arbeidstid", val = "-5"
+        },
+        { txt = "Utrykning", val = "192"
+        },
+        { txt = "Møte frivillig", val = "372"
+        },
+        { txt = "Ekstrapersonell", val = "659"
+        },
+        { txt = "Opplæring", val = "660"
+        },
+        { txt = "Ekstra pga uro", val = "661"
+        },
+        { txt = "Møte pålagt", val = "759"
+        },
+        { txt = "Utrykning2", val = "962"
+        }
+    ], selectedDeviation = Just { costPlaceId = Just 39, costPlaces = [
+            { cpId = 39, cpName = "Avdeling 2/Felles 1020/KNA 12"
+            },
+            { cpId = 49, cpName = "Avdeling 3/Felles 1040/KNA 40"
+            }
+        ], deviationIn = "-", deviationOut = "-", isSelected = False, name = "Asle Tarvik", oid = 60, presentId = Nothing, reasonIn = "659", reasonOut = "-5", regTimeIn = { date = "2023-03-07", time = "08:00"
+        }, regTimeOut = { date = "2023-03-08", time = "11:39"
+        }, toHourBank = Just "0,00", watchEnd = { date = "", time = ""
+        }, watchId = Nothing, watchStart = { date = "", time = ""
+        }
+    }
+},<internals>)
+
+
+({ deviations = [
+        { costPlaceId = Just 49, costPlaces = [
+                { cpId = 39, cpName = "Avdeling 2/Felles 1020/KNA 12"
+                },
+                { cpId = 49, cpName = "Avdeling 3/Felles 1040/KNA 40"
+                }
+            ], deviationIn = "-", deviationOut = "-", isSelected = False, name = "Asle Tarvik", oid = 60, presentId = Nothing, reasonIn = "659", reasonOut = "-5", regTimeIn = { date = "2023-03-07", time = "08:00"
+            }, regTimeOut = { date = "2023-03-08", time = "11:39"
+            }, toHourBank = Just "0,00", watchEnd = { date = "", time = ""
+            }, watchId = Nothing, watchStart = { date = "", time = ""
+            }
+        },
+        { costPlaceId = Nothing, costPlaces = [
+                { cpId = 39, cpName = "Avdeling 2/Felles 1020/KNA 12"
+                }
+            ], deviationIn = "-", deviationOut = "-", isSelected = False, name = "Solveig Restad", oid = 66, presentId = Nothing, reasonIn = "372", reasonOut = "-5", regTimeIn = { date = "2023-03-09", time = "08:00"
+            }, regTimeOut = { date = "2023-03-09", time = "09:52"
+            }, toHourBank = Just "0,00", watchEnd = { date = "", time = ""
+            }, watchId = Nothing, watchStart = { date = "", time = ""
+            }
+        },
+        { costPlaceId = Just -1, costPlaces = [
+                { cpId = 39, cpName = "Avdeling 2/Felles 1020/KNA 12"
+                },
+                { cpId = 49, cpName = "Avdeling 3/Felles 1040/KNA 40"
+                },
+                { cpId = 59, cpName = "Avdeling 4/Felles 1050/KNA 59"
+                }
+            ], deviationIn = "-", deviationOut = "-", isSelected = False, name = "Trine Lie", oid = 69, presentId = Nothing, reasonIn = "659", reasonOut = "-5", regTimeIn = { date = "2023-03-09", time = "12:05"
+            }, regTimeOut = { date = "2023-03-09", time = "12:27"
+            }, toHourBank = Just "0,00", watchEnd = { date = "", time = ""
+            }, watchId = Nothing, watchStart = { date = "", time = ""
+            }
+        },
+        { costPlaceId = Nothing, costPlaces = [
+                { cpId = 39, cpName = "Avdeling 2/Felles 1020/KNA 12"
+                }
+            ], deviationIn = "-", deviationOut = "-", isSelected = False, name = "Trine Lie", oid = 70, presentId = Nothing, reasonIn = "660", reasonOut = "372", regTimeIn = { date = "2023-03-09", time = "14:03"
+            }, regTimeOut = { date = "2023-03-09", time = "16:10"
+            }, toHourBank = Just "0,00", watchEnd = { date = "", time = ""
+            }, watchId = Nothing, watchStart = { date = "", time = ""
+            }
+        }
+    ], dlgAlert = DialogHidden, dlgEdit = DialogVisible, flags = { userid = "kaidan", wid = "39"
+    }, reasonsIn = [
+        { txt = "Normal arbeidstid", val = "-5"
+        },
+        { txt = "Utrykning", val = "192"
+        },
+        { txt = "Møte frivillig", val = "372"
+        },
+        { txt = "Ekstrapersonell", val = "659"
+        },
+        { txt = "Opplæring", val = "660"
+        },
+        { txt = "Ekstra pga uro", val = "661"
+        },
+        { txt = "Møte pålagt", val = "759"
+        },
+        { txt = "Utrykning2", val = "962"
+        }
+    ], reasonsOut = [
+        { txt = "Normal arbeidstid", val = "-5"
+        },
+        { txt = "Utrykning", val = "192"
+        },
+        { txt = "Møte frivillig", val = "372"
+        },
+        { txt = "Ekstrapersonell", val = "659"
+        },
+        { txt = "Opplæring", val = "660"
+        },
+        { txt = "Ekstra pga uro", val = "661"
+        },
+        { txt = "Møte pålagt", val = "759"
+        },
+        { txt = "Utrykning2", val = "962"
+        }
+    ], selectedDeviation = Just { costPlaceId = Just 39, costPlaces = [
+            { cpId = 39, cpName = "Avdeling 2/Felles 1020/KNA 12"
+            },
+            { cpId = 49, cpName = "Avdeling 3/Felles 1040/KNA 40"
+            }
+        ], deviationIn = "-", deviationOut = "-", isSelected = False, name = "Asle Tarvik", oid = 60, presentId = Nothing, reasonIn = "659", reasonOut = "-5", regTimeIn = { date = "2023-03-07", time = "08:00"
+        }, regTimeOut = { date = "2023-03-08", time = "11:39"
+        }, toHourBank = Just "0,00", watchEnd = { date = "", time = ""
+        }, watchId = Nothing, watchStart = { date = "", time = ""
+        }
+    }
+},<internals>)

@@ -1,0 +1,437 @@
+.h5, h5 {
+    font-size: inherit;
+}
+
+.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+  padding-right: 5px;
+  padding-left: 5px; }
+
+.container-fluid--left-offset .row {
+  margin-left: 0; }
+
+.login-page {
+  width: 100%;
+  height: 100vh;
+  background-color: #0072bc;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(/Resources/img/login-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.login-row {
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.top-logo {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 26px;
+  font-weight: bold;
+  opacity: .5;
+  background-image: url(/Resources/img/top_logo_white-on-transparent.png);
+  background-repeat: no-repeat;
+  width: 88px;
+  height: 22px; }
+
+.login-container {
+  margin: 0 auto;
+  min-width: 319px; }
+
+.form-signin-heading {
+  margin: 0 0 2rem; }
+
+.form-signin-heading-desc {
+  background-image: url(/Resources/img/sm-logo_white.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 65%;
+  height: 33px; }
+
+.form-signin-heading-label {
+  line-height: 1;
+  font-size: 22px;
+  font-weight: normal; }
+
+.forgot-password {
+  text-align: center;
+  padding: .6rem; }
+
+.forgot-password a {
+  color: #fff;
+  font-weight: bold;
+}
+
+.login-change-type {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    padding: 10px 0;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgba(0,0,0,.5);
+}
+
+    .login-change-type:hover {
+        background-color: rgba(0,0,0,.8);
+    }
+
+    .login-change-type a {
+        color: #fff !important;
+    }
+
+.page-header {
+  margin-top: 0.5rem; }
+
+.air {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 25px; }
+
+.title {
+  margin-top: 20px; }
+
+.date,
+.time,
+.select,
+.melding {
+  width: 100%; }
+
+.ajour {
+  width: 65%; }
+
+label.missing {
+  color: #000; }
+
+label.missing::after {
+  content: " **";
+  color: red; }
+
+.btn {
+  padding: .375rem .8rem; }
+
+.btn--refresh {
+    background-image: url(../img/ic_refresh_white_24dp_1x.png);
+    background-repeat: no-repeat;
+    background-position: top 6px left 6px;
+    height: 38px;
+    width: 38px;
+    padding: 0;
+}
+
+.width-max-180 {
+  max-width: 180px; }
+
+.dx-checkbox-icon {
+  border-color: #aaa; }
+
+.form-control {
+  border-color: #ccc; }
+
+.form-group--stacked {
+  float: left;
+  margin-right: .5rem; }
+
+.pull-right {
+  float: right; }
+
+.kdo-header-dropdown {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.kdo-header-dropdown .nav-link {
+    display: inline-block;
+    padding: 0;
+}
+
+.container {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+
+}
+
+.dx-scheduler-date-table-other-month {
+    opacity: 0;
+}
+
+.dx-scheduler-work-space-month .dx-scheduler-date-table-cell > div {
+    color: #444;
+}
+
+.grid-link {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* table styles */
+.table td,
+.table th {
+    color: #959595;
+    font-size: 14px;
+    font-weight: normal;
+    border: 0;
+    border-right: 1px solid rgb(211,211,211);
+    border-spacing: 0;
+    padding: 6px;
+}
+
+    .table td:last-child,
+    .table th:last-child {
+        border-right: 0;
+    }
+
+.table td {
+    color: #333;
+}
+
+
+
+
+/* meldingsboks */
+.dx-datagrid-rowsview .dx-row > .dx-master-detail-cell {
+    padding: 5px;
+}
+
+.message-center-details-table {
+    margin: 0;
+}
+
+.message-center-details-table thead th,
+.message-center-details-table tbody td {
+    padding: .3rem;
+    font-weight: normal;
+}
+
+.dx-scheduler-navigator-caption {
+  max-width: 170px !important; }
+
+.dx-scheduler-appointment-tooltip.dx-popup-content,
+.dx-tooltip-wrapper.dx-popover-wrapper .dx-popover-arrow:after {
+  background-color: #2689c9 !important;
+  color: #fff; }
+
+.dx-scheduler-appointment-content {
+  background-color: #fce8ae; }
+
+.dx-datagrid .dx-row > td {
+    padding: 6px;
+}
+
+td[aria-label="Select all"]::after {
+    content: "Velg";
+}
+
+.modalDialog,
+.modalDialog400 {
+  position: fixed;
+  font-family: Arial, Helvetica, sans-serif;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(100, 0, 0, 0.2);
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none; }
+
+.modalDialog:target,
+.modalDialog400:target {
+  opacity: 1;
+  pointer-events: auto; }
+
+.modalDialog > div,
+.modalDialog400 > div {
+  width: 600px;
+  position: relative;
+  margin: 10% auto;
+  padding: 5px 20px 13px 20px;
+  border-radius: 10px;
+  background: #fff;
+  background: -moz-linear-gradient(#fff, #999);
+  background: -webkit-linear-gradient(#fff, #999);
+  background: -o-linear-gradient(#fff, #999); }
+
+.modalDialog400 > div {
+  width: 400px;
+}
+.navbar-light {
+  background-color: #004499; }
+
+.navbar {
+    justify-content: flex-start;
+}
+
+.navbar-light .navbar-brand {
+  color: #fff; }
+
+.navbar-light .navbar-nav .nav-link {
+  color: #fff; }
+
+.navbar-brand {
+  margin-left: 1rem; }
+
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+  color: #add2ff; }
+
+.navbar-light .navbar-brand:focus,
+.navbar-light .navbar-brand:hover {
+  color: #add2ff; }
+
+.navbar-light .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E"); }
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  border-color: #ccc #ccc #fff; }
+
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .show > .nav-link {
+  color: yellow; }
+
+li.nav-item {
+    border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.dx-datagrid-rowsview .dx-select-checkboxes-hidden > tbody > tr > td > .dx-select-checkbox {
+    display: initial;
+}
+
+.dx-header-row  .dx-select-checkbox {
+    display: none !important;
+}
+
+@media (min-width: 576px) {
+  .navbar-expand-sm .navbar-nav .nav-link {
+    padding-right: .7rem;
+    padding-left: .7rem; } }
+/*------------- Melgingssenter --------------*/
+td.mt1 {
+  color: white;
+  background-color: green; }
+
+/*------------- flexi plan dropdowns --------------*/
+.flexi-short {
+  color: white;
+  background-color: red; }
+
+.flexi-long {
+  color: white;
+  background-color: green; }
+
+/*------------- Tasks --------------*/
+.task {
+  color: black;
+  background-color: Gainsboro;
+  padding: 6px; }
+
+.cp1t, .cp2t, .cp3t {
+  background-color: blue; }
+
+.cp1t {
+  color: white; }
+.cp2t {
+  color: white; }
+.cp3t {
+  color: white; }
+/*------------- call period 1: day --------------*/
+.cp1 {
+  color: black;
+  background-color: #fafad2;
+  padding: 6px; }
+
+
+/*------------- call period 2: evening --------------*/
+.cp2 {
+  color: black;
+  background-color: #eed9d9;
+  padding: 6px; }
+
+/*------------- call period 3: night --------------*/
+.cp3 {
+  color: black;
+  background-color: #d5dbd3;
+  padding: 6px; }
+
+/*------------- ajourhold id 1: AVSPASERING --------------*/
+.aj1 {
+  color: white;
+  background-color: #6a7cfb;
+  padding: 6px; }
+
+/*------------- ajourhold id 3: VAKTBYTTE --------------*/
+.aj3 {
+  color: white;
+  background-color: #7acc7a;
+  padding: 6px; }
+
+/*------------- ajourhold id 4: FORSKJOEVETFRA --------------*/
+.aj4 {
+  color: white;
+  background-color: #aabbcc;
+  padding: 6px; }
+
+/*------------- ajourhold id 6: FRAVAER --------------*/
+.aj6 {
+  color: white;
+  background-color: #e54b4b;
+  padding: 6px; }
+
+/*------------- ajourhold id 7: INNLEIE --------------*/
+.aj7 {
+  color: white;
+  background-color: #82a954;
+  padding: 6px; }
+
+/*------------- ajourhold id 15: FORSKJOEVETTIL --------------*/
+.aj15 {
+  color: white;
+  background-color: #806893;
+  padding: 6px; }
+
+/*------------- ajourhold id 18: FERIE --------------*/
+.aj18 {
+  color: white;
+  background-color: #f4a460;
+  padding: 6px; }
+
+/*------------- ajourhold id 18: GENERELT TILLEGG --------------*/
+.aj19 {
+  color: white;
+  background-color: #ff68ca;
+  padding: 6px; }
+/*
+.dx-item-content {
+  background-color: transparent;
+}
+*/
+.dx-scheduler-appointment-content {
+  background-color: #f7f1df;
+  /* background-color: blue;  */
+}
+
+#data-grid-demo {
+  min-height: 700px; }
+
+#gridContainer {
+  padding-top: 5px; }
+
+#gridDeleteSelected {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  margin: 1px;
+  top: 0; }
+
+/*# sourceMappingURL=shiftmanager.css.map */

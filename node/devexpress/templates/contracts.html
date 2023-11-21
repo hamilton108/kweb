@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Kontrakter</title>
+
+    <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="./node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./lib/dx.all.js"></script>
+    <link rel="stylesheet" href="./lib/dx.common.css">
+    <link rel="stylesheet" href="./lib/dx.light.css">
+
+    <link rel="stylesheet" href="./lib/shiftmanager.css">
+    <script src="./lib/shiftmanager.js"></script>
+    <script src="./lib/mycontracts.js"></script>
+</head>
+<body>
+
+    <div class="container-fluid  container-fluid--left-offset">
+        <div class="row">
+            <div class="page-header">
+                <h5>Kontrakter</h5>
+            </div>
+        </div>
+        <div class="row">
+
+            <div style="margin: 10px 0 0">
+                <button id="gridSave" type="button" class="btn btn-success">Lagre</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="gridContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" id="userid" value="KaiDan" />
+</body>
+</html>

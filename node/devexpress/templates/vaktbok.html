@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Vaktbok</title>
+
+    <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="./node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./lib/dx.all.js"></script>
+    <link rel="stylesheet" href="./lib/dx.common.css">
+    <link rel="stylesheet" href="./lib/dx.light.css">
+
+    <link rel="stylesheet" href="./lib/shiftmanager.css">
+    <script src="./lib/shiftmanager.js"></script>
+    <script src="./lib/myvaktbok.js"></script>
+</head>
+<body>
+<div class="container-fluid  container-fluid--left-offset">
+  <div class="row">
+      <div class="form-group form-group--stacked">
+          <label class="col-form-label">Virksomhet/arbeidssted:</label>
+          <select class="form-control" id="workplace"></select>
+      </div>
+      <div class="form-group  form-group--stacked">
+          <label class="col-form-label">Dato:</label>
+          <input type="date" class="form-control date width-max-180" id="vaktbok-date" />
+      </div>
+  </div>
+  <!-- Drop-down menu -->
+  <div class="page-header">
+    <ul class="nav kdo-header-dropdown" role="tablist">
+      <li  class="nav-item dropdown">
+        <a id="tab-header" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Vaktbok</a>
+        <div class="dropdown-menu">
+          <a id="tab-1" class="dropdown-item" data-toggle="tab" href="#pane1" role="tab">Vaktbok</a>
+          <a id="tab-2" class="dropdown-item" data-toggle="tab" href="#pane2" role="tab">Ajourhold</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- Content -->
+  <div class="row">
+    <div class="tab-content">
+      <!-- Pane 1 -->
+      <div class="tab-pane active" id="pane1" role="tabpanel">
+        <div class="row">
+          <div style="margin: 10px 0 0">
+            <button id="gridSave" type="button" class="btn btn-success">Lagre</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div id="vaktbokGrid"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Pane 2 -->
+      <div class="tab-pane" id="pane2" role="tabpanel">
+        <div class="row">
+          <div class="col-sm-12">
+            <div id="ajourholdGrid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<input type="hidden" id="userid" value="KaiDan" />
+</body>
+</html>

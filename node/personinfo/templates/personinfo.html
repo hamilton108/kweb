@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Local stuff -->
+    <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="./node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./lib/personinfo.css">
+    <script src="./lib/elm-personinfo.js"></script>
+</head>
+<body>
+  <div id="elm"></div>
+  <script type="text/javascript">
+      const node = document.getElementById("elm");
+      const app = Elm.PersonInfo.Main.init({
+        node: node,
+        flags: "KaiDan"
+      });
+  </script>
+</body>
+</html>

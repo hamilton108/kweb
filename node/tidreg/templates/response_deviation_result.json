@@ -1,0 +1,303 @@
+{
+    "flags": {
+        "userid": "kaidan",
+        "wid": "39"
+    },
+    "usr": "kaidan",
+    "deviations": [
+        {
+            "name": "Kai  Danesen",
+            "id": 96,
+            "timeIn": "2023-03-16T08:05",
+            "timeOut": "2023-03-16T10:45",
+            "watchStart": "",
+            "watchEnd": "",
+            "deviationIn": "-",
+            "deviationOut": "-",
+            "reasonIn": "192",
+            "reasonOut": "192",
+            "watchId": null,
+            "presentId": null,
+            "isAnvist": false,
+            "toHourBank": "0,00",
+            "costplaceid": -1,
+            "costplacelist": [
+                {
+                    "cpid": 39,
+                    "cpname": "Avdeling 2/Felles 1020/KNA 12"
+                },
+                {
+                    "cpid": 59,
+                    "cpname": "Avdeling 1/Bolig-A/Bolig-A"
+                }
+            ]
+        },
+        {
+            "name": "Asle Tarvik",
+            "id": 98,
+            "timeIn": "2023-03-16T15:15",
+            "timeOut": "2023-03-16T23:45",
+            "watchStart": "2023-03-16T15:15",
+            "watchEnd": "2023-03-16T23:00",
+            "deviationIn": "-",
+            "deviationOut": "+45 min",
+            "reasonIn": "-5",
+            "reasonOut": "661",
+            "watchId": 1147645,
+            "presentId": null,
+            "isAnvist": false,
+            "toHourBank": "0,00",
+            "costplaceid": -1,
+            "costplacelist": [
+                {
+                    "cpid": 39,
+                    "cpname": "Avdeling 2/Felles 1020/KNA 12"
+                },
+                {
+                    "cpid": 59,
+                    "cpname": "Avdeling 1/Bolig-A/Bolig-A"
+                },
+                {
+                    "cpid": 257,
+                    "cpname": "Avdeling 12/VA_tjenesten-4600/"
+                },
+                {
+                    "cpid": 217,
+                    "cpname": "Avdeling 10/Otta/Otta"
+                }
+            ]
+        },
+        {
+            "name": "Kai  Danesen",
+            "id": 99,
+            "timeIn": "2023-03-16T10:56",
+            "timeOut": "2023-03-16T10:57",
+            "watchStart": "",
+            "watchEnd": "",
+            "deviationIn": "-",
+            "deviationOut": "-",
+            "reasonIn": "192",
+            "reasonOut": "192",
+            "watchId": null,
+            "presentId": null,
+            "isAnvist": false,
+            "toHourBank": "0,00",
+            "costplaceid": -1,
+            "costplacelist": [
+                {
+                    "cpid": 39,
+                    "cpname": "Avdeling 2/Felles 1020/KNA 12"
+                },
+                {
+                    "cpid": 59,
+                    "cpname": "Avdeling 1/Bolig-A/Bolig-A"
+                }
+            ]
+        },
+        {
+            "name": "Kai  Danesen",
+            "id": 100,
+            "timeIn": "2023-03-17T06:30",
+            "timeOut": "2023-03-17T06:30",
+            "watchStart": "",
+            "watchEnd": "",
+            "deviationIn": "-",
+            "deviationOut": "-",
+            "reasonIn": "192",
+            "reasonOut": "192",
+            "watchId": null,
+            "presentId": null,
+            "isAnvist": false,
+            "toHourBank": "0,00",
+            "costplaceid": -1,
+            "costplacelist": [
+                {
+                    "cpid": 39,
+                    "cpname": "Avdeling 2/Felles 1020/KNA 12"
+                },
+                {
+                    "cpid": 59,
+                    "cpname": "Avdeling 1/Bolig-A/Bolig-A"
+                }
+            ]
+        },
+        {
+            "name": "Kai  Danesen",
+            "id": 101,
+            "timeIn": "2023-03-17T06:30",
+            "timeOut": "2023-03-17T06:30",
+            "watchStart": "",
+            "watchEnd": "",
+            "deviationIn": "-",
+            "deviationOut": "-",
+            "reasonIn": "192",
+            "reasonOut": "192",
+            "watchId": null,
+            "presentId": null,
+            "isAnvist": false,
+            "toHourBank": "0,00",
+            "costplaceid": 59,
+            "costplacelist": [
+                {
+                    "cpid": 39,
+                    "cpname": "Avdeling 2/Felles 1020/KNA 12"
+                },
+                {
+                    "cpid": 59,
+                    "cpname": "Avdeling 1/Bolig-A/Bolig-A"
+                }
+            ]
+        },
+        {
+            "name": "Asle Tarvik",
+            "id": 102,
+            "timeIn": "2023-03-23T07:44",
+            "timeOut": "2023-03-23T12:55",
+            "watchStart": "",
+            "watchEnd": "",
+            "deviationIn": "-",
+            "deviationOut": "-",
+            "reasonIn": "661",
+            "reasonOut": "661",
+            "watchId": null,
+            "presentId": null,
+            "isAnvist": false,
+            "toHourBank": "0,00",
+            "costplaceid": 257,
+            "costplacelist": [
+                {
+                    "cpid": 39,
+                    "cpname": "Avdeling 2/Felles 1020/KNA 12"
+                },
+                {
+                    "cpid": 59,
+                    "cpname": "Avdeling 1/Bolig-A/Bolig-A"
+                },
+                {
+                    "cpid": 257,
+                    "cpname": "Avdeling 12/VA_tjenesten-4600/"
+                },
+                {
+                    "cpid": 217,
+                    "cpname": "Avdeling 10/Otta/Otta"
+                }
+            ]
+        }
+    ],
+    "reasonsIn": [
+        {
+            "id": -5,
+            "value": "-5",
+            "text": "Normal arbeidstid",
+            "isComing": true,
+            "isLeaving": true
+        },
+        {
+            "id": 192,
+            "value": "192",
+            "text": "Utrykning",
+            "isComing": true,
+            "isLeaving": true
+        },
+        {
+            "id": 372,
+            "value": "372",
+            "text": "Møte frivillig",
+            "isComing": true,
+            "isLeaving": true
+        },
+        {
+            "id": 659,
+            "value": "659",
+            "text": "Ekstrapersonell",
+            "isComing": true,
+            "isLeaving": true
+        },
+        {
+            "id": 660,
+            "value": "660",
+            "text": "Opplæring",
+            "isComing": true,
+            "isLeaving": true
+        },
+        {
+            "id": 661,
+            "value": "661",
+            "text": "Ekstra pga uro",
+            "isComing": true,
+            "isLeaving": true
+        },
+        {
+            "id": 759,
+            "value": "759",
+            "text": "Møte pålagt",
+            "isComing": true,
+            "isLeaving": true
+        },
+        {
+            "id": 962,
+            "value": "962",
+            "text": "Utrykning2",
+            "isComing": true,
+            "isLeaving": true
+        }
+    ],
+    "reasonsOut": [
+        {
+            "id": -5,
+            "value": "-5",
+            "text": "Normal arbeidstid",
+            "isComing": true,
+            "isLeaving": true
+        },
+        {
+            "id": 192,
+            "value": "192",
+            "text": "Utrykning",
+            "isComing": true,
+            "isLeaving": true
+        },
+        {
+            "id": 372,
+            "value": "372",
+            "text": "Møte frivillig",
+            "isComing": true,
+            "isLeaving": true
+        },
+        {
+            "id": 659,
+            "value": "659",
+            "text": "Ekstrapersonell",
+            "isComing": true,
+            "isLeaving": true
+        },
+        {
+            "id": 660,
+            "value": "660",
+            "text": "Opplæring",
+            "isComing": true,
+            "isLeaving": true
+        },
+        {
+            "id": 661,
+            "value": "661",
+            "text": "Ekstra pga uro",
+            "isComing": true,
+            "isLeaving": true
+        },
+        {
+            "id": 759,
+            "value": "759",
+            "text": "Møte pålagt",
+            "isComing": true,
+            "isLeaving": true
+        },
+        {
+            "id": 962,
+            "value": "962",
+            "text": "Utrykning2",
+            "isComing": true,
+            "isLeaving": true
+        }
+    ]
+}

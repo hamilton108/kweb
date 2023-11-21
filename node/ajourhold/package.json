@@ -1,0 +1,27 @@
+{
+  "description": "todo test app",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "awesome-bootstrap-checkbox": "^1.0.1",
+    "bootstrap": "^4.6.2",
+    "flatiron": "0.4.3",
+    "jquery": "^3.3.1",
+    "nocache": "^2.0.0",
+    "npm": "^6.4.1",
+    "plates": "^0.4.11",
+    "popper.js": "^1.14.3",
+    "st": "^1.2.2",
+    "union": "^0.4.6"
+  },
+  "devDependencies": {
+    "mocha": "5.1.1",
+    "zombie": "6.1.2"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "name": "todo",
+  "author": "Hamilton108",
+  "homepage": ""
+}

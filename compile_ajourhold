@@ -1,0 +1,5 @@
+#!/bin/bash
+
+elm make src/Ajourhold/Requests.elm --output node/ajourhold/lib/elm-requests.js  
+
+exit 0
