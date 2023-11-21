@@ -10,7 +10,7 @@ module Ajourhold.Commands exposing
     , fetchWatchesSwapFrom
     , fetchWatchesSwapTo
     , fetchWatches_
-    , fetchHourBankForWorkPlace 
+    , fetchTimebankWorkPlace     
     , fromAjCat
     , getWatchDef
     , isDateFromLess
@@ -540,6 +540,21 @@ fetchWatches_ (MainUrl mainUrl) ajCat ajaxCall myCmd userId workPlace dateFrom d
         Http.send myCmd <| Http.get url AD.watchInfoDecoder
 
 
+fetchTimebankWorkPlace : MainUrl -> UserId -> WorkPlace -> WorkPlace -> Cmd Msg 
+fetchTimebankWorkPlace (MainUrl mainUrl) (UserId userId) origWp newWp =
+    if  (newWp == NoWorkPlace) || 
+        (origWp == newWp) then
+        Cmd.none
+    else
+        let 
+            url = 
+                mainUrl ++ "/timebankworkplace/" ++ userId ++ "/" ++ T.fromWorkPlace newWp
+            myCmd = 
+                WatchMsgFor Watch1 << TimebankFetched
+
+        in
+        Http.send myCmd <| Http.get url AD.timebankWorkPlaceDecoder
+
 slideUrl : MainUrl -> UserId -> WorkPlace -> MyDate -> Bool -> String
 slideUrl (MainUrl mainUrl) (UserId userId) wp curDate isSlideFrom =
     let
@@ -591,11 +606,4 @@ fetchSlideTo (MainUrl mainUrl) (UserId userId) wp tlid odf cd =
         in
         Http.send (SlideMsgFor << SlideWatchFetched 2) <| Http.get url AD.watchInfoDecoder
 
-fetchHourBankForWorkPlace : UserId -> WorkPlace -> WorkPlace -> Cmd Msg 
-fetchHourBankForWorkPlace (UserId userId) origWp newWp =
-    if  (newWp == NoWorkPlace) || 
-        (origWp == newWp) then
-        Cmd.none
-    else
-        Cmd.none
 

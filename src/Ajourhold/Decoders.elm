@@ -1,6 +1,6 @@
-module Ajourhold.Decoders exposing (myInitDataDecoder, myWorkPlacesDecoder, watchDefDecoder, watchInfoDecoder)
+module Ajourhold.Decoders exposing (myInitDataDecoder, myWorkPlacesDecoder, watchDefDecoder, watchInfoDecoder, timebankWorkPlaceDecoder)
 
-import Ajourhold.Types exposing (InitData, WatchDef, WatchInfo)
+import Ajourhold.Types exposing (InitData, WatchDef, WatchInfo, TimebankWorkPlace)
 import Common.ComboBox as CB
 import Json.Decode as JD
 import Json.Decode.Pipeline as JP
@@ -51,3 +51,8 @@ watchInfoDecoder =
     JD.succeed WatchInfo
         |> JP.required "watches" (JD.nullable CB.comboBoxItemListDecoder)
         |> JP.required "watchdefs" (JD.nullable (JD.dict watchDefDecoder))
+
+timebankWorkPlaceDecoder : JD.Decoder TimebankWorkPlace
+timebankWorkPlaceDecoder =
+    JD.succeed TimebankWorkPlace
+        |> JP.required "value" JD.float

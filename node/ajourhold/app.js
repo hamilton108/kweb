@@ -230,6 +230,12 @@ app.router.get("/AjourholdRequest/slideto/:usr/:workPlace/:curDate", function (u
   this.res.json(w);
 });
 
+app.router.get("/AjourholdRequest/timebankworkplace/:usr/:workPlace", function (usr,workPlace) {
+  console.log(this.req.url);
+  const curVal = workPlace === "39" ? 12.45343 : 15.47865;
+  this.res.json({value: curVal});
+});
+
 module.exports = app;
 
 if (process.mainModule ===  module) {

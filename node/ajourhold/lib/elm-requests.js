@@ -6586,6 +6586,9 @@ var $author$project$Ajourhold$Commands$sendData = function (model) {
 		A2($elm$core$Basics$composeL, $author$project$Ajourhold$Types$SendData, $author$project$Ajourhold$Types$Sent),
 		A3($elm$http$Http$post, url, jbody, myDecoder));
 };
+var $author$project$Ajourhold$Types$UserId = function (a) {
+	return {$: 'UserId', a: a};
+};
 var $author$project$Ajourhold$Types$CoverFor = {$: 'CoverFor'};
 var $author$project$Ajourhold$Types$Fetched = function (a) {
 	return {$: 'Fetched', a: a};
@@ -6737,6 +6740,45 @@ var $author$project$Ajourhold$Commands$fetchCoverFor = F5(
 			dateFrom,
 			dateTo);
 	});
+var $author$project$Ajourhold$Types$NoWorkPlace = {$: 'NoWorkPlace'};
+var $author$project$Ajourhold$Types$TimebankFetched = function (a) {
+	return {$: 'TimebankFetched', a: a};
+};
+var $author$project$Ajourhold$Types$Watch1 = {$: 'Watch1'};
+var $author$project$Ajourhold$Types$fromWorkPlace = function (wp) {
+	if (wp.$ === 'NoWorkPlace') {
+		return '-1';
+	} else {
+		var s = wp.a;
+		return s;
+	}
+};
+var $author$project$Ajourhold$Types$TimebankWorkPlace = function (value) {
+	return {value: value};
+};
+var $author$project$Ajourhold$Decoders$timebankWorkPlaceDecoder = A3(
+	$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+	'value',
+	$elm$json$Json$Decode$float,
+	$elm$json$Json$Decode$succeed($author$project$Ajourhold$Types$TimebankWorkPlace));
+var $author$project$Ajourhold$Commands$fetchTimebankWorkPlace = F4(
+	function (_v0, _v1, origWp, newWp) {
+		var mainUrl = _v0.a;
+		var userId = _v1.a;
+		if (_Utils_eq(newWp, $author$project$Ajourhold$Types$NoWorkPlace) || _Utils_eq(origWp, newWp)) {
+			return $elm$core$Platform$Cmd$none;
+		} else {
+			var url = mainUrl + ('/timebankworkplace/' + (userId + ('/' + $author$project$Ajourhold$Types$fromWorkPlace(newWp))));
+			var myCmd = A2(
+				$elm$core$Basics$composeL,
+				$author$project$Ajourhold$Types$WatchMsgFor($author$project$Ajourhold$Types$Watch1),
+				$author$project$Ajourhold$Types$TimebankFetched);
+			return A2(
+				$elm$http$Http$send,
+				myCmd,
+				A2($elm$http$Http$get, url, $author$project$Ajourhold$Decoders$timebankWorkPlaceDecoder));
+		}
+	});
 var $elm$regex$Regex$Match = F4(
 	function (match, index, number, submatches) {
 		return {index: index, match: match, number: number, submatches: submatches};
@@ -6801,6 +6843,17 @@ var $author$project$Common$Misc$formatNumberStr = F2(
 					A2($elm$core$List$drop, 1, splitList))));
 		return numPart + ('.' + decimalPart);
 	});
+var $author$project$Ajourhold$Types$WorkPlace = function (a) {
+	return {$: 'WorkPlace', a: a};
+};
+var $author$project$Ajourhold$Types$toWorkPlace = function (s) {
+	if (s.$ === 'Nothing') {
+		return $author$project$Ajourhold$Types$NoWorkPlace;
+	} else {
+		var sx = s.a;
+		return (sx === '-1') ? $author$project$Ajourhold$Types$NoWorkPlace : $author$project$Ajourhold$Types$WorkPlace(sx);
+	}
+};
 var $author$project$Ajourhold$Update$updateCoverFor = F2(
 	function (msg, model) {
 		switch (msg.$) {
@@ -6831,13 +6884,32 @@ var $author$project$Ajourhold$Update$updateCoverFor = F2(
 			case 'Fetch':
 				var s = msg.a;
 				var wp = $elm$core$Maybe$Just(s);
-				var curCmd = (s === '-1') ? $elm$core$Platform$Cmd$none : A5($author$project$Ajourhold$Commands$fetchCoverFor, model.mainUrl, model.userId, wp, model.dateFrom, model.dateTo);
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{hourFrom: $elm$core$Maybe$Nothing, hourTo: $elm$core$Maybe$Nothing, selectedReasonCode: $elm$core$Maybe$Nothing, selectedWatch: $elm$core$Maybe$Nothing, selectedWorkPlace: wp, sumHours: $elm$core$Maybe$Nothing, watchDefs: $elm$core$Maybe$Nothing, watches: $elm$core$Maybe$Nothing}),
-					curCmd);
-			default:
+				var curCmd = function () {
+					if (s === '-1') {
+						return $elm$core$Platform$Cmd$none;
+					} else {
+						var newWp = $author$project$Ajourhold$Types$toWorkPlace(wp);
+						var curWp = $author$project$Ajourhold$Types$toWorkPlace(model.selectedWorkPlace);
+						return $elm$core$Platform$Cmd$batch(
+							_List_fromArray(
+								[
+									A5($author$project$Ajourhold$Commands$fetchCoverFor, model.mainUrl, model.userId, wp, model.dateFrom, model.dateTo),
+									A4(
+									$author$project$Ajourhold$Commands$fetchTimebankWorkPlace,
+									model.mainUrl,
+									$author$project$Ajourhold$Types$UserId(model.userId),
+									curWp,
+									newWp)
+								]));
+					}
+				}();
+				var newModel = (s === '-1') ? _Utils_update(
+					model,
+					{hourFrom: $elm$core$Maybe$Nothing, hourTo: $elm$core$Maybe$Nothing, saldo: $elm$core$Maybe$Nothing, selectedReasonCode: $elm$core$Maybe$Nothing, selectedWatch: $elm$core$Maybe$Nothing, selectedWorkPlace: wp, sumHours: $elm$core$Maybe$Nothing, watchDefs: $elm$core$Maybe$Nothing, watches: $elm$core$Maybe$Nothing}) : _Utils_update(
+					model,
+					{hourFrom: $elm$core$Maybe$Nothing, hourTo: $elm$core$Maybe$Nothing, selectedReasonCode: $elm$core$Maybe$Nothing, selectedWatch: $elm$core$Maybe$Nothing, selectedWorkPlace: wp, sumHours: $elm$core$Maybe$Nothing, watchDefs: $elm$core$Maybe$Nothing, watches: $elm$core$Maybe$Nothing});
+				return _Utils_Tuple2(newModel, curCmd);
+			case 'Fetched':
 				if (msg.a.$ === 'Ok') {
 					var s = msg.a.a;
 					return _Utils_Tuple2(
@@ -6851,9 +6923,18 @@ var $author$project$Ajourhold$Update$updateCoverFor = F2(
 						A4($author$project$Common$ModalDialog$errorAlert, $elm$core$Maybe$Nothing, 'updateCoverFor Error:', s, model),
 						$elm$core$Platform$Cmd$none);
 				}
+			default:
+				if (msg.a.$ === 'Ok') {
+					var s = msg.a.a;
+					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				} else {
+					var s = msg.a.a;
+					return _Utils_Tuple2(
+						A4($author$project$Common$ModalDialog$errorAlert, $elm$core$Maybe$Nothing, 'updateWatch1 Error:', s, model),
+						$elm$core$Platform$Cmd$none);
+				}
 		}
 	});
-var $author$project$Ajourhold$Types$Watch1 = {$: 'Watch1'};
 var $author$project$Ajourhold$Commands$fetchWatches = F6(
 	function (mu, ajCat, userId, workPlace, dateFrom, dateTo) {
 		return A8(
@@ -6913,13 +6994,31 @@ var $author$project$Ajourhold$Update$updateEmergency = F2(
 			case 'Fetch':
 				var s = msg.a;
 				var wp = $elm$core$Maybe$Just(s);
-				var curCmd = (s === '-1') ? $elm$core$Platform$Cmd$none : ($author$project$Ajourhold$Commands$isDateFromLess(model) ? $elm$core$Platform$Cmd$none : A6($author$project$Ajourhold$Commands$fetchWatches, model.mainUrl, model.ajcat, model.userId, wp, model.dateFrom, model.dateTo));
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{hourFrom: $elm$core$Maybe$Nothing, hourTo: $elm$core$Maybe$Nothing, selectedWatch: $elm$core$Maybe$Nothing, selectedWorkPlace: wp, sumHours: $elm$core$Maybe$Nothing, watchDefs: $elm$core$Maybe$Nothing, watches: $elm$core$Maybe$Nothing}),
-					curCmd);
-			default:
+				var newWp = $author$project$Ajourhold$Types$toWorkPlace(wp);
+				var curWp = $author$project$Ajourhold$Types$toWorkPlace(model.selectedWorkPlace);
+				var curCmd = (s === '-1') ? $elm$core$Platform$Cmd$none : ($author$project$Ajourhold$Commands$isDateFromLess(model) ? A4(
+					$author$project$Ajourhold$Commands$fetchTimebankWorkPlace,
+					model.mainUrl,
+					$author$project$Ajourhold$Types$UserId(model.userId),
+					curWp,
+					newWp) : $elm$core$Platform$Cmd$batch(
+					_List_fromArray(
+						[
+							A6($author$project$Ajourhold$Commands$fetchWatches, model.mainUrl, model.ajcat, model.userId, wp, model.dateFrom, model.dateTo),
+							A4(
+							$author$project$Ajourhold$Commands$fetchTimebankWorkPlace,
+							model.mainUrl,
+							$author$project$Ajourhold$Types$UserId(model.userId),
+							curWp,
+							newWp)
+						])));
+				var newModel = (s === '-1') ? _Utils_update(
+					model,
+					{hourFrom: $elm$core$Maybe$Nothing, hourTo: $elm$core$Maybe$Nothing, saldo: $elm$core$Maybe$Nothing, selectedWatch: $elm$core$Maybe$Nothing, selectedWorkPlace: wp, sumHours: $elm$core$Maybe$Nothing, watchDefs: $elm$core$Maybe$Nothing, watches: $elm$core$Maybe$Nothing}) : _Utils_update(
+					model,
+					{hourFrom: $elm$core$Maybe$Nothing, hourTo: $elm$core$Maybe$Nothing, selectedWatch: $elm$core$Maybe$Nothing, selectedWorkPlace: wp, sumHours: $elm$core$Maybe$Nothing, watchDefs: $elm$core$Maybe$Nothing, watches: $elm$core$Maybe$Nothing});
+				return _Utils_Tuple2(newModel, curCmd);
+			case 'Fetched':
 				if (msg.a.$ === 'Ok') {
 					var s = msg.a.a;
 					return _Utils_Tuple2(
@@ -6933,13 +7032,19 @@ var $author$project$Ajourhold$Update$updateEmergency = F2(
 						A4($author$project$Common$ModalDialog$errorAlert, $elm$core$Maybe$Nothing, 'updateEmergency Error:', s, model),
 						$elm$core$Platform$Cmd$none);
 				}
+			default:
+				if (msg.a.$ === 'Ok') {
+					var s = msg.a.a;
+					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				} else {
+					var s = msg.a.a;
+					return _Utils_Tuple2(
+						A4($author$project$Common$ModalDialog$errorAlert, $elm$core$Maybe$Nothing, 'updateWatch1 Error:', s, model),
+						$elm$core$Platform$Cmd$none);
+				}
 		}
 	});
-var $author$project$Ajourhold$Types$UserId = function (a) {
-	return {$: 'UserId', a: a};
-};
 var $author$project$Ajourhold$Types$NoDate = {$: 'NoDate'};
-var $author$project$Ajourhold$Types$NoWorkPlace = {$: 'NoWorkPlace'};
 var $author$project$Ajourhold$Types$SlideMsgFor = function (a) {
 	return {$: 'SlideMsgFor', a: a};
 };
@@ -6952,14 +7057,6 @@ var $author$project$Ajourhold$Types$fromMyDate = function (dx) {
 		return '-1';
 	} else {
 		var s = dx.a;
-		return s;
-	}
-};
-var $author$project$Ajourhold$Types$fromWorkPlace = function (wp) {
-	if (wp.$ === 'NoWorkPlace') {
-		return '-1';
-	} else {
-		var s = wp.a;
 		return s;
 	}
 };
@@ -7007,17 +7104,6 @@ var $author$project$Ajourhold$Types$toMyDate = function (s) {
 	} else {
 		var sx = s.a;
 		return (sx === '-1') ? $author$project$Ajourhold$Types$NoDate : $author$project$Ajourhold$Types$MyDate(sx);
-	}
-};
-var $author$project$Ajourhold$Types$WorkPlace = function (a) {
-	return {$: 'WorkPlace', a: a};
-};
-var $author$project$Ajourhold$Types$toWorkPlace = function (s) {
-	if (s.$ === 'Nothing') {
-		return $author$project$Ajourhold$Types$NoWorkPlace;
-	} else {
-		var sx = s.a;
-		return (sx === '-1') ? $author$project$Ajourhold$Types$NoWorkPlace : $author$project$Ajourhold$Types$WorkPlace(sx);
 	}
 };
 var $author$project$Ajourhold$Update$updateSlide = F2(
@@ -7186,7 +7272,7 @@ var $author$project$Ajourhold$Update$updateSwap = F3(
 					{selectedWatch2: $elm$core$Maybe$Nothing, selectedWorkPlace2: wp, watches2: $elm$core$Maybe$Nothing});
 				var curCmd = (s === '-1') ? $elm$core$Platform$Cmd$none : ((index === 1) ? A4($author$project$Ajourhold$Commands$fetchWatchesSwapFrom, updMod.mainUrl, updMod.userId, wp, updMod.dateFrom) : A6($author$project$Ajourhold$Commands$fetchWatchesSwapTo, updMod.mainUrl, updMod.userId, wp, updMod.dateFrom, updMod.dateTo, updMod.selectedWatch));
 				return _Utils_Tuple2(updMod, curCmd);
-			default:
+			case 'Fetched':
 				if (msg.a.$ === 'Ok') {
 					var s = msg.a.a;
 					return (index === 1) ? _Utils_Tuple2(
@@ -7204,14 +7290,18 @@ var $author$project$Ajourhold$Update$updateSwap = F3(
 						A4($author$project$Common$ModalDialog$errorAlert, $elm$core$Maybe$Nothing, 'updateSwap Error:', s, model),
 						$elm$core$Platform$Cmd$none);
 				}
+			default:
+				if (msg.a.$ === 'Ok') {
+					var s = msg.a.a;
+					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				} else {
+					var s = msg.a.a;
+					return _Utils_Tuple2(
+						A4($author$project$Common$ModalDialog$errorAlert, $elm$core$Maybe$Nothing, 'updateWatch1 Error:', s, model),
+						$elm$core$Platform$Cmd$none);
+				}
 		}
 	});
-var $author$project$Ajourhold$Commands$fetchHourBankForWorkPlace = F3(
-	function (_v0, origWp, newWp) {
-		var userId = _v0.a;
-		return (_Utils_eq(newWp, $author$project$Ajourhold$Types$NoWorkPlace) || _Utils_eq(origWp, newWp)) ? $elm$core$Platform$Cmd$none : $elm$core$Platform$Cmd$none;
-	});
-var $elm$core$Debug$log = _Debug_log;
 var $author$project$Ajourhold$Update$updateWatch1 = F2(
 	function (msg, model) {
 		switch (msg.$) {
@@ -7243,43 +7333,55 @@ var $author$project$Ajourhold$Update$updateWatch1 = F2(
 			case 'Fetch':
 				var s = msg.a;
 				var wp = $elm$core$Maybe$Just(s);
-				var curCmd = function () {
-					if (s === '-1') {
-						return $elm$core$Platform$Cmd$none;
-					} else {
-						if ($author$project$Ajourhold$Commands$isDateFromLess(model)) {
-							return $elm$core$Platform$Cmd$none;
-						} else {
-							var newWp = $author$project$Ajourhold$Types$toWorkPlace(wp);
-							var curWp = $author$project$Ajourhold$Types$toWorkPlace(model.selectedWorkPlace);
-							return $elm$core$Platform$Cmd$batch(
-								_List_fromArray(
-									[
-										A6($author$project$Ajourhold$Commands$fetchWatches, model.mainUrl, model.ajcat, model.userId, wp, model.dateFrom, model.dateTo),
-										A3(
-										$author$project$Ajourhold$Commands$fetchHourBankForWorkPlace,
-										$author$project$Ajourhold$Types$UserId(model.userId),
-										curWp,
-										newWp)
-									]));
-						}
-					}
-				}();
-				return A2(
-					$elm$core$Debug$log,
-					'Fetch',
-					_Utils_Tuple2(
-						_Utils_update(
-							model,
-							{hourFrom: $elm$core$Maybe$Nothing, hourTo: $elm$core$Maybe$Nothing, selectedWatch: $elm$core$Maybe$Nothing, selectedWorkPlace: wp, sumHours: $elm$core$Maybe$Nothing, watchDefs: $elm$core$Maybe$Nothing, watches: $elm$core$Maybe$Nothing}),
-						curCmd));
-			default:
+				var newWp = $author$project$Ajourhold$Types$toWorkPlace(wp);
+				var curWp = $author$project$Ajourhold$Types$toWorkPlace(model.selectedWorkPlace);
+				var curCmd = (s === '-1') ? $elm$core$Platform$Cmd$none : ($author$project$Ajourhold$Commands$isDateFromLess(model) ? A4(
+					$author$project$Ajourhold$Commands$fetchTimebankWorkPlace,
+					model.mainUrl,
+					$author$project$Ajourhold$Types$UserId(model.userId),
+					curWp,
+					newWp) : $elm$core$Platform$Cmd$batch(
+					_List_fromArray(
+						[
+							A6($author$project$Ajourhold$Commands$fetchWatches, model.mainUrl, model.ajcat, model.userId, wp, model.dateFrom, model.dateTo),
+							A4(
+							$author$project$Ajourhold$Commands$fetchTimebankWorkPlace,
+							model.mainUrl,
+							$author$project$Ajourhold$Types$UserId(model.userId),
+							curWp,
+							newWp)
+						])));
+				var newModel = (s === '-1') ? _Utils_update(
+					model,
+					{hourFrom: $elm$core$Maybe$Nothing, hourTo: $elm$core$Maybe$Nothing, saldo: $elm$core$Maybe$Nothing, selectedWatch: $elm$core$Maybe$Nothing, selectedWorkPlace: wp, sumHours: $elm$core$Maybe$Nothing, watchDefs: $elm$core$Maybe$Nothing, watches: $elm$core$Maybe$Nothing}) : _Utils_update(
+					model,
+					{hourFrom: $elm$core$Maybe$Nothing, hourTo: $elm$core$Maybe$Nothing, selectedWatch: $elm$core$Maybe$Nothing, selectedWorkPlace: wp, sumHours: $elm$core$Maybe$Nothing, watchDefs: $elm$core$Maybe$Nothing, watches: $elm$core$Maybe$Nothing});
+				return _Utils_Tuple2(newModel, curCmd);
+			case 'Fetched':
 				if (msg.a.$ === 'Ok') {
 					var s = msg.a.a;
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
 							{watchDefs: s.watchDefs, watches: s.watches}),
+						$elm$core$Platform$Cmd$none);
+				} else {
+					var s = msg.a.a;
+					return _Utils_Tuple2(
+						A4($author$project$Common$ModalDialog$errorAlert, $elm$core$Maybe$Nothing, 'updateWatch1 Error:', s, model),
+						$elm$core$Platform$Cmd$none);
+				}
+			default:
+				if (msg.a.$ === 'Ok') {
+					var s = msg.a.a;
+					var mySaldo = $elm$core$String$fromFloat(
+						A2($author$project$Common$Misc$toDecimal, s.value, 100.0));
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								saldo: $elm$core$Maybe$Just(mySaldo)
+							}),
 						$elm$core$Platform$Cmd$none);
 				} else {
 					var s = msg.a.a;
@@ -7329,7 +7431,7 @@ var $author$project$Ajourhold$Update$updateWatch2 = F2(
 						model,
 						{selectedWatch2: $elm$core$Maybe$Nothing, selectedWorkPlace2: wp, watches2: $elm$core$Maybe$Nothing}),
 					curCmd);
-			default:
+			case 'Fetched':
 				if (msg.a.$ === 'Ok') {
 					var s = msg.a.a;
 					return _Utils_Tuple2(
@@ -7341,6 +7443,16 @@ var $author$project$Ajourhold$Update$updateWatch2 = F2(
 					var s = msg.a.a;
 					return _Utils_Tuple2(
 						A4($author$project$Common$ModalDialog$errorAlert, $elm$core$Maybe$Nothing, 'updateWatch2 Error:', s, model),
+						$elm$core$Platform$Cmd$none);
+				}
+			default:
+				if (msg.a.$ === 'Ok') {
+					var s = msg.a.a;
+					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				} else {
+					var s = msg.a.a;
+					return _Utils_Tuple2(
+						A4($author$project$Common$ModalDialog$errorAlert, $elm$core$Maybe$Nothing, 'updateWatch1 Error:', s, model),
 						$elm$core$Platform$Cmd$none);
 				}
 		}
@@ -7373,14 +7485,11 @@ var $author$project$Ajourhold$Update$update = F2(
 			case 'InitDataFetched':
 				if (msg.a.$ === 'Ok') {
 					var s = msg.a.a;
-					var mySaldo = $elm$core$String$fromFloat(
-						A2($author$project$Common$Misc$toDecimal, s.saldo, 100.0));
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
 							{
 								reasonCodes: s.reasonCodes,
-								saldo: $elm$core$Maybe$Just(mySaldo),
 								userId: s.userId,
 								vacation: s.vacation,
 								workPlaces: $elm$core$Maybe$Just(s.workPlaces)

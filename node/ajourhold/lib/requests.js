@@ -50,6 +50,7 @@ jQuery(document).ready(function() {
         "lagre" : "Lagre",
         "fra_kl" : "Fra kl",
         "til_kl" : "Til kl",
+        "ferie_tilgode": "Ferie tilgode"
     };
   };
   const initElm = (category) => {

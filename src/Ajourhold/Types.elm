@@ -16,6 +16,7 @@ module Ajourhold.Types exposing
     , WatchDef
     , WatchDefDict
     , WatchInfo
+    , TimebankWorkPlace
     , WatchMsg(..)
     , WorkPlace(..)
     , defaultWatchDef
@@ -175,6 +176,9 @@ type alias WatchInfo =
 type alias DataSentStatus =
     { ok : Bool, msg : String }
 
+type alias TimebankWorkPlace =
+    { value: Float
+    }
 
 type WatchCategory
     = Watch1
@@ -189,6 +193,7 @@ type WatchMsg
     | DateChanged Int String
     | Fetch String
     | Fetched (Result Http.Error WatchInfo)
+    | TimebankFetched (Result Http.Error TimebankWorkPlace)
 
 
 
