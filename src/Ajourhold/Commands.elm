@@ -548,7 +548,7 @@ fetchTimebankWorkPlace (MainUrl mainUrl) (UserId userId) origWp newWp =
     else
         let 
             url = 
-                mainUrl ++ "/timebankworkplace/" ++ userId ++ "/" ++ T.fromWorkPlace newWp
+                mainUrl ++ "/timebankworkplace?userid=" ++ userId ++ "&workplaceid=" ++ T.fromWorkPlace newWp
             myCmd = 
                 WatchMsgFor Watch1 << TimebankFetched
 

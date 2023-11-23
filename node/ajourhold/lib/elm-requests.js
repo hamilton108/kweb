@@ -6768,7 +6768,7 @@ var $author$project$Ajourhold$Commands$fetchTimebankWorkPlace = F4(
 		if (_Utils_eq(newWp, $author$project$Ajourhold$Types$NoWorkPlace) || _Utils_eq(origWp, newWp)) {
 			return $elm$core$Platform$Cmd$none;
 		} else {
-			var url = mainUrl + ('/timebankworkplace/' + (userId + ('/' + $author$project$Ajourhold$Types$fromWorkPlace(newWp))));
+			var url = mainUrl + ('/timebankworkplace?userid=' + (userId + ('&workplaceid=' + $author$project$Ajourhold$Types$fromWorkPlace(newWp))));
 			var myCmd = A2(
 				$elm$core$Basics$composeL,
 				$author$project$Ajourhold$Types$WatchMsgFor($author$project$Ajourhold$Types$Watch1),

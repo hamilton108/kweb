@@ -190,6 +190,15 @@ app.router.get(`${homeUrl}/WatchesFor`, function () {
   const w = watchesFor(msgType); //DEFAULT_WATCH);
   this.res.json(w);
 });
+app.router.get("/AjourholdRequest/timebankworkplace", function () {
+  console.log(this.req.url);
+  const paramString = this.req.url.split("?")[1];
+  const queryParam = paramString.split("&");
+  const workPlace =queryParam[1].split("=")[1];
+  console.log(workPlace);
+  const curVal = workPlace === "39" ? 12.45343 : 15.47865;
+  this.res.json({value: curVal});
+});
 app.router.get(`${homeUrl}/WatchesForSwapTo`, function () {
   console.log(this.req.url);
   const w = watchesFor(SWAP_TO);
@@ -230,11 +239,6 @@ app.router.get("/AjourholdRequest/slideto/:usr/:workPlace/:curDate", function (u
   this.res.json(w);
 });
 
-app.router.get("/AjourholdRequest/timebankworkplace/:usr/:workPlace", function (usr,workPlace) {
-  console.log(this.req.url);
-  const curVal = workPlace === "39" ? 12.45343 : 15.47865;
-  this.res.json({value: curVal});
-});
 
 module.exports = app;
 
