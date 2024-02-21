@@ -1,0 +1,22 @@
+1) Ekstra
+    Default dato i dag.
+    Hvis kun ett arb.sted, velges dette
+    Hvis arb.sted velges, hent inn dekke for
+    (Til dato kun en dag + utover fra dato)
+
+2) Fravær
+    Default dato i dag.
+    Til dato er ikke obligatorisk (fjern **)
+    Hvis kun ett arb.sted, velges dette
+    Hvis arb.sted velges, hent inn dekke for
+    (Til dato kun en dag + utover fra dato)
+    
+3) Avspasering 
+
+    (samme som fravær)
+
+4) Utrykning
+    
+    (samme som fravær)
+
+    
