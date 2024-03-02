@@ -1,0 +1,105 @@
+   
+    class JsonInitDataRequest
+    {
+        public string curDate { get; set; }
+        
+        public int curUnitid { get; set; }
+        public JsonWatchesWithWatchDefs watches { get; set; }
+       
+    }
+
+
+        public JsonResult InitDataCurDay(string userid, int messageType)
+        {
+            if (HomeController.userAuth.ContainsKey(userid))
+            {
+                var info = HomeController.userAuth[userid];
+
+                //var reasons = CommonModel.WebReasonCodes;
+
+                var workPlaces = CommonModel.WorkPlaces(info.personId);
+                int curunit = -1;
+                string todayString = DateTime.Today.ToString("yyyy-MM-dd");
+                JsonWatchesWithWatchDefs wwDef = new JsonWatchesWithWatchDefs();
+                wwDef.watches = new List<ComboBoxItem>();
+                wwDef.watchdefs = new Dictionary<string, JsonWatchDef>();
+                if (workPlaces.Count == 1)
+                {
+                    curunit = int.Parse(workPlaces[0].value);
+                    AjourholdModel ajourholdModel = new AjourholdModel();
+                    wwDef = ajourholdModel.WatchesFor(messageType, curunit, info.personId, todayString, todayString);
+                }
+                               
+                var result = new JsonInitDataRequest()
+                {
+                    curDate = todayString,
+                    curUnitid = curunit,
+                    watches = wwDef
+                };
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new JsonStatusMsg() { ok = false, msg = "No auth" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+    public class JsonWatchDef
+    {
+        public string len
+        {
+            get;set;
+        }
+        public string hourFrom
+        {
+            get; set;
+        }
+        public string hourTo
+        {
+            get; set;
+        }
+        public string isExtra
+        {
+            get; set;
+        }
+        public string reason
+        {
+            get; set;
+        }
+        public string startDate
+        {
+            get;set;
+        }
+        /*
+        */
+    }
+
+
+    public class JsonWatchesWithWatchDefs
+    {
+        public  List<ComboBoxItem> watches { get; set; }
+
+        public Dictionary<string, JsonWatchDef> watchdefs { get; set; }
+    }
+
+    public class ComboBoxItem
+    {
+        public ComboBoxItem()
+        {
+
+        }
+        public ComboBoxItem(string t, string v)
+        {
+            text = t;
+            value = v;
+        }
+        /// <summary>
+        /// Text field (visible part) of Json Combobox item
+        /// </summary>
+        public string text { get; set; }
+        /// <summary>
+        /// Value field (invisible part, whitch is sent to server) of Json Combobox item
+        /// </summary>
+        public string value { get; set; }
+    }
