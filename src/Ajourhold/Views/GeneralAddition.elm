@@ -10,17 +10,18 @@ import Ajourhold.Types
         , WatchMsg(..)
         )
 import Ajourhold.Views.ViewItems as VI
+import Common.Misc exposing (getLangValue)
 import Common.ModalDialog as DLG
 import Html as H
 import Html.Attributes as A
-import Common.Misc exposing (getLangValue)
+
 
 view : Model -> H.Html Msg
 view model =
     let
         from_date_str =
             getLangValue "fra_dato" model.lang
-            
+
         to_date_str =
             getLangValue "til_dato" model.lang
 
@@ -30,7 +31,7 @@ view model =
 
         date2 =
             VI.gridAjourItem VI.gA2
-                (VI.dateItem to_date_str model.dateTo (SimpleDateChanged 2))
+                (VI.dateItem2 to_date_str model.dateTo (SimpleDateChanged 2) False)
 
         workPlace1 =
             VI.workPlace1 model

@@ -29,9 +29,10 @@ view model =
                 (WatchMsgFor Watch1 << DateChanged 1)
 
         date2 =
-            VI.dateTo model
+            VI.dateTo2 model
                 (WatchMsgFor Watch1 << DateChanged 2)
                 VI.gA2
+                False
 
         watch1 =
             VI.watch1 model
@@ -43,6 +44,11 @@ view model =
             VI.workPlace1 model
                 (WatchMsgFor Watch1 << Fetch)
                 VI.gB1
+
+        -- else
+        --     VI.workPlaceWithDefaults1 model
+        --         (WatchMsgFor Watch1 << Fetch)
+        --         VI.gB1
     in
     H.div
         [ A.class "grid-ajour-cells" ]

@@ -51,7 +51,6 @@ view model =
                 (WatchMsgFor (Swap 2) << Changed)
                 VI.gD2
     in
-     
     H.div
         [ A.class "grid-ajour-cells" ]
         [ date1

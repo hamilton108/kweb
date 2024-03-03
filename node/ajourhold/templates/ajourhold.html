@@ -1,11 +1,12 @@
 ﻿<!DOCTYPE html>
 
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Forespørsler</title>
 
-    <!--
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Forespørsler</title>
+
+  <!--
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -16,32 +17,35 @@
     -->
 
 
-    <!-- Local stuff -->
-    <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
-    <script src="./node_modules/popper.js/dist/umd/popper.min.js"></script>
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./lib/ajourhold.css">
-    <script src="./lib/elm-requests.js"></script>
-    <script src="./lib/requests.js"></script>
+  <!-- Local stuff -->
+  <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
+  <script src="./node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="./lib/ajourhold.css">
+  <script src="./lib/customer.js"></script>
+  <script src="./lib/elm-requests.js"></script>
+  <script src="./lib/requests.js"></script>
 </head>
+
 <body>
   <div class="page-header">
-      <ul class="nav kdo-header-dropdown" role="tablist">
-          <li  class="nav-item dropdown">
-            Forespørsler - <a id="tab-header" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Ekstraarbeid</a>
-              <div class="dropdown-menu">
-                  <a id="tab-1" class="dropdown-item" data-toggle="tab" href="#pane-1" role="tab">Ekstraarbeid</a>
-                  <a id="tab-2" class="dropdown-item" data-toggle="tab" href="#pane-2" role="tab">Fravær</a>
-                  <a id="tab-3" class="dropdown-item" data-toggle="tab" href="#pane-3" role="tab">Avspasering</a>
-                  <a id="tab-4" class="dropdown-item" data-toggle="tab" href="#pane-4" role="tab">Ferie</a>
-                  <a id="tab-5" class="dropdown-item" data-toggle="tab" href="#pane-5" role="tab">Vaktbytte</a>
-                  <a id="tab-6" class="dropdown-item" data-toggle="tab" href="#pane-6" role="tab">Generelt tillegg</a>
-                  <a id="tab-7" class="dropdown-item" data-toggle="tab" href="#pane-7" role="tab">Uttrykning</a>
-                  <a id="tab-8" class="dropdown-item" data-toggle="tab" href="#pane-8" role="tab">Forskyvning</a>
-              </div>
-          </li>
-      </ul>
+    <ul class="nav kdo-header-dropdown" role="tablist">
+      <li class="nav-item dropdown">
+        Forespørsler - <a id="tab-header" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+          aria-haspopup="true" aria-expanded="false">Ekstraarbeid</a>
+        <div class="dropdown-menu">
+          <a id="tab-1" class="dropdown-item" data-toggle="tab" href="#pane-1" role="tab">Ekstraarbeid</a>
+          <a id="tab-2" class="dropdown-item" data-toggle="tab" href="#pane-2" role="tab">Fravær</a>
+          <a id="tab-3" class="dropdown-item" data-toggle="tab" href="#pane-3" role="tab">Avspasering</a>
+          <a id="tab-4" class="dropdown-item" data-toggle="tab" href="#pane-4" role="tab">Ferie</a>
+          <a id="tab-5" class="dropdown-item" data-toggle="tab" href="#pane-5" role="tab">Vaktbytte</a>
+          <a id="tab-6" class="dropdown-item" data-toggle="tab" href="#pane-6" role="tab">Generelt tillegg</a>
+          <a id="tab-7" class="dropdown-item" data-toggle="tab" href="#pane-7" role="tab">Uttrykning</a>
+          <a id="tab-8" class="dropdown-item" data-toggle="tab" href="#pane-8" role="tab">Forskyvning</a>
+        </div>
+      </li>
+    </ul>
   </div>
   <div class="tab-content">
     <div class="tab-pane active" id="pane-1" role="tabpanel">
@@ -69,8 +73,9 @@
       <div id="elm15"></div>
     </div>
   </div>
-<input type="hidden" id="userid" value="KaiDan" />
+  <input type="hidden" id="userid" value="KaiDan" />
 </body>
+
 </html>
 
 

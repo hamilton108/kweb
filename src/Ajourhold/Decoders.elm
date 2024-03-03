@@ -1,6 +1,6 @@
-module Ajourhold.Decoders exposing (myInitDataDecoder, myWorkPlacesDecoder, watchDefDecoder, watchInfoDecoder, timebankWorkPlaceDecoder)
+module Ajourhold.Decoders exposing (myInitDataCurDayDecoder, myInitDataDecoder, myWorkPlacesDecoder, timebankWorkPlaceDecoder, watchDefDecoder, watchInfoDecoder)
 
-import Ajourhold.Types exposing (InitData, WatchDef, WatchInfo, TimebankWorkPlace)
+import Ajourhold.Types exposing (InitData, InitDataCurDay, TimebankWorkPlace, WatchDef, WatchInfo)
 import Common.ComboBox as CB
 import Json.Decode as JD
 import Json.Decode.Pipeline as JP
@@ -16,6 +16,22 @@ myInitDataDecoder =
                 |> JP.required "workPlaces" CB.comboBoxItemListDecoder
                 |> JP.required "saldo" JD.float
                 |> JP.required "vacation" JD.string
+                |> JP.required "reasonCodes" (JD.nullable CB.comboBoxItemListDecoder)
+    in
+    JD.decodeValue myDecoder
+
+
+myInitDataCurDayDecoder : JD.Value -> Result JD.Error InitDataCurDay
+myInitDataCurDayDecoder =
+    let
+        myDecoder =
+            JD.succeed InitDataCurDay
+                |> JP.required "userId" JD.string
+                |> JP.required "curUnitid" JD.string
+                |> JP.required "curDate" JD.string
+                |> JP.required "watches" CB.comboBoxItemListDecoder
+                |> JP.required "watchDefs" (JD.dict watchDefDecoder)
+                |> JP.required "workPlaces" CB.comboBoxItemListDecoder
                 |> JP.required "reasonCodes" (JD.nullable CB.comboBoxItemListDecoder)
     in
     JD.decodeValue myDecoder
@@ -51,6 +67,7 @@ watchInfoDecoder =
     JD.succeed WatchInfo
         |> JP.required "watches" (JD.nullable CB.comboBoxItemListDecoder)
         |> JP.required "watchdefs" (JD.nullable (JD.dict watchDefDecoder))
+
 
 timebankWorkPlaceDecoder : JD.Decoder TimebankWorkPlace
 timebankWorkPlaceDecoder =

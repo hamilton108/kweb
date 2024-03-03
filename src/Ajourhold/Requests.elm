@@ -15,11 +15,15 @@ port initDataFetched : (JD.Value -> msg) -> Sub msg
 port workPlacesFetched : (JD.Value -> msg) -> Sub msg
 
 
+port initDataCurDayFetched : (JD.Value -> msg) -> Sub msg
+
+
 subscriptions : Model -> Sub Msg
 subscriptions _ =
     Sub.batch
         [ initDataFetched (DC.myInitDataDecoder >> InitDataFetched)
         , workPlacesFetched (DC.myWorkPlacesDecoder >> WorkPlacesFetched)
+        , initDataCurDayFetched (DC.myInitDataCurDayDecoder >> InitDataCurDayFetched)
         ]
 
 

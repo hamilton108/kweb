@@ -4,6 +4,7 @@ module Ajourhold.Types exposing
     , Flags
     , GridPosition(..)
     , InitData
+    , InitDataCurDay
     , IsDisabled(..)
     , MainUrl(..)
     , Model
@@ -11,12 +12,12 @@ module Ajourhold.Types exposing
     , MyDate(..)
     , SendMsg(..)
     , SlideMsg(..)
+    , TimebankWorkPlace
     , UserId(..)
     , WatchCategory(..)
     , WatchDef
     , WatchDefDict
     , WatchInfo
-    , TimebankWorkPlace
     , WatchMsg(..)
     , WorkPlace(..)
     , defaultWatchDef
@@ -148,6 +149,17 @@ type alias InitData =
     }
 
 
+type alias InitDataCurDay =
+    { userId : String
+    , curUnitId : String
+    , curDate : String
+    , watches : CB.SelectItems
+    , watchDefs : WatchDefDict
+    , workPlaces : CB.SelectItems
+    , reasonCodes : Maybe CB.SelectItems
+    }
+
+
 type alias WatchDef =
     { len : String
     , hourFrom : String
@@ -176,9 +188,11 @@ type alias WatchInfo =
 type alias DataSentStatus =
     { ok : Bool, msg : String }
 
+
 type alias TimebankWorkPlace =
-    { value: Float
+    { value : Float
     }
+
 
 type WatchCategory
     = Watch1
@@ -224,6 +238,7 @@ type Msg
     = AlertOk
     | WorkPlacesFetched (Result JD.Error InitData)
     | InitDataFetched (Result JD.Error InitData)
+    | InitDataCurDayFetched (Result JD.Error InitDataCurDay)
     | ReasonCodeChanged String
     | MeldingChanged String
     | WorkPlaceChanged String
