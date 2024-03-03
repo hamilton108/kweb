@@ -2,7 +2,9 @@ module Ajourhold.Views.ViewItems exposing
     ( btn
     , dateFrom
     , dateItem
+    , dateItem2
     , dateTo
+    , dateTo2
     , formGroupItem
     , fromHour
     , fromHour2
@@ -191,21 +193,26 @@ dateFrom model msg =
         (dateItem title model.dateFrom msg)
 
 
-dateTo : Model -> (String -> Msg) -> GridPosition -> H.Html Msg
-dateTo model msg gpos =
+dateTo2 : Model -> (String -> Msg) -> GridPosition -> Bool -> H.Html Msg
+dateTo2 model msg gpos checkMissing =
     let
         title =
             getLangValue "til_dato" model.lang
     in
     gridAjourItem gpos
-        (dateItem title model.dateTo msg)
+        (dateItem2 title model.dateTo msg checkMissing)
+
+
+dateTo : Model -> (String -> Msg) -> GridPosition -> H.Html Msg
+dateTo model msg gpos =
+    dateTo2 model msg gpos True
 
 
 watch1 : Model -> Bool -> (String -> Msg) -> GridPosition -> H.Html Msg
 watch1 model isDisabled msg gpos =
     let
         py =
-            wrapSelectItems "-------" model.watches
+            wrapSelectItems "-------" Nothing model.watches
 
         title =
             if model.ajcat == 7 then
@@ -217,7 +224,7 @@ watch1 model isDisabled msg gpos =
 
         --"Vakt:"
         wp2 =
-            selectRow model.selectedWatch False isDisabled title py msg
+            selectRow False isDisabled title py msg
     in
     gridAjourItem gpos wp2
 
@@ -233,10 +240,10 @@ watch2 model isDisabled msg gpos =
             getLangValue "vakt" model.lang
 
         py =
-            wrapSelectItems "-------" model.watches2
+            wrapSelectItems "-------" Nothing model.watches2
 
         w2 =
-            selectRow model.selectedWatch2 False isDisabled title py msg
+            selectRow False isDisabled title py msg
     in
     gridAjourItem gpos w2
 
@@ -252,15 +259,14 @@ workPlace1 model msg gpos =
             getLangValue "arbeidssted" model.lang
 
         px =
-            wrapSelectItems "-------" model.workPlaces
+            wrapSelectItems "-------" model.selectedWorkPlace model.workPlaces
 
         isMissing =
             model.selectedWorkPlace == Nothing
 
         wp1 =
-            selectRow model.selectedWorkPlace isMissing False title px msg
+            selectRow isMissing False title px msg
     in
-    -- gridAjourItem gB1 wp1
     gridAjourItem gpos wp1
 
 
@@ -271,13 +277,13 @@ workPlace2 model msg gpos =
             getLangValue "arbeidssted" model.lang
 
         px =
-            wrapSelectItems "-------" model.workPlaces
+            wrapSelectItems "-------" Nothing model.workPlaces
 
         isMissing =
             model.selectedWorkPlace == Nothing
 
         wp2 =
-            selectRow model.selectedWorkPlace2 isMissing False title px msg
+            selectRow isMissing False title px msg
     in
     gridAjourItem gpos wp2
 
@@ -313,16 +319,15 @@ reasons model gpos =
             getLangValue "aarsakskoder" model.lang
 
         rc =
-            wrapSelectItems "-------" model.reasonCodes
+            wrapSelectItems "-------" Nothing model.reasonCodes
 
         isMissingReason =
             model.selectedReasonCode == Nothing
 
         r =
-            selectRow model.selectedReasonCode isMissingReason False title rc ReasonCodeChanged
+            selectRow isMissingReason False title rc ReasonCodeChanged
     in
     gridAjourItem gpos r
-
 
 
 message : Model -> GridPosition -> H.Html Msg
@@ -333,8 +338,6 @@ message model gpos =
     in
     gridAjourItem gpos
         (meldingInput title model.melding)
-
-
 
 
 hourBankBalance : Model -> H.Html Msg
@@ -477,8 +480,8 @@ formGroupItem clazz title myInput =
         ]
 
 
-dateItem : String -> Maybe String -> (String -> Msg) -> H.Html Msg
-dateItem title value event =
+dateItem2 : String -> Maybe String -> (String -> Msg) -> Bool -> H.Html Msg
+dateItem2 title value event checkMissing =
     let
         isMissing =
             value == Nothing
@@ -490,8 +493,12 @@ dateItem title value event =
             "form-control date start-date"
 
         myClazz =
-            if isMissing == True then
-                "missing"
+            if checkMissing == True then
+                if isMissing == True then
+                    "missing"
+
+                else
+                    ""
 
             else
                 ""
@@ -500,6 +507,11 @@ dateItem title value event =
             H.input [ A.value value_, A.type_ "date", A.class dateClazz, E.onInput event ] []
     in
     formGroupItem myClazz title myInput
+
+
+dateItem : String -> Maybe String -> (String -> Msg) -> H.Html Msg
+dateItem title value event =
+    dateItem2 title value event True
 
 
 
@@ -542,23 +554,22 @@ dateItem title value event =
 
 
 selectRow :
-    Maybe String
-    -> Bool
+    Bool
     -> Bool
     -> String
     -> List (H.Html Msg)
     -> (String -> Msg)
     -> H.Html Msg
-selectRow value isMissing isDisabled title mySelects myMsg =
+selectRow isMissing isDisabled title mySelects myMsg =
     let
-        valx =
-            Maybe.withDefault "-1" value
-
+        -- valx =
+        --     Maybe.withDefault "-1" value
         mySelect =
             H.select
                 [ E.onInput myMsg
                 , A.class "form-control select"
-                , A.value valx
+
+                -- , A.value valx
                 , A.disabled isDisabled
                 ]
                 mySelects
@@ -573,22 +584,33 @@ selectRow value isMissing isDisabled title mySelects myMsg =
     formGroupItem myClazz title mySelect
 
 
-selectOption_ : CB.ComboBoxItem -> VD.Node a
-selectOption_ =
-    CB.selectOption Nothing
+selectOption_ : Maybe String -> CB.ComboBoxItem -> VD.Node a
+selectOption_ selected =
+    CB.selectOption selected
 
 
 
+-- Nothing
 --wrapSelectItems : String -> Maybe (List a) -> List a
 
 
-wrapSelectItems firstLineTitle items =
+wrapSelectItems firstLineTitle selected items =
     let
         items_ =
             Maybe.withDefault [] items
     in
     CB.emptySelectOption (Just firstLineTitle)
-        :: List.map selectOption_ items_
+        :: List.map (selectOption_ selected) items_
+
+
+
+-- wrapSelectItemsWithDefaults items =
+--     let
+--         items_ =
+--             Maybe.withDefault [] items
+--     in
+--     --CB.emptySelectOption (Just firstLineTitle)
+--     List.map selectOption_ items_
 
 
 meldingInput : String -> Maybe String -> H.Html Msg

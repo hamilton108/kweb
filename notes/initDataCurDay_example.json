@@ -1,0 +1,136 @@
+{
+  "userId": "KaiDan",
+  "curUnitid": "39",
+  "curDate": "2024-03-03",
+  "watches": [
+    {
+      "value": "7012",
+      "text": "Hansen, Fredrik - D3 07:30 - 15:00"
+    },
+    {
+      "value": "8914",
+      "text": "Johnsen, Tine - A1 15:00 - 22:00"
+    },
+    {
+      "value": "324",
+      "text": "Krais, Axel - D1 07:45 - 16:00"
+    }
+  ],
+  "watchDefs": {
+    "324": {
+      "len": "8,25",
+      "hourFrom": "07:45",
+      "hourTo": "16:00",
+      "isExtra": "true",
+      "reason": "703"
+    },
+    "7012": {
+      "len": "7,5",
+      "hourFrom": "07:30",
+      "hourTo": "15:00",
+      "isExtra": "false",
+      "reason": "701"
+    },
+    "8914": {
+      "len": "8,0",
+      "hourFrom": "15:00",
+      "hourTo": "22:00",
+      "isExtra": "false",
+      "reason": "702"
+    }
+  },
+  "workPlaces": [
+    {
+      "value": "39",
+      "text": "Avdeling 1/Hjelpepleier"
+    }
+  ],
+  "reasonCodes": {
+    "r1": [
+      {
+        "value": "101",
+        "text": "Avspasering reason 1"
+      },
+      {
+        "value": "102",
+        "text": "Avspasering reason 2"
+      }
+    ],
+    "r2": [
+      {
+        "value": "201",
+        "text": "Utrykning reason 1"
+      },
+      {
+        "value": "202",
+        "text": "Utrykning reason 2"
+      }
+    ],
+    "r6": [
+      {
+        "value": "601",
+        "text": "Absence reason 1"
+      },
+      {
+        "value": "602",
+        "text": "Absence reason 2"
+      }
+    ],
+    "r7": [
+      {
+        "value": "701",
+        "text": "Extra reason 1"
+      },
+      {
+        "value": "702",
+        "text": "Extra reason 2"
+      },
+      {
+        "value": "703",
+        "text": "Extra reason 3"
+      }
+    ],
+    "r15": [
+      {
+        "value": "1501",
+        "text": "Slide reason 1"
+      },
+      {
+        "value": "1502",
+        "text": "Slide reason 2"
+      },
+      {
+        "value": "1503",
+        "text": "Slide reason 3"
+      }
+    ],
+    "r18": [
+      {
+        "value": "1801",
+        "text": "Vacation reason 1"
+      },
+      {
+        "value": "1802",
+        "text": "Vacation reason 2"
+      },
+      {
+        "value": "1803",
+        "text": "Vacation reason 3"
+      }
+    ],
+    "r19": [
+      {
+        "value": "1901",
+        "text": "Generelt tillegg reason 1"
+      },
+      {
+        "value": "1902",
+        "text": "Generelt tillegg reason 2"
+      },
+      {
+        "value": "1903",
+        "text": "Generelt tillegg reason 3"
+      }
+    ]
+  }
+}

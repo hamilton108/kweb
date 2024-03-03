@@ -33,7 +33,9 @@ jQuery(document).ready(function() {
   //const mainUrl = "http://172.17.0.4:3000";
   const mainUrl = "http://localhost:3000/AjourholdRequest";
 
-  const myUrl = `${mainUrl}/InitData`;
+  const myInitUrl = `${mainUrl}/InitData`;
+
+  const myCurDayInitUrl = `${mainUrl}/InitDataCurDay`;
 
   const myLangValues = () => {
     return {
@@ -71,20 +73,59 @@ jQuery(document).ready(function() {
   const app2 = initElm(2); // Uttrykning
   const app15 = initElm(15); // Forskyvning (Slide)
   const userid = document.getElementById("userid").value;
-  fetch(myUrl + "?userid=" + userid)
+
+  fetch(myInitUrl + "?userid=" + userid)
     .then(data => {
       return data.json();
     }).then(result => {
-      app7.ports.initDataFetched.send(initDataFor("r7", result));
-      app6.ports.initDataFetched.send(initDataFor("r6", result));
-      app1.ports.initDataFetched.send(initDataFor("r1", result));
+      //console.log(result);
       app18.ports.initDataFetched.send(initDataFor("r18", result));
       app19.ports.initDataFetched.send(initDataFor("r19", result));
-      app2.ports.initDataFetched.send(initDataFor("r2", result));
       app15.ports.initDataFetched.send(initDataFor("r15", result));
       app3.ports.workPlacesFetched.send(result);
     });
 
+
+  const fetchCurDayInitData = function (userId, messageType) {
+    fetch(myCurDayInitUrl + "?userId=" + userid + "?messageType=" + messageType)
+      .then(data => {
+        return data.json();
+      }).then(result => {
+        //console.log(result);
+        switch (messageType) {
+          case 1:
+            app1.ports.initDataCurDayFetched.send(curDayInitDataFor(messageType, result));
+            break;
+          case 2:
+            app2.ports.initDataCurDayFetched.send(curDayInitDataFor(messageType, result));
+            break;
+          case 6:
+            app6.ports.initDataCurDayFetched.send(curDayInitDataFor(messageType, result));
+            break;
+          case 7:
+            app7.ports.initDataCurDayFetched.send(curDayInitDataFor(messageType, result));
+            break;
+        }
+      });
+  };
+
+  fetchCurDayInitData(userid, 1);
+  fetchCurDayInitData(userid, 2);
+  fetchCurDayInitData(userid, 6);
+  fetchCurDayInitData(userid, 7);
+
+  const curDayInitDataFor = function(ajCat, myData) {
+    const result = {
+      "userId": myData.userId,
+      "curUnitid": myData.curUnitid,
+      "curDate": myData.curDate,
+      "watches": myData.watches,
+      "watchDefs": myData.watchDefs,
+      "workPlaces": myData.workPlaces,
+      "reasonCodes": myData["reasonCodes"][`r${ajCat}`]
+    }
+    return result;
+  }
   const initDataFor = function(ajCat, myData) {
     const result = {
       "userId": myData.userId,

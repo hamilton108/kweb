@@ -174,51 +174,51 @@ updateWatch1 msg model =
                 wp =
                     Just s
 
-                curWp = 
+                curWp =
                     T.toWorkPlace model.selectedWorkPlace
 
-                newWp = 
-                    T.toWorkPlace wp 
+                newWp =
+                    T.toWorkPlace wp
 
                 curCmd =
-
                     if s == "-1" then
                         Cmd.none
 
                     else if C.isDateFromLess model then
-                        C.fetchTimebankWorkPlace model.mainUrl (UserId model.userId) curWp newWp 
+                        C.fetchTimebankWorkPlace model.mainUrl (UserId model.userId) curWp newWp
 
                     else
-                        Cmd.batch [
-                            C.fetchWatches model.mainUrl model.ajcat model.userId wp model.dateFrom model.dateTo
-                            , C.fetchTimebankWorkPlace model.mainUrl (UserId model.userId) curWp newWp 
-                        ]
+                        Cmd.batch
+                            [ C.fetchWatches model.mainUrl model.ajcat model.userId wp model.dateFrom model.dateTo
+                            , C.fetchTimebankWorkPlace model.mainUrl (UserId model.userId) curWp newWp
+                            ]
             in
-                let 
-                    newModel = 
-                        if s == "-1" then
-                            { model
-                                | selectedWorkPlace = wp
-                                , selectedWatch = Nothing
-                                , watches = Nothing
-                                , watchDefs = Nothing
-                                , hourFrom = Nothing
-                                , hourTo = Nothing
-                                , sumHours = Nothing
-                                , saldo = Nothing
-                            }
-                        else
-                            { model
-                                | selectedWorkPlace = wp
-                                , selectedWatch = Nothing
-                                , watches = Nothing
-                                , watchDefs = Nothing
-                                , hourFrom = Nothing
-                                , hourTo = Nothing
-                                , sumHours = Nothing
-                            }
-                in 
-                ( newModel , curCmd )
+            let
+                newModel =
+                    if s == "-1" then
+                        { model
+                            | selectedWorkPlace = wp
+                            , selectedWatch = Nothing
+                            , watches = Nothing
+                            , watchDefs = Nothing
+                            , hourFrom = Nothing
+                            , hourTo = Nothing
+                            , sumHours = Nothing
+                            , saldo = Nothing
+                        }
+
+                    else
+                        { model
+                            | selectedWorkPlace = wp
+                            , selectedWatch = Nothing
+                            , watches = Nothing
+                            , watchDefs = Nothing
+                            , hourFrom = Nothing
+                            , hourTo = Nothing
+                            , sumHours = Nothing
+                        }
+            in
+            ( newModel, curCmd )
 
         Fetched (Ok s) ->
             ( { model | watches = s.watches, watchDefs = s.watchDefs }, Cmd.none )
@@ -227,18 +227,19 @@ updateWatch1 msg model =
             ( DLG.errorAlert Nothing "updateWatch1 Error:" s model, Cmd.none )
 
         TimebankFetched (Ok s) ->
-            let 
+            let
                 mySaldo =
                     String.fromFloat (M.toDecimal s.value 100.0)
             in
             ( { model
-                | saldo = Just mySaldo 
+                | saldo = Just mySaldo
               }
-            , Cmd.none 
+            , Cmd.none
             )
 
         TimebankFetched (Err s) ->
             ( DLG.errorAlert Nothing "updateWatch1 Error:" s model, Cmd.none )
+
 
 updateWatch2 : WatchMsg -> Model -> ( Model, Cmd Msg )
 updateWatch2 msg model =
@@ -333,44 +334,45 @@ updateCoverFor msg model =
 
                     else
                         let
-                            curWp = 
+                            curWp =
                                 T.toWorkPlace model.selectedWorkPlace
 
-                            newWp = 
-                                T.toWorkPlace wp 
+                            newWp =
+                                T.toWorkPlace wp
                         in
-                        Cmd.batch [
-                            C.fetchCoverFor model.mainUrl model.userId wp model.dateFrom model.dateTo
-                            , C.fetchTimebankWorkPlace model.mainUrl (UserId model.userId) curWp newWp 
-                        ]
+                        Cmd.batch
+                            [ C.fetchCoverFor model.mainUrl model.userId wp model.dateFrom model.dateTo
+                            , C.fetchTimebankWorkPlace model.mainUrl (UserId model.userId) curWp newWp
+                            ]
             in
-                let 
-                    newModel = 
-                        if s == "-1" then
-                            { model
-                                | selectedWorkPlace = wp
-                                , selectedWatch = Nothing
-                                , watches = Nothing
-                                , watchDefs = Nothing
-                                , selectedReasonCode = Nothing
-                                , hourFrom = Nothing
-                                , hourTo = Nothing
-                                , sumHours = Nothing
-                                , saldo = Nothing
-                            }
-                        else
-                            { model
-                                | selectedWorkPlace = wp
-                                , selectedWatch = Nothing
-                                , watches = Nothing
-                                , watchDefs = Nothing
-                                , selectedReasonCode = Nothing
-                                , hourFrom = Nothing
-                                , hourTo = Nothing
-                                , sumHours = Nothing
-                            }
-                in 
-                ( newModel , curCmd )
+            let
+                newModel =
+                    if s == "-1" then
+                        { model
+                            | selectedWorkPlace = wp
+                            , selectedWatch = Nothing
+                            , watches = Nothing
+                            , watchDefs = Nothing
+                            , selectedReasonCode = Nothing
+                            , hourFrom = Nothing
+                            , hourTo = Nothing
+                            , sumHours = Nothing
+                            , saldo = Nothing
+                        }
+
+                    else
+                        { model
+                            | selectedWorkPlace = wp
+                            , selectedWatch = Nothing
+                            , watches = Nothing
+                            , watchDefs = Nothing
+                            , selectedReasonCode = Nothing
+                            , hourFrom = Nothing
+                            , hourTo = Nothing
+                            , sumHours = Nothing
+                        }
+            in
+            ( newModel, curCmd )
 
         Fetched (Ok s) ->
             ( { model | watches = s.watches, watchDefs = s.watchDefs }, Cmd.none )
@@ -466,6 +468,7 @@ updateSwap index msg model =
 
         TimebankFetched (Err s) ->
             ( DLG.errorAlert Nothing "updateWatch1 Error:" s model, Cmd.none )
+
 
 updateSlide : SlideMsg -> Model -> ( Model, Cmd Msg )
 updateSlide msg model =
@@ -624,50 +627,51 @@ updateEmergency msg model =
                 wp =
                     Just s
 
-                curWp = 
+                curWp =
                     T.toWorkPlace model.selectedWorkPlace
 
-                newWp = 
-                    T.toWorkPlace wp 
+                newWp =
+                    T.toWorkPlace wp
 
                 curCmd =
                     if s == "-1" then
                         Cmd.none
 
                     else if C.isDateFromLess model then
-                        C.fetchTimebankWorkPlace model.mainUrl (UserId model.userId) curWp newWp 
+                        C.fetchTimebankWorkPlace model.mainUrl (UserId model.userId) curWp newWp
 
                     else
-                        Cmd.batch [
-                            C.fetchWatches model.mainUrl model.ajcat model.userId wp model.dateFrom model.dateTo
-                            , C.fetchTimebankWorkPlace model.mainUrl (UserId model.userId) curWp newWp 
-                        ]
+                        Cmd.batch
+                            [ C.fetchWatches model.mainUrl model.ajcat model.userId wp model.dateFrom model.dateTo
+                            , C.fetchTimebankWorkPlace model.mainUrl (UserId model.userId) curWp newWp
+                            ]
             in
-                let 
-                    newModel = 
-                        if s == "-1" then
-                            { model
-                                | selectedWorkPlace = wp
-                                , selectedWatch = Nothing
-                                , watches = Nothing
-                                , watchDefs = Nothing
-                                , hourFrom = Nothing
-                                , hourTo = Nothing
-                                , sumHours = Nothing
-                                , saldo = Nothing
-                            }
-                        else
-                            { model
-                                | selectedWorkPlace = wp
-                                , selectedWatch = Nothing
-                                , watches = Nothing
-                                , watchDefs = Nothing
-                                , hourFrom = Nothing
-                                , hourTo = Nothing
-                                , sumHours = Nothing
-                            }
-                in
-                ( newModel , curCmd )
+            let
+                newModel =
+                    if s == "-1" then
+                        { model
+                            | selectedWorkPlace = wp
+                            , selectedWatch = Nothing
+                            , watches = Nothing
+                            , watchDefs = Nothing
+                            , hourFrom = Nothing
+                            , hourTo = Nothing
+                            , sumHours = Nothing
+                            , saldo = Nothing
+                        }
+
+                    else
+                        { model
+                            | selectedWorkPlace = wp
+                            , selectedWatch = Nothing
+                            , watches = Nothing
+                            , watchDefs = Nothing
+                            , hourFrom = Nothing
+                            , hourTo = Nothing
+                            , sumHours = Nothing
+                        }
+            in
+            ( newModel, curCmd )
 
         Fetched (Ok s) ->
             ( { model | watches = s.watches, watchDefs = s.watchDefs }, Cmd.none )
@@ -680,6 +684,7 @@ updateEmergency msg model =
 
         TimebankFetched (Err s) ->
             ( DLG.errorAlert Nothing "updateWatch1 Error:" s model, Cmd.none )
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -714,6 +719,31 @@ update msg model =
 
         InitDataFetched (Err s) ->
             ( { model | dlgAlert = DLG.DialogVisibleAlert "Subscriptions" ("InitDataFetched Error: " ++ JD.errorToString s) DLG.Error }, Cmd.none )
+
+        InitDataCurDayFetched (Ok s) ->
+            let
+                selWorkPlace =
+                    if s.curUnitId == "-1" then
+                        Nothing
+
+                    else
+                        Just s.curUnitId
+            in
+            --Debug.log "InitDataCurDayFetched "
+            ( { model
+                | userId = s.userId
+                , selectedWorkPlace = selWorkPlace
+                , dateFrom = Just s.curDate
+                , workPlaces = Just s.workPlaces
+                , watches = Just s.watches
+                , watchDefs = Just s.watchDefs
+                , reasonCodes = s.reasonCodes
+              }
+            , Cmd.none
+            )
+
+        InitDataCurDayFetched (Err s) ->
+            ( { model | dlgAlert = DLG.DialogVisibleAlert "Subscriptions" ("InitDataCurDayFetched Error: " ++ JD.errorToString s) DLG.Error }, Cmd.none )
 
         WorkPlaceChanged s ->
             ( { model | selectedWorkPlace = Just s }, Cmd.none )

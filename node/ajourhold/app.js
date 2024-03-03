@@ -23,7 +23,6 @@ app.router.get(`${homeUrl}/InitData`, function () {
   this.res.json(initData());
 });
 
-
 /*---------------- From KDO.Common --------------------
    public enum MessageType
    {
@@ -90,6 +89,24 @@ const initData = () => {
         vacation: "12"
     };
 };
+const initDataCurDay = () => {
+    const ww = watchesFor(6);
+    return {
+        userId: "KaiDan",
+        curUnitid: "39",
+        curDate: "2024-03-03",
+        watches: ww.watches,
+        watchDefs: ww.watchdefs,
+        /*
+        workPlaces: [{value: "39",text: "Avdeling 1/Hjelpepleier"},
+        
+                     {value: "59",text: "Avdeling 2/Sykepleier"}],
+        */
+        workPlaces: [{value: "39",text: "Avdeling 1/Hjelpepleier"}],
+        reasonCodes: reasonCodesAll()
+    };
+};
+
 const emptyComboBox = () => {
     return {value:"-1",text:"---------------------"}
 }
@@ -175,26 +192,35 @@ const watchesFor = (ajCat) => {
                 }
       };
 };
+
+const parseReqUrl = function (reqUrl) {
+  console.log(reqUrl);
+  const paramString = reqUrl.split("?")[1];
+  const queryParam = paramString.split("&");
+  console.log(queryParam);
+  return queryParam;
+};
+
+app.router.get(`${homeUrl}/InitDataCurDay`, function () {
+  const queryParam = parseReqUrl(this.req.url);
+  //const msgType = queryParam[0].split("=")[1];
+  this.res.json(initDataCurDay());
+});
+
 app.router.get(`${homeUrl}/CoverFor`, function () {
   console.log(this.req.url);
   const w = watchesFor(COVER_FOR);
   this.res.json(w);
 });
 app.router.get(`${homeUrl}/WatchesFor`, function () {
-  console.log(this.req.url);
-  const paramString = this.req.url.split("?")[1];
-  const queryParam = paramString.split("&");
-  console.log(queryParam);
+  const queryParam = parseReqUrl(this.req.url);
   const msgType = queryParam[0].split("=")[1];
-
   const w = watchesFor(msgType); //DEFAULT_WATCH);
   this.res.json(w);
 });
-app.router.get("/AjourholdRequest/timebankworkplace", function () {
-  console.log(this.req.url);
-  const paramString = this.req.url.split("?")[1];
-  const queryParam = paramString.split("&");
-  const workPlace =queryParam[1].split("=")[1];
+app.router.get(`${homeUrl}/timebankworkplace`, function () {
+  const queryParam = parseReqUrl(this.req.url);
+  const workPlace = queryParam[1].split("=")[1];
   console.log(workPlace);
   const curVal = workPlace === "39" ? 12.45343 : 15.47865;
   this.res.json({value: curVal});
