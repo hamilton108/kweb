@@ -12,7 +12,6 @@ jQuery(document).ready(function () {
       .then(data => {
         return data.json();
       }).then(result => {
-        //const dx = document.getElementById("subst24t");
         ret = result;
         locLang = ret != null ? ret : "no";
         if (locLang == "en") {
@@ -33,12 +32,12 @@ jQuery(document).ready(function () {
           .then(data => {
             return data.json();
           }).then(result => {
-            app7.ports.initDataFetched.send(initDataFor("r7", result));
-            app6.ports.initDataFetched.send(initDataFor("r6", result));
-            app1.ports.initDataFetched.send(initDataFor("r1", result));
+            //app7.ports.initDataFetched.send(initDataFor("r7", result));
+            //app6.ports.initDataFetched.send(initDataFor("r6", result));
+            //app1.ports.initDataFetched.send(initDataFor("r1", result));
             app18.ports.initDataFetched.send(initDataFor("r18", result));
             app19.ports.initDataFetched.send(initDataFor("r19", result));
-            app2.ports.initDataFetched.send(initDataFor("r2", result));
+            //app2.ports.initDataFetched.send(initDataFor("r2", result));
             app15.ports.initDataFetched.send(initDataFor("r15", result));
             app3.ports.workPlacesFetched.send(result);
           });
