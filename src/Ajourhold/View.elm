@@ -1,5 +1,6 @@
 module Ajourhold.View exposing (view)
 
+import Ajourhold.AjourCatEnum exposing (AjourCatEnum(..))
 import Ajourhold.Types exposing (Model, Msg(..), SendMsg(..))
 import Ajourhold.Views.Absence as ABS
 import Ajourhold.Views.Emergency as EM
@@ -35,25 +36,25 @@ import Html as H
 view : Model -> H.Html Msg
 view model =
     case model.ajcat of
-        7 ->
+        AceExtra ->
             EXTRA.view model
 
-        2 ->
+        AceEmergency ->
             EM.view model
 
-        6 ->
+        AceAbsence ->
             ABS.view model
 
-        1 ->
+        AceTimeoff ->
             TIMO.view model
 
-        18 ->
+        AceVacation ->
             VAC.view model
 
-        3 ->
+        AceSwap ->
             SWAP.view model
 
-        15 ->
+        AceSlide ->
             SL.view model
 
         _ ->

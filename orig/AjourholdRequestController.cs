@@ -72,8 +72,8 @@ namespace KDO.ShiftManagerMVC.Controllers
                 int curunit = -1;
                 string todayString = DateTime.Today.ToString("yyyy-MM-dd");
                 JsonWatchesWithWatchDefs wwDef = new JsonWatchesWithWatchDefs();
-                wwDef.watches = new List<ComboBoxItem>();
-                wwDef.watchdefs = new Dictionary<string, JsonWatchDef>();
+                //wwDef.watches = new List<ComboBoxItem>();
+                //wwDef.watchdefs = new Dictionary<string, JsonWatchDef>();
                 if (workPlaces.Count == 1)
                 {
                     curunit = int.Parse(workPlaces[0].value);
@@ -88,8 +88,8 @@ namespace KDO.ShiftManagerMVC.Controllers
                     curUnitid = curunit.ToString(),
                     reasonCodes = reasons,
                     workPlaces = workPlaces,
-                    watches = wwDef.watches,
-                    watchdefs = wwDef.watchdefs
+                    watches = wwDef.watches == null ? new List<ComboBoxItem() : wwDef.watches,
+                    watchdefs = wwDef.watchdefs == null ? new Dictionary<string, JsonWatchDef>() : wwDef.watchdefs
                 };
 
                 return Json(result, JsonRequestBehavior.AllowGet);
@@ -130,7 +130,7 @@ namespace KDO.ShiftManagerMVC.Controllers
                 jsonInput.personId = info.personId;
                 AjourholdModel ajourholdModel = new AjourholdModel();
                 //Privat vaktbytte settes til årsaksid -1
-                if (jsonInput.msgType == 512 && jsonInput.reason == 0)
+                if (jsonInput.msgType == 3 && jsonInput.reason == 0)
                     jsonInput.reason = -1;
                 var jsonStatus = ajourholdModel.SaveMessageCenter(jsonInput);
                 return Json(jsonStatus, JsonRequestBehavior.AllowGet);

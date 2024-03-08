@@ -1,5 +1,6 @@
 port module Ajourhold.Requests exposing (init, initDataFetched, main, subscriptions, workPlacesFetched)
 
+import Ajourhold.AjourCatEnum as ACE
 import Ajourhold.Decoders as DC
 import Ajourhold.Types exposing (Flags, MainUrl(..), Model, Msg(..))
 import Ajourhold.Update exposing (initModel, update)
@@ -46,4 +47,4 @@ init flags =
                 |> JD.decodeValue (JD.dict JD.string)
                 |> Result.withDefault Dict.empty
     in
-    ( initModel (MainUrl flags.mainurl) flags.ajcat lang, Cmd.none )
+    ( initModel (MainUrl flags.mainurl) (ACE.toEnum flags.ajcat) lang, Cmd.none )

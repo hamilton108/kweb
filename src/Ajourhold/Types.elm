@@ -27,6 +27,7 @@ module Ajourhold.Types exposing
     , toWorkPlace
     )
 
+import Ajourhold.AjourCatEnum exposing (AjourCatEnum)
 import Common.ComboBox as CB
 import Common.ModalDialog as DLG
 import Dict exposing (Dict)
@@ -254,7 +255,7 @@ type Msg
 
 type alias Model =
     { mainUrl : MainUrl
-    , ajcat : Int
+    , ajcat : AjourCatEnum
     , lang : Dict String String
     , userId : String
     , reasonCodes : Maybe CB.SelectItems

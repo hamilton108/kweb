@@ -5,13 +5,12 @@ module Ajourhold.Commands exposing
     , fetchCoverFor
     , fetchSlideFrom
     , fetchSlideTo
+    , fetchTimebankWorkPlace
     , fetchWatches
     , fetchWatches2
     , fetchWatchesSwapFrom
     , fetchWatchesSwapTo
     , fetchWatches_
-    , fetchTimebankWorkPlace     
-    , fromAjCat
     , getWatchDef
     , isDateFromLess
     , sendData
@@ -20,6 +19,7 @@ module Ajourhold.Commands exposing
     , toJsonString
     )
 
+import Ajourhold.AjourCatEnum as ACE exposing (AjourCatEnum(..))
 import Ajourhold.Decoders as AD
 import Ajourhold.Types as T
     exposing
@@ -57,11 +57,11 @@ import String
 canSendData : Model -> Bool
 canSendData m =
     case m.ajcat of
-        2 ->
+        AceEmergency ->
             -- Utrykning
             canSendData2 m
 
-        3 ->
+        AceSwap ->
             -- Vaktbytte
             canSendData3 m
 
@@ -121,26 +121,6 @@ type alias AjCatDict =
    };
 
 -}
-
-
-ajCatDict : AjCatDict
-ajCatDict =
-    Dict.fromList
-        [ ( 1, 8 ) -- Avspasering
-        , ( 2, 2 ) -- Uttrykning
-        , ( 3, 512 ) -- Vaktbytte
-        , ( 6, 4 ) -- Fravaer
-        , ( 7, 1 ) -- Extra
-        , ( 15, 1024 ) -- Forskyvning
-        , ( 18, 256 ) -- Ferie
-        , ( 19, 2048 ) -- Generelt tillegg
-        ]
-
-
-fromAjCat : Int -> Int
-fromAjCat k =
-    -- String.fromInt <| Maybe.withDefault -1 (Dict.get k ajCatDict)
-    Maybe.withDefault -1 (Dict.get k ajCatDict)
 
 
 getWatchDef : String -> Maybe WatchDefDict -> WatchDef
@@ -241,7 +221,7 @@ toJsonFloat s =
 
 ajCatDateFrom : Model -> JE.Value
 ajCatDateFrom model =
-    if model.ajcat == 2 then
+    if model.ajcat == AceEmergency then
         case model.selectedWatch of
             Just selWatch ->
                 let
@@ -289,7 +269,7 @@ sendData model =
 
         myHourFrom =
             case ajCat of
-                3 ->
+                AceSwap ->
                     -- Vaktbytte
                     Nothing
 
@@ -298,7 +278,7 @@ sendData model =
 
         myHourTo =
             case ajCat of
-                3 ->
+                AceSwap ->
                     -- Vaktbytte
                     Nothing
 
@@ -307,7 +287,7 @@ sendData model =
 
         stem =
             [ ( "userId", JE.string model.userId )
-            , ( "msgType", JE.int (fromAjCat model.ajcat) )
+            , ( "msgType", JE.int (ACE.fromEnum model.ajcat) )
             , ( "workPlace", toJsonInt model.selectedWorkPlace )
 
             -- , ( "dateFrom", toJsonString model.dateFrom )
@@ -324,21 +304,21 @@ sendData model =
 
         params =
             case ajCat of
-                3 ->
+                AceSwap ->
                     -- Vaktbytte
                     ( "turnuslinjeId", toJsonInt model.selectedWatch )
                         :: ( "turnuslinjeId2", toJsonInt model.selectedWatch2 )
                         :: ( "ajourDvId", JE.null )
                         :: stem
 
-                7 ->
+                AceExtra ->
                     -- Ekstraarbeid
                     ( "ajourDvId", toJsonInt model.selectedWatch )
                         :: ( "turnuslinjeId", JE.null )
                         :: ( "turnuslinjeId2", JE.null )
                         :: stem
 
-                15 ->
+                AceSlide ->
                     -- Forskjøvet vakt --
                     ( "turnuslinjeId", toJsonInt model.selectedWatch )
                         :: ( "turnuslinjeId2", toJsonInt model.selectedWatch2 )
@@ -446,7 +426,7 @@ fetchCoverFor :
 fetchCoverFor mu userId workPlace dateFrom dateTo =
     fetchWatches_
         mu
-        Nothing
+        AceNone
         "/CoverFor"
         (WatchMsgFor CoverFor << Fetched)
         userId
@@ -457,7 +437,7 @@ fetchCoverFor mu userId workPlace dateFrom dateTo =
 
 fetchWatches :
     MainUrl
-    -> Int
+    -> AjourCatEnum
     -> String
     -> Maybe String
     -> Maybe String
@@ -466,7 +446,7 @@ fetchWatches :
 fetchWatches mu ajCat userId workPlace dateFrom dateTo =
     fetchWatches_
         mu
-        (Just ajCat)
+        ajCat
         "/WatchesFor"
         (WatchMsgFor Watch1 << Fetched)
         userId
@@ -485,7 +465,7 @@ fetchWatches2 :
 fetchWatches2 mu userId workPlace dateFrom dateTo =
     fetchWatches_
         mu
-        Nothing
+        AceNone
         "/WatchesForSwapTo"
         (WatchMsgFor Watch2 << Fetched)
         userId
@@ -496,7 +476,7 @@ fetchWatches2 mu userId workPlace dateFrom dateTo =
 
 fetchWatches_ :
     MainUrl
-    -> Maybe Int
+    -> AjourCatEnum
     -> String
     -> (Result Http.Error WatchInfo -> Msg)
     -> String
@@ -524,11 +504,11 @@ fetchWatches_ (MainUrl mainUrl) ajCat ajaxCall myCmd userId workPlace dateFrom d
 
             url =
                 case ajCat of
-                    Nothing ->
+                    AceNone ->
                         mainUrl ++ ajaxCall ++ "?workPlace=" ++ wp ++ "&userid=" ++ userId ++ "&dateFrom=" ++ df ++ "&dateTo=" ++ dt
 
-                    Just ajCat_ ->
-                        mainUrl ++ ajaxCall ++ "?messageType=" ++ (String.fromInt <| fromAjCat ajCat_) ++ "&workPlace=" ++ wp ++ "&userid=" ++ userId ++ "&dateFrom=" ++ df ++ "&dateTo=" ++ dt
+                    _ ->
+                        mainUrl ++ ajaxCall ++ "?messageType=" ++ (String.fromInt <| ACE.fromEnum ajCat) ++ "&workPlace=" ++ wp ++ "&userid=" ++ userId ++ "&dateFrom=" ++ df ++ "&dateTo=" ++ dt
 
             {-
                decoder =
@@ -540,20 +520,24 @@ fetchWatches_ (MainUrl mainUrl) ajCat ajaxCall myCmd userId workPlace dateFrom d
         Http.send myCmd <| Http.get url AD.watchInfoDecoder
 
 
-fetchTimebankWorkPlace : MainUrl -> UserId -> WorkPlace -> WorkPlace -> Cmd Msg 
+fetchTimebankWorkPlace : MainUrl -> UserId -> WorkPlace -> WorkPlace -> Cmd Msg
 fetchTimebankWorkPlace (MainUrl mainUrl) (UserId userId) origWp newWp =
-    if  (newWp == NoWorkPlace) || 
-        (origWp == newWp) then
+    if
+        (newWp == NoWorkPlace)
+            || (origWp == newWp)
+    then
         Cmd.none
-    else
-        let 
-            url = 
-                mainUrl ++ "/timebankworkplace?userid=" ++ userId ++ "&workplaceid=" ++ T.fromWorkPlace newWp
-            myCmd = 
-                WatchMsgFor Watch1 << TimebankFetched
 
+    else
+        let
+            url =
+                mainUrl ++ "/timebankworkplace?userid=" ++ userId ++ "&workplaceid=" ++ T.fromWorkPlace newWp
+
+            myCmd =
+                WatchMsgFor Watch1 << TimebankFetched
         in
         Http.send myCmd <| Http.get url AD.timebankWorkPlaceDecoder
+
 
 slideUrl : MainUrl -> UserId -> WorkPlace -> MyDate -> Bool -> String
 slideUrl (MainUrl mainUrl) (UserId userId) wp curDate isSlideFrom =
@@ -605,5 +589,3 @@ fetchSlideTo (MainUrl mainUrl) (UserId userId) wp tlid odf cd =
             --slideUrl userId wp cd False
         in
         Http.send (SlideMsgFor << SlideWatchFetched 2) <| Http.get url AD.watchInfoDecoder
-
-

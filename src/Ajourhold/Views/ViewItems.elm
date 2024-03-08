@@ -44,6 +44,7 @@ module Ajourhold.Views.ViewItems exposing
     , wrapSelectItems
     )
 
+import Ajourhold.AjourCatEnum exposing (AjourCatEnum(..))
 import Ajourhold.Commands as C
 import Ajourhold.Types
     exposing
@@ -215,7 +216,7 @@ watch1 model isDisabled msg gpos =
             wrapSelectItems "-------" Nothing model.watches
 
         title =
-            if model.ajcat == 7 then
+            if model.ajcat == AceExtra then
                 getLangValue "dekke_for" model.lang
                 --"Dekke for:"
 
@@ -419,7 +420,7 @@ fromHour model (IsDisabled isDisabled) gpos =
             getLangValue "fra_kl" model.lang
 
         index =
-            if model.ajcat == 2 then
+            if model.ajcat == AceEmergency then
                 31
 
             else
@@ -436,7 +437,7 @@ toHour model (IsDisabled isDisabled) gpos =
             getLangValue "til_kl" model.lang
 
         index =
-            if model.ajcat == 2 then
+            if model.ajcat == AceEmergency then
                 32
 
             else

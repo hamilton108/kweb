@@ -9,6 +9,7 @@ module Ajourhold.Update exposing
     , updateWatch2
     )
 
+import Ajourhold.AjourCatEnum as ACE exposing (AjourCatEnum(..))
 import Ajourhold.Commands as C
 import Ajourhold.Types as T
     exposing
@@ -28,7 +29,7 @@ import Dict exposing (Dict)
 import Json.Decode as JD
 
 
-initModel : MainUrl -> Int -> Dict String String -> Model
+initModel : MainUrl -> AjourCatEnum -> Dict String String -> Model
 initModel mainUrl ajcat lang =
     { mainUrl = mainUrl
     , ajcat = ajcat
@@ -618,7 +619,7 @@ updateEmergency msg model =
                     }
 
                 curCmd =
-                    C.fetchWatches model.mainUrl 2 model.userId model.selectedWorkPlace myDateFrom model.dateTo
+                    C.fetchWatches model.mainUrl AceEmergency model.userId model.selectedWorkPlace myDateFrom model.dateTo
             in
             ( curModel, curCmd )
 
