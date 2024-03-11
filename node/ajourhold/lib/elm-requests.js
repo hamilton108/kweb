@@ -5520,6 +5520,37 @@ var $author$project$Ajourhold$Update$initModel = F3(
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $elm$json$Json$Decode$string = _Json_decodeString;
+var $author$project$Ajourhold$AjourCatEnum$AceAbsence = {$: 'AceAbsence'};
+var $author$project$Ajourhold$AjourCatEnum$AceEmergency = {$: 'AceEmergency'};
+var $author$project$Ajourhold$AjourCatEnum$AceExtra = {$: 'AceExtra'};
+var $author$project$Ajourhold$AjourCatEnum$AceGeneralAddition = {$: 'AceGeneralAddition'};
+var $author$project$Ajourhold$AjourCatEnum$AceNone = {$: 'AceNone'};
+var $author$project$Ajourhold$AjourCatEnum$AceSlide = {$: 'AceSlide'};
+var $author$project$Ajourhold$AjourCatEnum$AceSwap = {$: 'AceSwap'};
+var $author$project$Ajourhold$AjourCatEnum$AceTimeoff = {$: 'AceTimeoff'};
+var $author$project$Ajourhold$AjourCatEnum$AceVacation = {$: 'AceVacation'};
+var $author$project$Ajourhold$AjourCatEnum$toEnum = function (i) {
+	switch (i) {
+		case 1:
+			return $author$project$Ajourhold$AjourCatEnum$AceTimeoff;
+		case 2:
+			return $author$project$Ajourhold$AjourCatEnum$AceEmergency;
+		case 3:
+			return $author$project$Ajourhold$AjourCatEnum$AceSwap;
+		case 6:
+			return $author$project$Ajourhold$AjourCatEnum$AceAbsence;
+		case 7:
+			return $author$project$Ajourhold$AjourCatEnum$AceExtra;
+		case 15:
+			return $author$project$Ajourhold$AjourCatEnum$AceSlide;
+		case 18:
+			return $author$project$Ajourhold$AjourCatEnum$AceVacation;
+		case 19:
+			return $author$project$Ajourhold$AjourCatEnum$AceGeneralAddition;
+		default:
+			return $author$project$Ajourhold$AjourCatEnum$AceNone;
+	}
+};
 var $elm$core$Result$withDefault = F2(
 	function (def, result) {
 		if (result.$ === 'Ok') {
@@ -5541,7 +5572,7 @@ var $author$project$Ajourhold$Requests$init = function (flags) {
 		A3(
 			$author$project$Ajourhold$Update$initModel,
 			$author$project$Ajourhold$Types$MainUrl(flags.mainurl),
-			flags.ajcat,
+			$author$project$Ajourhold$AjourCatEnum$toEnum(flags.ajcat),
 			lang),
 		$elm$core$Platform$Cmd$none);
 };
@@ -5682,7 +5713,7 @@ var $author$project$Ajourhold$Decoders$myInitDataCurDayDecoder = function () {
 			$author$project$Common$ComboBox$comboBoxItemListDecoder,
 			A3(
 				$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
-				'watchDefs',
+				'watchdefs',
 				$elm$json$Json$Decode$dict($author$project$Ajourhold$Decoders$watchDefDecoder),
 				A3(
 					$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
@@ -5904,7 +5935,6 @@ var $author$project$Common$Misc$getLangValue = F2(
 			'empty',
 			A2($elm$core$Dict$get, key, dict));
 	});
-var $elm$core$Debug$log = _Debug_log;
 var $author$project$Ajourhold$Update$maybeDate = function (s) {
 	return (!$elm$core$String$length(s)) ? $elm$core$Maybe$Nothing : $elm$core$Maybe$Just(s);
 };
@@ -5970,7 +6000,7 @@ var $author$project$Ajourhold$Commands$toJsonString = function (s) {
 	}
 };
 var $author$project$Ajourhold$Commands$ajCatDateFrom = function (model) {
-	if (model.ajcat === 2) {
+	if (_Utils_eq(model.ajcat, $author$project$Ajourhold$AjourCatEnum$AceEmergency)) {
 		var _v0 = model.selectedWatch;
 		if (_v0.$ === 'Just') {
 			var selWatch = _v0.a;
@@ -6020,23 +6050,27 @@ var $elm$core$Basics$composeL = F3(
 		return g(
 			f(x));
 	});
-var $author$project$Ajourhold$Commands$ajCatDict = $elm$core$Dict$fromList(
-	_List_fromArray(
-		[
-			_Utils_Tuple2(1, 8),
-			_Utils_Tuple2(2, 2),
-			_Utils_Tuple2(3, 512),
-			_Utils_Tuple2(6, 4),
-			_Utils_Tuple2(7, 1),
-			_Utils_Tuple2(15, 1024),
-			_Utils_Tuple2(18, 256),
-			_Utils_Tuple2(19, 2048)
-		]));
-var $author$project$Ajourhold$Commands$fromAjCat = function (k) {
-	return A2(
-		$elm$core$Maybe$withDefault,
-		-1,
-		A2($elm$core$Dict$get, k, $author$project$Ajourhold$Commands$ajCatDict));
+var $author$project$Ajourhold$AjourCatEnum$fromEnum = function (cat) {
+	switch (cat.$) {
+		case 'AceTimeoff':
+			return 1;
+		case 'AceEmergency':
+			return 2;
+		case 'AceSwap':
+			return 3;
+		case 'AceAbsence':
+			return 6;
+		case 'AceExtra':
+			return 7;
+		case 'AceSlide':
+			return 15;
+		case 'AceVacation':
+			return 18;
+		case 'AceGeneralAddition':
+			return 19;
+		default:
+			return 99;
+	}
 };
 var $elm$json$Json$Encode$int = _Json_wrap;
 var $author$project$Ajourhold$Commands$isExtra = function (model) {
@@ -6568,14 +6602,14 @@ var $author$project$Ajourhold$Commands$sendData = function (model) {
 	var myDateTo = model.dateTo;
 	var ajCat = model.ajcat;
 	var myHourFrom = function () {
-		if (ajCat === 3) {
+		if (ajCat.$ === 'AceSwap') {
 			return $elm$core$Maybe$Nothing;
 		} else {
 			return model.hourFrom;
 		}
 	}();
 	var myHourTo = function () {
-		if (ajCat === 3) {
+		if (ajCat.$ === 'AceSwap') {
 			return $elm$core$Maybe$Nothing;
 		} else {
 			return model.hourTo;
@@ -6589,7 +6623,7 @@ var $author$project$Ajourhold$Commands$sendData = function (model) {
 			_Utils_Tuple2(
 			'msgType',
 			$elm$json$Json$Encode$int(
-				$author$project$Ajourhold$Commands$fromAjCat(model.ajcat))),
+				$author$project$Ajourhold$AjourCatEnum$fromEnum(model.ajcat))),
 			_Utils_Tuple2(
 			'workPlace',
 			$author$project$Ajourhold$Commands$toJsonInt(model.selectedWorkPlace)),
@@ -6621,8 +6655,8 @@ var $author$project$Ajourhold$Commands$sendData = function (model) {
 				$author$project$Ajourhold$Commands$isExtra(model)))
 		]);
 	var params = function () {
-		switch (ajCat) {
-			case 3:
+		switch (ajCat.$) {
+			case 'AceSwap':
 				return A2(
 					$elm$core$List$cons,
 					_Utils_Tuple2(
@@ -6637,7 +6671,7 @@ var $author$project$Ajourhold$Commands$sendData = function (model) {
 							$elm$core$List$cons,
 							_Utils_Tuple2('ajourDvId', $elm$json$Json$Encode$null),
 							stem)));
-			case 7:
+			case 'AceExtra':
 				return A2(
 					$elm$core$List$cons,
 					_Utils_Tuple2(
@@ -6650,7 +6684,7 @@ var $author$project$Ajourhold$Commands$sendData = function (model) {
 							$elm$core$List$cons,
 							_Utils_Tuple2('turnuslinjeId2', $elm$json$Json$Encode$null),
 							stem)));
-			case 15:
+			case 'AceSlide':
 				return A2(
 					$elm$core$List$cons,
 					_Utils_Tuple2(
@@ -6752,12 +6786,11 @@ var $author$project$Ajourhold$Commands$fetchWatches_ = F8(
 				var df = A2($elm$core$Maybe$withDefault, '-', dateFrom);
 				var dt = A2($elm$core$Maybe$withDefault, df, dateTo);
 				var url = function () {
-					if (ajCat.$ === 'Nothing') {
+					if (ajCat.$ === 'AceNone') {
 						return mainUrl + (ajaxCall + ('?workPlace=' + (wp + ('&userid=' + (userId + ('&dateFrom=' + (df + ('&dateTo=' + dt))))))));
 					} else {
-						var ajCat_ = ajCat.a;
 						return mainUrl + (ajaxCall + ('?messageType=' + ($elm$core$String$fromInt(
-							$author$project$Ajourhold$Commands$fromAjCat(ajCat_)) + ('&workPlace=' + (wp + ('&userid=' + (userId + ('&dateFrom=' + (df + ('&dateTo=' + dt))))))))));
+							$author$project$Ajourhold$AjourCatEnum$fromEnum(ajCat)) + ('&workPlace=' + (wp + ('&userid=' + (userId + ('&dateFrom=' + (df + ('&dateTo=' + dt))))))))));
 					}
 				}();
 				return A2(
@@ -6772,7 +6805,7 @@ var $author$project$Ajourhold$Commands$fetchCoverFor = F5(
 		return A8(
 			$author$project$Ajourhold$Commands$fetchWatches_,
 			mu,
-			$elm$core$Maybe$Nothing,
+			$author$project$Ajourhold$AjourCatEnum$AceNone,
 			'/CoverFor',
 			A2(
 				$elm$core$Basics$composeL,
@@ -6983,7 +7016,7 @@ var $author$project$Ajourhold$Commands$fetchWatches = F6(
 		return A8(
 			$author$project$Ajourhold$Commands$fetchWatches_,
 			mu,
-			$elm$core$Maybe$Just(ajCat),
+			ajCat,
 			'/WatchesFor',
 			A2(
 				$elm$core$Basics$composeL,
@@ -7032,7 +7065,7 @@ var $author$project$Ajourhold$Update$updateEmergency = F2(
 				var curModel = _Utils_update(
 					model,
 					{dateFrom: myDateFrom, hourFrom: $elm$core$Maybe$Nothing, hourTo: $elm$core$Maybe$Nothing, selectedWatch: $elm$core$Maybe$Nothing});
-				var curCmd = A6($author$project$Ajourhold$Commands$fetchWatches, model.mainUrl, 2, model.userId, model.selectedWorkPlace, myDateFrom, model.dateTo);
+				var curCmd = A6($author$project$Ajourhold$Commands$fetchWatches, model.mainUrl, $author$project$Ajourhold$AjourCatEnum$AceEmergency, model.userId, model.selectedWorkPlace, myDateFrom, model.dateTo);
 				return _Utils_Tuple2(curModel, curCmd);
 			case 'Fetch':
 				var s = msg.a;
@@ -7440,7 +7473,7 @@ var $author$project$Ajourhold$Commands$fetchWatches2 = F5(
 		return A8(
 			$author$project$Ajourhold$Commands$fetchWatches_,
 			mu,
-			$elm$core$Maybe$Nothing,
+			$author$project$Ajourhold$AjourCatEnum$AceNone,
 			'/WatchesForSwapTo',
 			A2(
 				$elm$core$Basics$composeL,
@@ -7556,22 +7589,19 @@ var $author$project$Ajourhold$Update$update = F2(
 				if (msg.a.$ === 'Ok') {
 					var s = msg.a.a;
 					var selWorkPlace = (s.curUnitId === '-1') ? $elm$core$Maybe$Nothing : $elm$core$Maybe$Just(s.curUnitId);
-					return A2(
-						$elm$core$Debug$log,
-						'InitDataCurDayFetched ',
-						_Utils_Tuple2(
-							_Utils_update(
-								model,
-								{
-									dateFrom: $elm$core$Maybe$Just(s.curDate),
-									reasonCodes: s.reasonCodes,
-									selectedWorkPlace: selWorkPlace,
-									userId: s.userId,
-									watchDefs: $elm$core$Maybe$Just(s.watchDefs),
-									watches: $elm$core$Maybe$Just(s.watches),
-									workPlaces: $elm$core$Maybe$Just(s.workPlaces)
-								}),
-							$elm$core$Platform$Cmd$none));
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								dateFrom: $elm$core$Maybe$Just(s.curDate),
+								reasonCodes: s.reasonCodes,
+								selectedWorkPlace: selWorkPlace,
+								userId: s.userId,
+								watchDefs: $elm$core$Maybe$Just(s.watchDefs),
+								watches: $elm$core$Maybe$Just(s.watches),
+								workPlaces: $elm$core$Maybe$Just(s.workPlaces)
+							}),
+						$elm$core$Platform$Cmd$none);
 				} else {
 					var s = msg.a.a;
 					return _Utils_Tuple2(
@@ -7947,10 +7977,10 @@ var $author$project$Ajourhold$Commands$canSendData_ = function (m) {
 };
 var $author$project$Ajourhold$Commands$canSendData = function (m) {
 	var _v0 = m.ajcat;
-	switch (_v0) {
-		case 2:
+	switch (_v0.$) {
+		case 'AceEmergency':
 			return $author$project$Ajourhold$Commands$canSendData2(m);
-		case 3:
+		case 'AceSwap':
 			return $author$project$Ajourhold$Commands$canSendData3(m);
 		default:
 			return $author$project$Ajourhold$Commands$canSendData_(m);
@@ -8146,7 +8176,7 @@ var $author$project$Ajourhold$Views$ViewItems$fromHour = F3(
 	function (model, _v0, gpos) {
 		var isDisabled = _v0.a;
 		var title = A2($author$project$Common$Misc$getLangValue, 'fra_kl', model.lang);
-		var index = (model.ajcat === 2) ? 31 : 1;
+		var index = _Utils_eq(model.ajcat, $author$project$Ajourhold$AjourCatEnum$AceEmergency) ? 31 : 1;
 		return A2(
 			$author$project$Ajourhold$Views$ViewItems$gridAjourItem,
 			gpos,
@@ -8326,7 +8356,7 @@ var $author$project$Ajourhold$Views$ViewItems$toHour = F3(
 	function (model, _v0, gpos) {
 		var isDisabled = _v0.a;
 		var title = A2($author$project$Common$Misc$getLangValue, 'til_kl', model.lang);
-		var index = (model.ajcat === 2) ? 32 : 2;
+		var index = _Utils_eq(model.ajcat, $author$project$Ajourhold$AjourCatEnum$AceEmergency) ? 32 : 2;
 		return A2(
 			$author$project$Ajourhold$Views$ViewItems$gridAjourItem,
 			gpos,
@@ -8339,7 +8369,7 @@ var $author$project$Ajourhold$Views$ViewItems$toHour = F3(
 	});
 var $author$project$Ajourhold$Views$ViewItems$watch1 = F4(
 	function (model, isDisabled, msg, gpos) {
-		var title = (model.ajcat === 7) ? A2($author$project$Common$Misc$getLangValue, 'dekke_for', model.lang) : A2($author$project$Common$Misc$getLangValue, 'vakt', model.lang);
+		var title = _Utils_eq(model.ajcat, $author$project$Ajourhold$AjourCatEnum$AceExtra) ? A2($author$project$Common$Misc$getLangValue, 'dekke_for', model.lang) : A2($author$project$Common$Misc$getLangValue, 'vakt', model.lang);
 		var py = A3($author$project$Ajourhold$Views$ViewItems$wrapSelectItems, '-------', $elm$core$Maybe$Nothing, model.watches);
 		var wp2 = A5($author$project$Ajourhold$Views$ViewItems$selectRow, false, isDisabled, title, py, msg);
 		return A2($author$project$Ajourhold$Views$ViewItems$gridAjourItem, gpos, wp2);
@@ -8888,20 +8918,20 @@ var $author$project$Ajourhold$Views$Vacation$view = function (model) {
 };
 var $author$project$Ajourhold$View$view = function (model) {
 	var _v0 = model.ajcat;
-	switch (_v0) {
-		case 7:
+	switch (_v0.$) {
+		case 'AceExtra':
 			return $author$project$Ajourhold$Views$Extra$view(model);
-		case 2:
+		case 'AceEmergency':
 			return $author$project$Ajourhold$Views$Emergency$view(model);
-		case 6:
+		case 'AceAbsence':
 			return $author$project$Ajourhold$Views$Absence$view(model);
-		case 1:
+		case 'AceTimeoff':
 			return $author$project$Ajourhold$Views$Timeoff$view(model);
-		case 18:
+		case 'AceVacation':
 			return $author$project$Ajourhold$Views$Vacation$view(model);
-		case 3:
+		case 'AceSwap':
 			return $author$project$Ajourhold$Views$Swap$view(model);
-		case 15:
+		case 'AceSlide':
 			return $author$project$Ajourhold$Views$Slide$view(model);
 		default:
 			return $author$project$Ajourhold$Views$GeneralAddition$view(model);

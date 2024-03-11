@@ -30,7 +30,7 @@ myInitDataCurDayDecoder =
                 |> JP.required "curUnitid" JD.string
                 |> JP.required "curDate" JD.string
                 |> JP.required "watches" CB.comboBoxItemListDecoder
-                |> JP.required "watchDefs" (JD.dict watchDefDecoder)
+                |> JP.required "watchdefs" (JD.dict watchDefDecoder)
                 |> JP.required "workPlaces" CB.comboBoxItemListDecoder
                 |> JP.required "reasonCodes" (JD.nullable CB.comboBoxItemListDecoder)
     in

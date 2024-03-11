@@ -87,7 +87,7 @@ jQuery(document).ready(function() {
 
 
   const fetchCurDayInitData = function (userId, messageType) {
-    fetch(myCurDayInitUrl + "?userId=" + userid + "?messageType=" + messageType)
+    fetch(myCurDayInitUrl + "?userId=" + userid + "&messageType=" + messageType)
       .then(data => {
         return data.json();
       }).then(result => {
