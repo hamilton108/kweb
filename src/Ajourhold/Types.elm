@@ -153,7 +153,9 @@ type alias InitData =
 type alias InitDataCurDay =
     { userId : String
     , curUnitId : String
+    , curWatchid : String
     , curDate : String
+    , curHbank : TimebankWorkPlace
     , watches : CB.SelectItems
     , watchDefs : WatchDefDict
     , workPlaces : CB.SelectItems

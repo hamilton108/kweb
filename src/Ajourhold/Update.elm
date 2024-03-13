@@ -729,19 +729,31 @@ update msg model =
 
                     else
                         Just s.curUnitId
+
+                selWatch =
+                    if s.curWatchid == "-1" then
+                        Nothing
+
+                    else
+                        Just s.curWatchid
+
+                mySaldo =
+                    String.fromFloat (M.toDecimal s.curHbank.value 100.0)
             in
-            --Debug.log "InitDataCurDayFetched "
-            ( { model
-                | userId = s.userId
-                , selectedWorkPlace = selWorkPlace
-                , dateFrom = Just s.curDate
-                , workPlaces = Just s.workPlaces
-                , watches = Just s.watches
-                , watchDefs = Just s.watchDefs
-                , reasonCodes = s.reasonCodes
-              }
-            , Cmd.none
-            )
+            Debug.log "InitDataCurDayFetched "
+                ( { model
+                    | userId = s.userId
+                    , selectedWorkPlace = selWorkPlace
+                    , selectedWatch = selWatch
+                    , saldo = Just mySaldo
+                    , dateFrom = Just s.curDate
+                    , workPlaces = Just s.workPlaces
+                    , watches = Just s.watches
+                    , watchDefs = Just s.watchDefs
+                    , reasonCodes = s.reasonCodes
+                  }
+                , Cmd.none
+                )
 
         InitDataCurDayFetched (Err s) ->
             ( { model | dlgAlert = DLG.DialogVisibleAlert "Subscriptions" ("InitDataCurDayFetched Error: " ++ JD.errorToString s) DLG.Error }, Cmd.none )

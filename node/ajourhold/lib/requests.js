@@ -118,9 +118,11 @@ jQuery(document).ready(function() {
     const result = {
       "userId": myData.userId,
       "curUnitid": myData.curUnitid,
+      "curWatchid": myData.curWatchid,
       "curDate": myData.curDate,
+      "curHbank": myData.curHbank,
       "watches": myData.watches,
-      "watchdefs": myData.watchDefs,
+      "watchdefs": myData.watchdefs,
       "workPlaces": myData.workPlaces,
       "reasonCodes": myData["reasonCodes"][`r${ajCat}`]
     }

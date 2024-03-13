@@ -548,21 +548,6 @@ fetchTimebankWorkPlace (MainUrl mainUrl) (UserId userId) origWp newWp =
         Http.send myCmd <| Http.get url AD.timebankWorkPlaceDecoder
 
 
-slideUrl : MainUrl -> UserId -> WorkPlace -> MyDate -> Bool -> String
-slideUrl (MainUrl mainUrl) (UserId userId) wp curDate isSlideFrom =
-    let
-        slide =
-            if isSlideFrom == True then
-                "/WatchesFor" ++ "?messageType=15" ++ "&workPlace=" ++ T.fromWorkPlace wp ++ "&userid=" ++ userId ++ "&dateFrom=" ++ T.fromMyDate curDate ++ "&dateTo=" ++ T.fromMyDate curDate
-
-            else
-                ""
-
-        -- "/WatchesForSlideTo" ++ "?twp=" ++ T.fromWorkPlace wp ++ "&odf=" ++ T.fromMyDate curDate  ++ "&userid=" ++ userId ++ "&tlid=" ++ T.Watch1  ++ "&dateTo=" ++ T.fromMyDate curDate
-    in
-    mainUrl ++ slide
-
-
 
 --++ userId ++ "/" ++ T.fromWorkPlace wp ++ "/" ++ T.fromMyDate curDate
 
@@ -575,7 +560,7 @@ fetchSlideFrom (MainUrl mainUrl) (UserId userId) wp cd =
     else
         let
             url =
-                mainUrl ++ "/WatchesFor?messageType=4" ++ "&workPlace=" ++ T.fromWorkPlace wp ++ "&userid=" ++ userId ++ "&dateFrom=" ++ T.fromMyDate cd ++ "&dateTo=" ++ T.fromMyDate cd
+                mainUrl ++ "/WatchesFor?messageType=6" ++ "&workPlace=" ++ T.fromWorkPlace wp ++ "&userid=" ++ userId ++ "&dateFrom=" ++ T.fromMyDate cd ++ "&dateTo=" ++ T.fromMyDate cd
 
             --slideUrl userId wp cd True
         in

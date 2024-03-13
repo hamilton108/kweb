@@ -213,7 +213,7 @@ watch1 : Model -> Bool -> (String -> Msg) -> GridPosition -> H.Html Msg
 watch1 model isDisabled msg gpos =
     let
         py =
-            wrapSelectItems "-------" Nothing model.watches
+            wrapSelectItems "-------" model.selectedWatch model.watches
 
         title =
             if model.ajcat == AceExtra then

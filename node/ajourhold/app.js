@@ -193,6 +193,116 @@ const watchesFor = (ajCat) => {
       };
 };
 
+const init_cur_day_1_single = 
+{
+  "userId": "kaidan",
+  "workPlaces": [
+    {
+      "text": "Avdeling 2/Felles 1020/KNA 12",
+      "value": "39"
+    }
+  ],
+  "curDate": "2024-03-14",
+  "curUnitid": "39",
+  "curWatchid": "1212488",
+  "curHbank": {
+    "value": 32.2
+  },
+  "watches": [
+    {
+      "text": "A1: 14.03 15:15 - 14.03 23:00",
+      "value": "1212488"
+    }
+  ],
+  "watchdefs": {
+    "1212488": {
+      "len": "7,75",
+      "hourFrom": "15:15",
+      "hourTo": "23:00",
+      "isExtra": "false",
+      "reason": "",
+      "startDate": "2024-03-14"
+    }
+  },
+  "reasonCodes": reasonCodesAll()
+}
+
+const init_cur_day_1_many = 
+{
+  "userId": "jonjoh",
+  "workPlaces": [
+    {
+      "text": "Avdeling 1/Bolig-A/Bolig-A",
+      "value": "59"
+    },
+    {
+      "text": "Avdeling 2/Felles 1020/KNA 12",
+      "value": "39"
+    },
+    {
+      "text": "Avdeling 2/2530 - Dagarbeider/2530 - Dagarbeider",
+      "value": "131"
+    }
+  ],
+  "curDate": "2024-03-14",
+  "curUnitid": "-1",
+  "curWatchid": "-1",
+  "curHbank": {
+    "value": 0
+  },
+  "watches": [],
+  "watchdefs": {},
+  "reasonCodes": reasonCodesAll()
+}
+
+const init_cur_day_7_single = 
+{
+  "userId": "kaidan",
+  "workPlaces": [
+    {
+      "text": "Avdeling 2/Felles 1020/KNA 12",
+      "value": "39"
+    }
+  ],
+  "curDate": "2024-03-14",
+  "curUnitid": "39",
+  "curWatchid": "-1",
+  "curHbank": {
+    "value": 32.2
+  },
+  "watches": [],
+  "watchdefs": {},
+  "reasonCodes": reasonCodesAll()
+};
+
+const init_cur_day_7_many = 
+{
+  "userId": "jonjoh",
+  "workPlaces": [
+    {
+      "text": "Avdeling 1/Bolig-A/Bolig-A",
+      "value": "59"
+    },
+    {
+      "text": "Avdeling 2/Felles 1020/KNA 12",
+      "value": "39"
+    },
+    {
+      "text": "Avdeling 2/2530 - Dagarbeider/2530 - Dagarbeider",
+      "value": "131"
+    }
+  ],
+  "curDate": "2024-03-14",
+  "curUnitid": "-1",
+  "curWatchid": "-1",
+  "curHbank": {
+    "value": 0
+  },
+  "watches": [],
+  "watchdefs": {},
+  "reasonCodes": reasonCodesAll()
+};
+
 const parseReqUrl = function (reqUrl) {
   console.log(reqUrl);
   const paramString = reqUrl.split("?")[1];
@@ -201,908 +311,28 @@ const parseReqUrl = function (reqUrl) {
   return queryParam;
 };
 
-const init_cur_day_1 = 
-{
-  "userId": "kaidan",
-  "workPlaces": [
-    {
-      "text": "Avdeling 2/Felles 1020/KNA 12",
-      "value": "39"
-    }
-  ],
-  "curDate": "2024-03-11",
-  "curUnitid": "39",
-  "watches": [
-    {
-      "text": "D3: 11.03 07:30 - 11.03 15:15",
-      "value": "1211754"
-    }
-  ],
-  "watchDefs": {
-    "1211754": {
-      "len": "7,25",
-      "hourFrom": "07:30",
-      "hourTo": "15:15",
-      "isExtra": "false",
-      "reason": "",
-      "startDate": "2024-03-11"
-    }
-  },
-  "reasonCodes": {
-    "r1": [
-      {
-        "text": "Avspasering m/trekk tillegg ",
-        "value": "216"
-      }
-    ],
-    "r2": [
-      {
-        "text": "Utrykning ",
-        "value": "192"
-      },
-      {
-        "text": "Utrykning2 ",
-        "value": "962"
-      }
-    ],
-    "r3": [
-      {
-        "text": "Privat vaktbytte ",
-        "value": "-1"
-      }
-    ],
-    "r6": [
-      {
-        "text": "Sykemelding 1-16 dager ",
-        "value": "191"
-      },
-      {
-        "text": "Permisjon m/lønn ",
-        "value": "212"
-      },
-      {
-        "text": "Permisjon U/lønn ",
-        "value": "213"
-      },
-      {
-        "text": "Ledig stilling vakant",
-        "value": "473"
-      },
-      {
-        "text": "Sykemelding over 16 dager Med refusjon",
-        "value": "560"
-      },
-      {
-        "text": "Egenmelding IA ",
-        "value": "719"
-      },
-      {
-        "text": "Permisjon U-lønn (Trekk lønn) ",
-        "value": "839"
-      },
-      {
-        "text": "Frivillig Ja ",
-        "value": "960"
-      }
-    ],
-    "r7": [
-      {
-        "text": "Sykemelding 1-16 dager ",
-        "value": "191"
-      },
-      {
-        "text": "Permisjon m/lønn ",
-        "value": "212"
-      },
-      {
-        "text": "Permisjon U/lønn ",
-        "value": "213"
-      },
-      {
-        "text": "Ferie lønnet ",
-        "value": "231"
-      },
-      {
-        "text": "Ferievikarer ",
-        "value": "291"
-      },
-      {
-        "text": "Møte frivillig Kun ordinære timer",
-        "value": "372"
-      },
-      {
-        "text": "Ledig stilling vakant",
-        "value": "473"
-      },
-      {
-        "text": "Sykemelding over 16 dager Med refusjon",
-        "value": "560"
-      },
-      {
-        "text": "Ekstrapersonell Styrket bemanning",
-        "value": "659"
-      },
-      {
-        "text": "Opplæring Opplæring av nyansatte",
-        "value": "660"
-      },
-      {
-        "text": "Ekstra pga uro ",
-        "value": "661"
-      },
-      {
-        "text": "Beredskapsvakt ",
-        "value": "679"
-      },
-      {
-        "text": "Egenmelding IA ",
-        "value": "719"
-      },
-      {
-        "text": "Møte pålagt Gir overtid",
-        "value": "759"
-      },
-      {
-        "text": "Permisjon U-lønn (Trekk lønn) ",
-        "value": "839"
-      }
-    ],
-    "r11": [],
-    "r15": [
-      {
-        "text": "Sykemelding 1-16 dager ",
-        "value": "191"
-      },
-      {
-        "text": "Permisjon m/lønn ",
-        "value": "212"
-      },
-      {
-        "text": "Permisjon U/lønn ",
-        "value": "213"
-      },
-      {
-        "text": "Ferievikarer ",
-        "value": "291"
-      },
-      {
-        "text": "Møte frivillig Kun ordinære timer",
-        "value": "372"
-      },
-      {
-        "text": "Ledig stilling vakant",
-        "value": "473"
-      },
-      {
-        "text": "Sykemelding over 16 dager Med refusjon",
-        "value": "560"
-      },
-      {
-        "text": "Ekstrapersonell Styrket bemanning",
-        "value": "659"
-      },
-      {
-        "text": "Opplæring Opplæring av nyansatte",
-        "value": "660"
-      },
-      {
-        "text": "Ekstra pga uro ",
-        "value": "661"
-      },
-      {
-        "text": "Egenmelding IA ",
-        "value": "719"
-      },
-      {
-        "text": "Møte pålagt Gir overtid",
-        "value": "759"
-      },
-      {
-        "text": "Permisjon U-lønn (Trekk lønn) ",
-        "value": "839"
-      },
-      {
-        "text": "Frivillig Ja ",
-        "value": "960"
-      }
-    ],
-    "r18": [
-      {
-        "text": "Ferie lønnet ",
-        "value": "231"
-      },
-      {
-        "text": "Ferievikarer ",
-        "value": "291"
-      }
-    ],
-    "r19": [
-      {
-        "text": "Generelt tillegg ",
-        "value": "10963"
-      }
-    ]
-  }
-}
-
-const init_cur_day_2 = 
-{
-  "userId": "kaidan",
-  "workPlaces": [
-    {
-      "text": "Avdeling 2/Felles 1020/KNA 12",
-      "value": "39"
-    },
-    {
-      "text": "Avdeling 3/Felles 1021/KNA 22",
-      "value": "59"
-    }
-  ],
-  "curDate": "2024-03-11",
-  "curUnitid": "39",
-  "watches": [],
-  "watchDefs": {},
-  "reasonCodes": {
-    "r1": [
-      {
-        "text": "Avspasering m/trekk tillegg ",
-        "value": "216"
-      }
-    ],
-    "r2": [
-      {
-        "text": "Utrykning ",
-        "value": "192"
-      },
-      {
-        "text": "Utrykning2 ",
-        "value": "962"
-      }
-    ],
-    "r3": [
-      {
-        "text": "Privat vaktbytte ",
-        "value": "-1"
-      }
-    ],
-    "r6": [
-      {
-        "text": "Sykemelding 1-16 dager ",
-        "value": "191"
-      },
-      {
-        "text": "Permisjon m/lønn ",
-        "value": "212"
-      },
-      {
-        "text": "Permisjon U/lønn ",
-        "value": "213"
-      },
-      {
-        "text": "Ledig stilling vakant",
-        "value": "473"
-      },
-      {
-        "text": "Sykemelding over 16 dager Med refusjon",
-        "value": "560"
-      },
-      {
-        "text": "Egenmelding IA ",
-        "value": "719"
-      },
-      {
-        "text": "Permisjon U-lønn (Trekk lønn) ",
-        "value": "839"
-      },
-      {
-        "text": "Frivillig Ja ",
-        "value": "960"
-      }
-    ],
-    "r7": [
-      {
-        "text": "Sykemelding 1-16 dager ",
-        "value": "191"
-      },
-      {
-        "text": "Permisjon m/lønn ",
-        "value": "212"
-      },
-      {
-        "text": "Permisjon U/lønn ",
-        "value": "213"
-      },
-      {
-        "text": "Ferie lønnet ",
-        "value": "231"
-      },
-      {
-        "text": "Ferievikarer ",
-        "value": "291"
-      },
-      {
-        "text": "Møte frivillig Kun ordinære timer",
-        "value": "372"
-      },
-      {
-        "text": "Ledig stilling vakant",
-        "value": "473"
-      },
-      {
-        "text": "Sykemelding over 16 dager Med refusjon",
-        "value": "560"
-      },
-      {
-        "text": "Ekstrapersonell Styrket bemanning",
-        "value": "659"
-      },
-      {
-        "text": "Opplæring Opplæring av nyansatte",
-        "value": "660"
-      },
-      {
-        "text": "Ekstra pga uro ",
-        "value": "661"
-      },
-      {
-        "text": "Beredskapsvakt ",
-        "value": "679"
-      },
-      {
-        "text": "Egenmelding IA ",
-        "value": "719"
-      },
-      {
-        "text": "Møte pålagt Gir overtid",
-        "value": "759"
-      },
-      {
-        "text": "Permisjon U-lønn (Trekk lønn) ",
-        "value": "839"
-      }
-    ],
-    "r11": [],
-    "r15": [
-      {
-        "text": "Sykemelding 1-16 dager ",
-        "value": "191"
-      },
-      {
-        "text": "Permisjon m/lønn ",
-        "value": "212"
-      },
-      {
-        "text": "Permisjon U/lønn ",
-        "value": "213"
-      },
-      {
-        "text": "Ferievikarer ",
-        "value": "291"
-      },
-      {
-        "text": "Møte frivillig Kun ordinære timer",
-        "value": "372"
-      },
-      {
-        "text": "Ledig stilling vakant",
-        "value": "473"
-      },
-      {
-        "text": "Sykemelding over 16 dager Med refusjon",
-        "value": "560"
-      },
-      {
-        "text": "Ekstrapersonell Styrket bemanning",
-        "value": "659"
-      },
-      {
-        "text": "Opplæring Opplæring av nyansatte",
-        "value": "660"
-      },
-      {
-        "text": "Ekstra pga uro ",
-        "value": "661"
-      },
-      {
-        "text": "Egenmelding IA ",
-        "value": "719"
-      },
-      {
-        "text": "Møte pålagt Gir overtid",
-        "value": "759"
-      },
-      {
-        "text": "Permisjon U-lønn (Trekk lønn) ",
-        "value": "839"
-      },
-      {
-        "text": "Frivillig Ja ",
-        "value": "960"
-      }
-    ],
-    "r18": [
-      {
-        "text": "Ferie lønnet ",
-        "value": "231"
-      },
-      {
-        "text": "Ferievikarer ",
-        "value": "291"
-      }
-    ],
-    "r19": [
-      {
-        "text": "Generelt tillegg ",
-        "value": "10963"
-      }
-    ]
-  }
-}
-
-/*
-  "watches": [
-    {
-      "text": "D3: 11.03 07:30 - 11.03 15:15",
-      "value": "1211754"
-    }
-  ],
-  "watchDefs": {
-    "1211754": {
-      "len": "7,25",
-      "hourFrom": "07:30",
-      "hourTo": "15:15",
-      "isExtra": "false",
-      "reason": "",
-      "startDate": "2024-03-11"
-    }
-  },
-
-*/
-const init_cur_day_6 = 
-{
-  "userId": "kaidan",
-  "workPlaces": [
-    {
-      "text": "Avdeling 2/Felles 1020/KNA 12",
-      "value": "39"
-    },
-    {
-      "text": "Avdeling 3/Felles 1021/KNA 22",
-      "value": "59"
-    }
-  ],
-  "curDate": "2024-03-11",
-  "curUnitid": "-1",
-  "watches": [],
-  "watchDefs": {},
-  "reasonCodes": {
-    "r1": [
-      {
-        "text": "Avspasering m/trekk tillegg ",
-        "value": "216"
-      }
-    ],
-    "r2": [
-      {
-        "text": "Utrykning ",
-        "value": "192"
-      },
-      {
-        "text": "Utrykning2 ",
-        "value": "962"
-      }
-    ],
-    "r3": [
-      {
-        "text": "Privat vaktbytte ",
-        "value": "-1"
-      }
-    ],
-    "r6": [
-      {
-        "text": "Sykemelding 1-16 dager ",
-        "value": "191"
-      },
-      {
-        "text": "Permisjon m/lønn ",
-        "value": "212"
-      },
-      {
-        "text": "Permisjon U/lønn ",
-        "value": "213"
-      },
-      {
-        "text": "Ledig stilling vakant",
-        "value": "473"
-      },
-      {
-        "text": "Sykemelding over 16 dager Med refusjon",
-        "value": "560"
-      },
-      {
-        "text": "Egenmelding IA ",
-        "value": "719"
-      },
-      {
-        "text": "Permisjon U-lønn (Trekk lønn) ",
-        "value": "839"
-      },
-      {
-        "text": "Frivillig Ja ",
-        "value": "960"
-      }
-    ],
-    "r7": [
-      {
-        "text": "Sykemelding 1-16 dager ",
-        "value": "191"
-      },
-      {
-        "text": "Permisjon m/lønn ",
-        "value": "212"
-      },
-      {
-        "text": "Permisjon U/lønn ",
-        "value": "213"
-      },
-      {
-        "text": "Ferie lønnet ",
-        "value": "231"
-      },
-      {
-        "text": "Ferievikarer ",
-        "value": "291"
-      },
-      {
-        "text": "Møte frivillig Kun ordinære timer",
-        "value": "372"
-      },
-      {
-        "text": "Ledig stilling vakant",
-        "value": "473"
-      },
-      {
-        "text": "Sykemelding over 16 dager Med refusjon",
-        "value": "560"
-      },
-      {
-        "text": "Ekstrapersonell Styrket bemanning",
-        "value": "659"
-      },
-      {
-        "text": "Opplæring Opplæring av nyansatte",
-        "value": "660"
-      },
-      {
-        "text": "Ekstra pga uro ",
-        "value": "661"
-      },
-      {
-        "text": "Beredskapsvakt ",
-        "value": "679"
-      },
-      {
-        "text": "Egenmelding IA ",
-        "value": "719"
-      },
-      {
-        "text": "Møte pålagt Gir overtid",
-        "value": "759"
-      },
-      {
-        "text": "Permisjon U-lønn (Trekk lønn) ",
-        "value": "839"
-      }
-    ],
-    "r11": [],
-    "r15": [
-      {
-        "text": "Sykemelding 1-16 dager ",
-        "value": "191"
-      },
-      {
-        "text": "Permisjon m/lønn ",
-        "value": "212"
-      },
-      {
-        "text": "Permisjon U/lønn ",
-        "value": "213"
-      },
-      {
-        "text": "Ferievikarer ",
-        "value": "291"
-      },
-      {
-        "text": "Møte frivillig Kun ordinære timer",
-        "value": "372"
-      },
-      {
-        "text": "Ledig stilling vakant",
-        "value": "473"
-      },
-      {
-        "text": "Sykemelding over 16 dager Med refusjon",
-        "value": "560"
-      },
-      {
-        "text": "Ekstrapersonell Styrket bemanning",
-        "value": "659"
-      },
-      {
-        "text": "Opplæring Opplæring av nyansatte",
-        "value": "660"
-      },
-      {
-        "text": "Ekstra pga uro ",
-        "value": "661"
-      },
-      {
-        "text": "Egenmelding IA ",
-        "value": "719"
-      },
-      {
-        "text": "Møte pålagt Gir overtid",
-        "value": "759"
-      },
-      {
-        "text": "Permisjon U-lønn (Trekk lønn) ",
-        "value": "839"
-      },
-      {
-        "text": "Frivillig Ja ",
-        "value": "960"
-      }
-    ],
-    "r18": [
-      {
-        "text": "Ferie lønnet ",
-        "value": "231"
-      },
-      {
-        "text": "Ferievikarer ",
-        "value": "291"
-      }
-    ],
-    "r19": [
-      {
-        "text": "Generelt tillegg ",
-        "value": "10963"
-      }
-    ]
-  }
-}
-
-const init_cur_day_7 = 
-{
-  "userId": "kaidan",
-  "workPlaces": [
-    {
-      "text": "Avdeling 2/Felles 1020/KNA 12",
-      "value": "39"
-    },
-    {
-      "text": "Avdeling 3/Felles 1021/KNA 22",
-      "value": "59"
-    }
-  ],
-  "curDate": "2024-03-11",
-  "curUnitid": "-1",
-  "watches": [],
-  "watchDefs": {},
-  "reasonCodes": {
-    "r1": [
-      {
-        "text": "Avspasering m/trekk tillegg ",
-        "value": "216"
-      }
-    ],
-    "r2": [
-      {
-        "text": "Utrykning ",
-        "value": "192"
-      },
-      {
-        "text": "Utrykning2 ",
-        "value": "962"
-      }
-    ],
-    "r3": [
-      {
-        "text": "Privat vaktbytte ",
-        "value": "-1"
-      }
-    ],
-    "r6": [
-      {
-        "text": "Sykemelding 1-16 dager ",
-        "value": "191"
-      },
-      {
-        "text": "Permisjon m/lønn ",
-        "value": "212"
-      },
-      {
-        "text": "Permisjon U/lønn ",
-        "value": "213"
-      },
-      {
-        "text": "Ledig stilling vakant",
-        "value": "473"
-      },
-      {
-        "text": "Sykemelding over 16 dager Med refusjon",
-        "value": "560"
-      },
-      {
-        "text": "Egenmelding IA ",
-        "value": "719"
-      },
-      {
-        "text": "Permisjon U-lønn (Trekk lønn) ",
-        "value": "839"
-      },
-      {
-        "text": "Frivillig Ja ",
-        "value": "960"
-      }
-    ],
-    "r7": [
-      {
-        "text": "Sykemelding 1-16 dager ",
-        "value": "191"
-      },
-      {
-        "text": "Permisjon m/lønn ",
-        "value": "212"
-      },
-      {
-        "text": "Permisjon U/lønn ",
-        "value": "213"
-      },
-      {
-        "text": "Ferie lønnet ",
-        "value": "231"
-      },
-      {
-        "text": "Ferievikarer ",
-        "value": "291"
-      },
-      {
-        "text": "Møte frivillig Kun ordinære timer",
-        "value": "372"
-      },
-      {
-        "text": "Ledig stilling vakant",
-        "value": "473"
-      },
-      {
-        "text": "Sykemelding over 16 dager Med refusjon",
-        "value": "560"
-      },
-      {
-        "text": "Ekstrapersonell Styrket bemanning",
-        "value": "659"
-      },
-      {
-        "text": "Opplæring Opplæring av nyansatte",
-        "value": "660"
-      },
-      {
-        "text": "Ekstra pga uro ",
-        "value": "661"
-      },
-      {
-        "text": "Beredskapsvakt ",
-        "value": "679"
-      },
-      {
-        "text": "Egenmelding IA ",
-        "value": "719"
-      },
-      {
-        "text": "Møte pålagt Gir overtid",
-        "value": "759"
-      },
-      {
-        "text": "Permisjon U-lønn (Trekk lønn) ",
-        "value": "839"
-      }
-    ],
-    "r11": [],
-    "r15": [
-      {
-        "text": "Sykemelding 1-16 dager ",
-        "value": "191"
-      },
-      {
-        "text": "Permisjon m/lønn ",
-        "value": "212"
-      },
-      {
-        "text": "Permisjon U/lønn ",
-        "value": "213"
-      },
-      {
-        "text": "Ferievikarer ",
-        "value": "291"
-      },
-      {
-        "text": "Møte frivillig Kun ordinære timer",
-        "value": "372"
-      },
-      {
-        "text": "Ledig stilling vakant",
-        "value": "473"
-      },
-      {
-        "text": "Sykemelding over 16 dager Med refusjon",
-        "value": "560"
-      },
-      {
-        "text": "Ekstrapersonell Styrket bemanning",
-        "value": "659"
-      },
-      {
-        "text": "Opplæring Opplæring av nyansatte",
-        "value": "660"
-      },
-      {
-        "text": "Ekstra pga uro ",
-        "value": "661"
-      },
-      {
-        "text": "Egenmelding IA ",
-        "value": "719"
-      },
-      {
-        "text": "Møte pålagt Gir overtid",
-        "value": "759"
-      },
-      {
-        "text": "Permisjon U-lønn (Trekk lønn) ",
-        "value": "839"
-      },
-      {
-        "text": "Frivillig Ja ",
-        "value": "960"
-      }
-    ],
-    "r18": [
-      {
-        "text": "Ferie lønnet ",
-        "value": "231"
-      },
-      {
-        "text": "Ferievikarer ",
-        "value": "291"
-      }
-    ],
-    "r19": [
-      {
-        "text": "Generelt tillegg ",
-        "value": "10963"
-      }
-    ]
-  }
-}
 
 app.router.get(`${homeUrl}/InitDataCurDay`, function () {
   const queryParam = parseReqUrl(this.req.url);
-  //console.log("Query para: " + queryParam[1]);
   const msgType = queryParam[1].split("=")[1];
   console.log("Message type: " + msgType);
   //this.res.json(initDataCurDay());
   if (msgType == "1") {
-    this.res.json(init_cur_day_1);
+    this.res.json(init_cur_day_1_single);
   }
+  /*
   else if (msgType == "2") {
     this.res.json(init_cur_day_2);
   }
   else if (msgType == "6") {
     this.res.json(init_cur_day_6);
   }
+  */
   else if (msgType == "7") {
-    this.res.json(init_cur_day_7);
+    this.res.json(init_cur_day_7_single);
+  }
+  else {
+    return {};
   }
 });
 

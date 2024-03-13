@@ -39,7 +39,9 @@ myInitDataCurDayDecoder =
             JD.succeed InitDataCurDay
                 |> JP.required "userId" JD.string
                 |> JP.required "curUnitid" JD.string
+                |> JP.required "curWatchid" JD.string
                 |> JP.required "curDate" JD.string
+                |> JP.required "curHbank" timebankWorkPlaceDecoder
                 |> JP.required "watches" CB.comboBoxItemListDecoder
                 |> JP.required "watchdefs" (JD.dict watchDefDecoder)
                 |> JP.required "workPlaces" CB.comboBoxItemListDecoder
