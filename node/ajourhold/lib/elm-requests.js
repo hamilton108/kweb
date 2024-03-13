@@ -5515,7 +5515,7 @@ var $elm$json$Json$Decode$dict = function (decoder) {
 var $author$project$Common$ModalDialog$DialogHidden = {$: 'DialogHidden'};
 var $author$project$Ajourhold$Update$initModel = F3(
 	function (mainUrl, ajcat, lang) {
-		return {ajcat: ajcat, dateFrom: $elm$core$Maybe$Nothing, dateTo: $elm$core$Maybe$Nothing, dlgAlert: $author$project$Common$ModalDialog$DialogHidden, hourFrom: $elm$core$Maybe$Nothing, hourFrom2: $elm$core$Maybe$Nothing, hourTo: $elm$core$Maybe$Nothing, hourTo2: $elm$core$Maybe$Nothing, lang: lang, mainUrl: mainUrl, melding: $elm$core$Maybe$Nothing, reasonCodes: $elm$core$Maybe$Nothing, saldo: $elm$core$Maybe$Nothing, selectedReasonCode: $elm$core$Maybe$Nothing, selectedWatch: $elm$core$Maybe$Nothing, selectedWatch2: $elm$core$Maybe$Nothing, selectedWorkPlace: $elm$core$Maybe$Nothing, selectedWorkPlace2: $elm$core$Maybe$Nothing, sumHours: $elm$core$Maybe$Nothing, sumHours2: $elm$core$Maybe$Nothing, toTimeBank: $elm$core$Maybe$Nothing, userId: '-1', vacation: '0', watchDefs: $elm$core$Maybe$Nothing, watchDefs2: $elm$core$Maybe$Nothing, watches: $elm$core$Maybe$Nothing, watches2: $elm$core$Maybe$Nothing, workPlaces: $elm$core$Maybe$Nothing, workPlaces2: $elm$core$Maybe$Nothing};
+		return {ajcat: ajcat, dateFrom: $elm$core$Maybe$Nothing, dateTo: $elm$core$Maybe$Nothing, dlgAlert: $author$project$Common$ModalDialog$DialogHidden, hourFrom: $elm$core$Maybe$Nothing, hourFrom2: $elm$core$Maybe$Nothing, hourTo: $elm$core$Maybe$Nothing, hourTo2: $elm$core$Maybe$Nothing, lang: lang, mainUrl: mainUrl, melding: $elm$core$Maybe$Nothing, reasonCodes: _List_Nil, saldo: $elm$core$Maybe$Nothing, selectedReasonCode: $elm$core$Maybe$Nothing, selectedWatch: $elm$core$Maybe$Nothing, selectedWatch2: $elm$core$Maybe$Nothing, selectedWorkPlace: $elm$core$Maybe$Nothing, selectedWorkPlace2: $elm$core$Maybe$Nothing, sumHours: $elm$core$Maybe$Nothing, sumHours2: $elm$core$Maybe$Nothing, toTimeBank: $elm$core$Maybe$Nothing, userId: '-1', vacation: '0', watchDefs: $elm$core$Maybe$Nothing, watchDefs2: $elm$core$Maybe$Nothing, watches: $elm$core$Maybe$Nothing, watches2: $elm$core$Maybe$Nothing, workPlaces: $elm$core$Maybe$Nothing, workPlaces2: $elm$core$Maybe$Nothing};
 	});
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
@@ -5610,16 +5610,6 @@ var $author$project$Common$ComboBox$comboBoxItemDecoder = A3(
 	A2($elm$json$Json$Decode$field, 'text', $elm$json$Json$Decode$string));
 var $elm$json$Json$Decode$list = _Json_decodeList;
 var $author$project$Common$ComboBox$comboBoxItemListDecoder = $elm$json$Json$Decode$list($author$project$Common$ComboBox$comboBoxItemDecoder);
-var $elm$json$Json$Decode$null = _Json_decodeNull;
-var $elm$json$Json$Decode$oneOf = _Json_oneOf;
-var $elm$json$Json$Decode$nullable = function (decoder) {
-	return $elm$json$Json$Decode$oneOf(
-		_List_fromArray(
-			[
-				$elm$json$Json$Decode$null($elm$core$Maybe$Nothing),
-				A2($elm$json$Json$Decode$map, $elm$core$Maybe$Just, decoder)
-			]));
-};
 var $NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$custom = $elm$json$Json$Decode$map2($elm$core$Basics$apR);
 var $NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required = F3(
 	function (key, valDecoder, decoder) {
@@ -5632,6 +5622,16 @@ var $author$project$Ajourhold$Types$WatchDef = F6(
 	function (len, hourFrom, hourTo, reason, isExtra, startDate) {
 		return {hourFrom: hourFrom, hourTo: hourTo, isExtra: isExtra, len: len, reason: reason, startDate: startDate};
 	});
+var $elm$json$Json$Decode$null = _Json_decodeNull;
+var $elm$json$Json$Decode$oneOf = _Json_oneOf;
+var $elm$json$Json$Decode$nullable = function (decoder) {
+	return $elm$json$Json$Decode$oneOf(
+		_List_fromArray(
+			[
+				$elm$json$Json$Decode$null($elm$core$Maybe$Nothing),
+				A2($elm$json$Json$Decode$map, $elm$core$Maybe$Just, decoder)
+			]));
+};
 var $elm$json$Json$Decode$fail = _Json_fail;
 var $NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$optionalDecoder = F3(
 	function (pathDecoder, valDecoder, fallback) {
@@ -5706,7 +5706,7 @@ var $author$project$Ajourhold$Decoders$myInitDataCurDayDecoder = function () {
 	var myDecoder = A3(
 		$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
 		'reasonCodes',
-		$elm$json$Json$Decode$nullable($author$project$Common$ComboBox$comboBoxItemListDecoder),
+		$author$project$Common$ComboBox$comboBoxItemListDecoder,
 		A3(
 			$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
 			'workPlaces',
@@ -5743,7 +5743,7 @@ var $author$project$Ajourhold$Decoders$myInitDataDecoder = function () {
 	var myDecoder = A3(
 		$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
 		'reasonCodes',
-		$elm$json$Json$Decode$nullable($author$project$Common$ComboBox$comboBoxItemListDecoder),
+		$author$project$Common$ComboBox$comboBoxItemListDecoder,
 		A3(
 			$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
 			'vacation',
@@ -5767,7 +5767,7 @@ var $NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$hardcoded = A2($elm$
 var $author$project$Ajourhold$Decoders$myWorkPlacesDecoder = function () {
 	var myDecoder = A2(
 		$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$hardcoded,
-		$elm$core$Maybe$Nothing,
+		_List_Nil,
 		A3(
 			$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
 			'vacation',
@@ -8309,9 +8309,8 @@ var $author$project$Common$ComboBox$selectOption = F2(
 var $author$project$Ajourhold$Views$ViewItems$selectOption_ = function (selected) {
 	return $author$project$Common$ComboBox$selectOption(selected);
 };
-var $author$project$Ajourhold$Views$ViewItems$wrapSelectItems = F3(
+var $author$project$Ajourhold$Views$ViewItems$wrapSelectItemsReasons = F3(
 	function (firstLineTitle, selected, items) {
-		var items_ = A2($elm$core$Maybe$withDefault, _List_Nil, items);
 		return A2(
 			$elm$core$List$cons,
 			$author$project$Common$ComboBox$emptySelectOption(
@@ -8319,12 +8318,12 @@ var $author$project$Ajourhold$Views$ViewItems$wrapSelectItems = F3(
 			A2(
 				$elm$core$List$map,
 				$author$project$Ajourhold$Views$ViewItems$selectOption_(selected),
-				items_));
+				items));
 	});
 var $author$project$Ajourhold$Views$ViewItems$reasons = F2(
 	function (model, gpos) {
 		var title = A2($author$project$Common$Misc$getLangValue, 'aarsakskoder', model.lang);
-		var rc = A3($author$project$Ajourhold$Views$ViewItems$wrapSelectItems, '-------', $elm$core$Maybe$Nothing, model.reasonCodes);
+		var rc = A3($author$project$Ajourhold$Views$ViewItems$wrapSelectItemsReasons, '-------', $elm$core$Maybe$Nothing, model.reasonCodes);
 		var isMissingReason = _Utils_eq(model.selectedReasonCode, $elm$core$Maybe$Nothing);
 		var r = A5($author$project$Ajourhold$Views$ViewItems$selectRow, isMissingReason, false, title, rc, $author$project$Ajourhold$Types$ReasonCodeChanged);
 		return A2($author$project$Ajourhold$Views$ViewItems$gridAjourItem, gpos, r);
@@ -8366,6 +8365,18 @@ var $author$project$Ajourhold$Views$ViewItems$toHour = F3(
 				model.hourTo,
 				$author$project$Ajourhold$Types$HourChanged(index),
 				isDisabled));
+	});
+var $author$project$Ajourhold$Views$ViewItems$wrapSelectItems = F3(
+	function (firstLineTitle, selected, items) {
+		var items_ = A2($elm$core$Maybe$withDefault, _List_Nil, items);
+		return A2(
+			$elm$core$List$cons,
+			$author$project$Common$ComboBox$emptySelectOption(
+				$elm$core$Maybe$Just(firstLineTitle)),
+			A2(
+				$elm$core$List$map,
+				$author$project$Ajourhold$Views$ViewItems$selectOption_(selected),
+				items_));
 	});
 var $author$project$Ajourhold$Views$ViewItems$watch1 = F4(
 	function (model, isDisabled, msg, gpos) {

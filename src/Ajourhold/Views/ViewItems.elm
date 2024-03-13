@@ -313,6 +313,11 @@ sumHour2 model gpos =
         (sumHourItem title model.sumHours2)
 
 
+wrapSelectItemsReasons firstLineTitle selected items =
+    CB.emptySelectOption (Just firstLineTitle)
+        :: List.map (selectOption_ selected) items
+
+
 reasons : Model -> GridPosition -> H.Html Msg
 reasons model gpos =
     let
@@ -320,7 +325,7 @@ reasons model gpos =
             getLangValue "aarsakskoder" model.lang
 
         rc =
-            wrapSelectItems "-------" Nothing model.reasonCodes
+            wrapSelectItemsReasons "-------" Nothing model.reasonCodes
 
         isMissingReason =
             model.selectedReasonCode == Nothing

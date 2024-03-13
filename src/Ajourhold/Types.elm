@@ -146,7 +146,7 @@ type alias InitData =
     , workPlaces : CB.SelectItems
     , saldo : Float
     , vacation : String
-    , reasonCodes : Maybe CB.SelectItems
+    , reasonCodes : CB.SelectItems
     }
 
 
@@ -157,7 +157,7 @@ type alias InitDataCurDay =
     , watches : CB.SelectItems
     , watchDefs : WatchDefDict
     , workPlaces : CB.SelectItems
-    , reasonCodes : Maybe CB.SelectItems
+    , reasonCodes : CB.SelectItems
     }
 
 
@@ -258,7 +258,7 @@ type alias Model =
     , ajcat : AjourCatEnum
     , lang : Dict String String
     , userId : String
-    , reasonCodes : Maybe CB.SelectItems
+    , reasonCodes : CB.SelectItems
     , selectedReasonCode : Maybe String
     , melding : Maybe String
     , workPlaces : Maybe CB.SelectItems

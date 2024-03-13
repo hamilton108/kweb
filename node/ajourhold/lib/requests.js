@@ -120,7 +120,7 @@ jQuery(document).ready(function() {
       "curUnitid": myData.curUnitid,
       "curDate": myData.curDate,
       "watches": myData.watches,
-      "watchDefs": myData.watchDefs,
+      "watchdefs": myData.watchDefs,
       "workPlaces": myData.workPlaces,
       "reasonCodes": myData["reasonCodes"][`r${ajCat}`]
     }

@@ -1,4 +1,11 @@
-module Ajourhold.Decoders exposing (myInitDataCurDayDecoder, myInitDataDecoder, myWorkPlacesDecoder, timebankWorkPlaceDecoder, watchDefDecoder, watchInfoDecoder)
+module Ajourhold.Decoders exposing
+    ( myInitDataCurDayDecoder
+    , myInitDataDecoder
+    , myWorkPlacesDecoder
+    , timebankWorkPlaceDecoder
+    , watchDefDecoder
+    , watchInfoDecoder
+    )
 
 import Ajourhold.Types exposing (InitData, InitDataCurDay, TimebankWorkPlace, WatchDef, WatchInfo)
 import Common.ComboBox as CB
@@ -16,9 +23,13 @@ myInitDataDecoder =
                 |> JP.required "workPlaces" CB.comboBoxItemListDecoder
                 |> JP.required "saldo" JD.float
                 |> JP.required "vacation" JD.string
-                |> JP.required "reasonCodes" (JD.nullable CB.comboBoxItemListDecoder)
+                |> JP.required "reasonCodes" CB.comboBoxItemListDecoder
     in
     JD.decodeValue myDecoder
+
+
+
+--|> JP.required "reasonCodes" (JD.nullable CB.comboBoxItemListDecoder)
 
 
 myInitDataCurDayDecoder : JD.Value -> Result JD.Error InitDataCurDay
@@ -32,7 +43,7 @@ myInitDataCurDayDecoder =
                 |> JP.required "watches" CB.comboBoxItemListDecoder
                 |> JP.required "watchdefs" (JD.dict watchDefDecoder)
                 |> JP.required "workPlaces" CB.comboBoxItemListDecoder
-                |> JP.required "reasonCodes" (JD.nullable CB.comboBoxItemListDecoder)
+                |> JP.required "reasonCodes" CB.comboBoxItemListDecoder
     in
     JD.decodeValue myDecoder
 
@@ -46,7 +57,7 @@ myWorkPlacesDecoder =
                 |> JP.required "workPlaces" CB.comboBoxItemListDecoder
                 |> JP.required "saldo" JD.float
                 |> JP.required "vacation" JD.string
-                |> JP.hardcoded Nothing
+                |> JP.hardcoded []
     in
     JD.decodeValue myDecoder
 
