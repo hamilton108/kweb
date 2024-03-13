@@ -120,6 +120,15 @@ type alias AjCatDict =
        GenereltTillegg = 2048
    };
 
+        [ ( 1, 8 ) -- Avspasering
+        , ( 2, 2 ) -- Uttrykning
+        , ( 3, 512 ) -- Vaktbytte
+        , ( 6, 4 ) -- Fravaer
+        , ( 7, 1 ) -- Extra
+        , ( 15, 1024 ) -- Forskyvning
+        , ( 18, 256 ) -- Ferie
+        , ( 19, 2048 ) -- Generelt tillegg
+        ]
 -}
 
 
@@ -369,7 +378,7 @@ fetchWatchesSwapFrom (MainUrl mainUrl) userId workPlace dateFrom =
                 Maybe.withDefault "-" workPlace
 
             url =
-                mainUrl ++ "/WatchesFor" ++ "?messageType=512" ++ "&workPlace=" ++ wp ++ "&userid=" ++ userId ++ "&dateFrom=" ++ df ++ "&dateTo=" ++ df
+                mainUrl ++ "/WatchesFor" ++ "?messageType=3" ++ "&workPlace=" ++ wp ++ "&userid=" ++ userId ++ "&dateFrom=" ++ df ++ "&dateTo=" ++ df
         in
         Http.send myCmd <| Http.get url AD.watchInfoDecoder
 

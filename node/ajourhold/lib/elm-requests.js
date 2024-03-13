@@ -7280,7 +7280,7 @@ var $author$project$Ajourhold$Commands$fetchWatchesSwapFrom = F4(
 					$author$project$Ajourhold$Types$Swap(1)),
 				$author$project$Ajourhold$Types$Fetched);
 			var df = A2($elm$core$Maybe$withDefault, '-', dateFrom);
-			var url = mainUrl + ('/WatchesFor' + ('?messageType=512' + ('&workPlace=' + (wp + ('&userid=' + (userId + ('&dateFrom=' + (df + ('&dateTo=' + df)))))))));
+			var url = mainUrl + ('/WatchesFor' + ('?messageType=3' + ('&workPlace=' + (wp + ('&userid=' + (userId + ('&dateFrom=' + (df + ('&dateTo=' + df)))))))));
 			return A2(
 				$elm$http$Http$send,
 				myCmd,

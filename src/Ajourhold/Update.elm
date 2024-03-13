@@ -9,7 +9,7 @@ module Ajourhold.Update exposing
     , updateWatch2
     )
 
-import Ajourhold.AjourCatEnum as ACE exposing (AjourCatEnum(..))
+import Ajourhold.AjourCatEnum exposing (AjourCatEnum(..))
 import Ajourhold.Commands as C
 import Ajourhold.Types as T
     exposing
