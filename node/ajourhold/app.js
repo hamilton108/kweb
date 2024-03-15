@@ -324,10 +324,10 @@ app.router.get(`${homeUrl}/InitDataCurDay`, function () {
   else if (msgType == "2") {
     this.res.json(init_cur_day_2);
   }
-  else if (msgType == "6") {
-    this.res.json(init_cur_day_6);
-  }
   */
+  else if (msgType == "6") {
+    this.res.json(init_cur_day_1_single);
+  }
   else if (msgType == "7") {
     this.res.json(init_cur_day_7_single);
   }

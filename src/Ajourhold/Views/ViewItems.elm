@@ -29,6 +29,7 @@ module Ajourhold.Views.ViewItems exposing
     , gG1
     , gridAjourItem
     , hourBankBalance
+    , hourItem2
     , inputItem
     , message
     , reasons
@@ -663,9 +664,18 @@ inputItem inputType value clazz event isDisabled =
 
 hourItem : String -> Maybe String -> (String -> Msg) -> Bool -> H.Html Msg
 hourItem title hourValue event isDisabled =
+    hourItem2 title hourValue event isDisabled False
+
+
+hourItem2 : String -> Maybe String -> (String -> Msg) -> Bool -> Bool -> H.Html Msg
+hourItem2 title hourValue event isDisabled checkMissing =
     let
         isMissing =
-            hourValue == Nothing
+            if checkMissing == True then
+                hourValue == Nothing
+
+            else
+                False
 
         hourValue_ =
             Maybe.withDefault "00:00" hourValue
