@@ -5595,9 +5595,9 @@ var $elm$core$Basics$composeR = F3(
 var $elm$json$Json$Decode$value = _Json_decodeValue;
 var $author$project$Ajourhold$Requests$initDataCurDayFetched = _Platform_incomingPort('initDataCurDayFetched', $elm$json$Json$Decode$value);
 var $author$project$Ajourhold$Requests$initDataFetched = _Platform_incomingPort('initDataFetched', $elm$json$Json$Decode$value);
-var $author$project$Ajourhold$Types$InitDataCurDay = F7(
-	function (userId, curUnitId, curDate, watches, watchDefs, workPlaces, reasonCodes) {
-		return {curDate: curDate, curUnitId: curUnitId, reasonCodes: reasonCodes, userId: userId, watchDefs: watchDefs, watches: watches, workPlaces: workPlaces};
+var $author$project$Ajourhold$Types$InitDataCurDay = F9(
+	function (userId, curUnitId, curWatchid, curDate, curHbank, watches, watchDefs, workPlaces, reasonCodes) {
+		return {curDate: curDate, curHbank: curHbank, curUnitId: curUnitId, curWatchid: curWatchid, reasonCodes: reasonCodes, userId: userId, watchDefs: watchDefs, watches: watches, workPlaces: workPlaces};
 	});
 var $author$project$Common$ComboBox$ComboBoxItem = F2(
 	function (val, txt) {
@@ -5618,6 +5618,15 @@ var $NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required = F3(
 			A2($elm$json$Json$Decode$field, key, valDecoder),
 			decoder);
 	});
+var $author$project$Ajourhold$Types$TimebankWorkPlace = function (value) {
+	return {value: value};
+};
+var $elm$json$Json$Decode$float = _Json_decodeFloat;
+var $author$project$Ajourhold$Decoders$timebankWorkPlaceDecoder = A3(
+	$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+	'value',
+	$elm$json$Json$Decode$float,
+	$elm$json$Json$Decode$succeed($author$project$Ajourhold$Types$TimebankWorkPlace));
 var $author$project$Ajourhold$Types$WatchDef = F6(
 	function (len, hourFrom, hourTo, reason, isExtra, startDate) {
 		return {hourFrom: hourFrom, hourTo: hourTo, isExtra: isExtra, len: len, reason: reason, startDate: startDate};
@@ -5721,24 +5730,31 @@ var $author$project$Ajourhold$Decoders$myInitDataCurDayDecoder = function () {
 					$author$project$Common$ComboBox$comboBoxItemListDecoder,
 					A3(
 						$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
-						'curDate',
-						$elm$json$Json$Decode$string,
+						'curHbank',
+						$author$project$Ajourhold$Decoders$timebankWorkPlaceDecoder,
 						A3(
 							$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
-							'curUnitid',
+							'curDate',
 							$elm$json$Json$Decode$string,
 							A3(
 								$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
-								'userId',
+								'curWatchid',
 								$elm$json$Json$Decode$string,
-								$elm$json$Json$Decode$succeed($author$project$Ajourhold$Types$InitDataCurDay))))))));
+								A3(
+									$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+									'curUnitid',
+									$elm$json$Json$Decode$string,
+									A3(
+										$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
+										'userId',
+										$elm$json$Json$Decode$string,
+										$elm$json$Json$Decode$succeed($author$project$Ajourhold$Types$InitDataCurDay))))))))));
 	return $elm$json$Json$Decode$decodeValue(myDecoder);
 }();
 var $author$project$Ajourhold$Types$InitData = F5(
 	function (userId, workPlaces, saldo, vacation, reasonCodes) {
 		return {reasonCodes: reasonCodes, saldo: saldo, userId: userId, vacation: vacation, workPlaces: workPlaces};
 	});
-var $elm$json$Json$Decode$float = _Json_decodeFloat;
 var $author$project$Ajourhold$Decoders$myInitDataDecoder = function () {
 	var myDecoder = A3(
 		$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
@@ -5935,6 +5951,7 @@ var $author$project$Common$Misc$getLangValue = F2(
 			'empty',
 			A2($elm$core$Dict$get, key, dict));
 	});
+var $elm$core$Debug$log = _Debug_log;
 var $author$project$Ajourhold$Update$maybeDate = function (s) {
 	return (!$elm$core$String$length(s)) ? $elm$core$Maybe$Nothing : $elm$core$Maybe$Just(s);
 };
@@ -6829,14 +6846,6 @@ var $author$project$Ajourhold$Types$fromWorkPlace = function (wp) {
 		return s;
 	}
 };
-var $author$project$Ajourhold$Types$TimebankWorkPlace = function (value) {
-	return {value: value};
-};
-var $author$project$Ajourhold$Decoders$timebankWorkPlaceDecoder = A3(
-	$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
-	'value',
-	$elm$json$Json$Decode$float,
-	$elm$json$Json$Decode$succeed($author$project$Ajourhold$Types$TimebankWorkPlace));
 var $author$project$Ajourhold$Commands$fetchTimebankWorkPlace = F4(
 	function (_v0, _v1, origWp, newWp) {
 		var mainUrl = _v0.a;
@@ -7143,7 +7152,7 @@ var $author$project$Ajourhold$Commands$fetchSlideFrom = F4(
 		if (_Utils_eq(wp, $author$project$Ajourhold$Types$NoWorkPlace) || _Utils_eq(cd, $author$project$Ajourhold$Types$NoDate)) {
 			return $elm$core$Platform$Cmd$none;
 		} else {
-			var url = mainUrl + ('/WatchesFor?messageType=4' + ('&workPlace=' + ($author$project$Ajourhold$Types$fromWorkPlace(wp) + ('&userid=' + (userId + ('&dateFrom=' + ($author$project$Ajourhold$Types$fromMyDate(cd) + ('&dateTo=' + $author$project$Ajourhold$Types$fromMyDate(cd)))))))));
+			var url = mainUrl + ('/WatchesFor?messageType=6' + ('&workPlace=' + ($author$project$Ajourhold$Types$fromWorkPlace(wp) + ('&userid=' + (userId + ('&dateFrom=' + ($author$project$Ajourhold$Types$fromMyDate(cd) + ('&dateTo=' + $author$project$Ajourhold$Types$fromMyDate(cd)))))))));
 			return A2(
 				$elm$http$Http$send,
 				A2(
@@ -7589,19 +7598,27 @@ var $author$project$Ajourhold$Update$update = F2(
 				if (msg.a.$ === 'Ok') {
 					var s = msg.a.a;
 					var selWorkPlace = (s.curUnitId === '-1') ? $elm$core$Maybe$Nothing : $elm$core$Maybe$Just(s.curUnitId);
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{
-								dateFrom: $elm$core$Maybe$Just(s.curDate),
-								reasonCodes: s.reasonCodes,
-								selectedWorkPlace: selWorkPlace,
-								userId: s.userId,
-								watchDefs: $elm$core$Maybe$Just(s.watchDefs),
-								watches: $elm$core$Maybe$Just(s.watches),
-								workPlaces: $elm$core$Maybe$Just(s.workPlaces)
-							}),
-						$elm$core$Platform$Cmd$none);
+					var selWatch = (s.curWatchid === '-1') ? $elm$core$Maybe$Nothing : $elm$core$Maybe$Just(s.curWatchid);
+					var mySaldo = $elm$core$String$fromFloat(
+						A2($author$project$Common$Misc$toDecimal, s.curHbank.value, 100.0));
+					return A2(
+						$elm$core$Debug$log,
+						'InitDataCurDayFetched ',
+						_Utils_Tuple2(
+							_Utils_update(
+								model,
+								{
+									dateFrom: $elm$core$Maybe$Just(s.curDate),
+									reasonCodes: s.reasonCodes,
+									saldo: $elm$core$Maybe$Just(mySaldo),
+									selectedWatch: selWatch,
+									selectedWorkPlace: selWorkPlace,
+									userId: s.userId,
+									watchDefs: $elm$core$Maybe$Just(s.watchDefs),
+									watches: $elm$core$Maybe$Just(s.watches),
+									workPlaces: $elm$core$Maybe$Just(s.workPlaces)
+								}),
+							$elm$core$Platform$Cmd$none));
 				} else {
 					var s = msg.a.a;
 					return _Utils_Tuple2(
@@ -8158,9 +8175,9 @@ var $author$project$Ajourhold$Views$ViewItems$inputItem = F5(
 				_List_Nil);
 		}
 	});
-var $author$project$Ajourhold$Views$ViewItems$hourItem = F4(
-	function (title, hourValue, event, isDisabled) {
-		var isMissing = _Utils_eq(hourValue, $elm$core$Maybe$Nothing);
+var $author$project$Ajourhold$Views$ViewItems$hourItem2 = F5(
+	function (title, hourValue, event, isDisabled, checkMissing) {
+		var isMissing = checkMissing ? _Utils_eq(hourValue, $elm$core$Maybe$Nothing) : false;
 		var hourValue_ = A2($elm$core$Maybe$withDefault, '00:00', hourValue);
 		var myInput = A5(
 			$author$project$Ajourhold$Views$ViewItems$inputItem,
@@ -8171,6 +8188,10 @@ var $author$project$Ajourhold$Views$ViewItems$hourItem = F4(
 			isDisabled);
 		var clazz = isMissing ? 'col-form-label missing' : 'col-form-label';
 		return A3($author$project$Ajourhold$Views$ViewItems$formGroupItem, clazz, title, myInput);
+	});
+var $author$project$Ajourhold$Views$ViewItems$hourItem = F4(
+	function (title, hourValue, event, isDisabled) {
+		return A5($author$project$Ajourhold$Views$ViewItems$hourItem2, title, hourValue, event, isDisabled, false);
 	});
 var $author$project$Ajourhold$Views$ViewItems$fromHour = F3(
 	function (model, _v0, gpos) {
@@ -8381,7 +8402,7 @@ var $author$project$Ajourhold$Views$ViewItems$wrapSelectItems = F3(
 var $author$project$Ajourhold$Views$ViewItems$watch1 = F4(
 	function (model, isDisabled, msg, gpos) {
 		var title = _Utils_eq(model.ajcat, $author$project$Ajourhold$AjourCatEnum$AceExtra) ? A2($author$project$Common$Misc$getLangValue, 'dekke_for', model.lang) : A2($author$project$Common$Misc$getLangValue, 'vakt', model.lang);
-		var py = A3($author$project$Ajourhold$Views$ViewItems$wrapSelectItems, '-------', $elm$core$Maybe$Nothing, model.watches);
+		var py = A3($author$project$Ajourhold$Views$ViewItems$wrapSelectItems, '-------', model.selectedWatch, model.watches);
 		var wp2 = A5($author$project$Ajourhold$Views$ViewItems$selectRow, false, isDisabled, title, py, msg);
 		return A2($author$project$Ajourhold$Views$ViewItems$gridAjourItem, gpos, wp2);
 	});
