@@ -739,21 +739,32 @@ update msg model =
 
                 mySaldo =
                     String.fromFloat (M.toDecimal s.curHbank.value 100.0)
+
+                w =
+                    C.getWatchDef s.curWatchid (Just s.watchDefs)
+
+                sumStr =
+                    M.formatNumberStr w.len 2
+
+                --x = Debug.log (Debug.toString s) 10
             in
-            Debug.log "InitDataCurDayFetched "
-                ( { model
-                    | userId = s.userId
-                    , selectedWorkPlace = selWorkPlace
-                    , selectedWatch = selWatch
-                    , saldo = Just mySaldo
-                    , dateFrom = Just s.curDate
-                    , workPlaces = Just s.workPlaces
-                    , watches = Just s.watches
-                    , watchDefs = Just s.watchDefs
-                    , reasonCodes = s.reasonCodes
-                  }
-                , Cmd.none
-                )
+            --Debug.log "InitDataCurDayFetched "
+            ( { model
+                | userId = s.userId
+                , selectedWorkPlace = selWorkPlace
+                , selectedWatch = selWatch
+                , saldo = Just mySaldo
+                , dateFrom = Just s.curDate
+                , workPlaces = Just s.workPlaces
+                , watches = Just s.watches
+                , watchDefs = Just s.watchDefs
+                , reasonCodes = s.reasonCodes
+                , sumHours = Just sumStr
+                , hourFrom = Just w.hourFrom
+                , hourTo = Just w.hourTo
+              }
+            , Cmd.none
+            )
 
         InitDataCurDayFetched (Err s) ->
             ( { model | dlgAlert = DLG.DialogVisibleAlert "Subscriptions" ("InitDataCurDayFetched Error: " ++ JD.errorToString s) DLG.Error }, Cmd.none )

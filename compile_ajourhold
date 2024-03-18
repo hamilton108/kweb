@@ -1,5 +1,53 @@
 #!/bin/bash
 
-elm make src/Ajourhold/Requests.elm --output node/ajourhold/lib/elm-requests.js  
+usage()
+{
+cat << EOF
+usage: $0 options
+
+OPTIONS:
+   -h      Show this message
+   -o      --optimize flag
+EOF
+}
+
+# -i      Module index (1: Charts, 2: Options, 3: OptionPurchase, 4: Critters)
+# while getopts “hoi:” OPTION
+#         i)
+#             MODULE=$OPTARG
+#             ;;
+
+DIST="node/ajourhold/lib"
+JS="elm-requests.js"
+# JS_MIN="elm-requests.min.js"
+JS_DEV="elm-requests.dev.js"
+
+OPTIMIZE=0
+
+while getopts “ho” OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         o)
+             OPTIMIZE=1
+             ;;
+         ?)
+             usage
+             exit
+             ;;
+     esac
+done
+
+if [[ $OPTIMIZE -eq 1 ]]; then
+  echo "OPTIMIZE"
+  elm make src/Ajourhold/Requests.elm --optimize --output $DIST/$JS_DEV  
+  uglifyjs $DIST/$JS_DEV --compress "pure_funcs=[F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9],pure_getters,keep_fargs=false,unsafe_comps,unsafe" | uglifyjs --mangle --output $DIST/$JS 
+else 
+  elm make src/Ajourhold/Requests.elm --output $DIST/$JS
+fi
+
 
 exit 0
