@@ -11,6 +11,7 @@ import Ajourhold.Types
         , WatchMsg(..)
         )
 import Ajourhold.Views.ViewItems as VI
+import Common.DateTime as DT
 import Common.ModalDialog as DLG
 import Html as H
 import Html.Attributes as A
@@ -19,20 +20,26 @@ import Html.Attributes as A
 view : Model -> H.Html Msg
 view model =
     let
-        isDisabled =
-            model.dateTo
-                /= Nothing
-                || C.isDateFromLess model
-
+        -- isDisabled =
+        --     model.dateTo
+        --         /= Nothing
+        --         || C.isDateFromLess model
         date1 =
             VI.dateFrom model
                 (WatchMsgFor Watch1 << DateChanged 1)
+
+        nextDay =
+            DT.incDayStr model.dateFrom
 
         date2 =
             VI.dateTo2 model
                 (WatchMsgFor Watch1 << DateChanged 2)
                 VI.gA2
                 False
+                nextDay
+
+        isDisabled =
+            model.dateTo /= Nothing
 
         watch1 =
             VI.watch1 model

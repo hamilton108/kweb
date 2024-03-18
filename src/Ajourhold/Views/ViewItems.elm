@@ -195,19 +195,19 @@ dateFrom model msg =
         (dateItem title model.dateFrom msg)
 
 
-dateTo2 : Model -> (String -> Msg) -> GridPosition -> Bool -> H.Html Msg
-dateTo2 model msg gpos checkMissing =
+dateTo2 : Model -> (String -> Msg) -> GridPosition -> Bool -> Maybe String -> H.Html Msg
+dateTo2 model msg gpos checkMissing minValue =
     let
         title =
             getLangValue "til_dato" model.lang
     in
     gridAjourItem gpos
-        (dateItem2 title model.dateTo msg checkMissing)
+        (dateItem2 title model.dateTo msg checkMissing minValue)
 
 
 dateTo : Model -> (String -> Msg) -> GridPosition -> H.Html Msg
 dateTo model msg gpos =
-    dateTo2 model msg gpos True
+    dateTo2 model msg gpos True Nothing
 
 
 watch1 : Model -> Bool -> (String -> Msg) -> GridPosition -> H.Html Msg
@@ -487,8 +487,8 @@ formGroupItem clazz title myInput =
         ]
 
 
-dateItem2 : String -> Maybe String -> (String -> Msg) -> Bool -> H.Html Msg
-dateItem2 title value event checkMissing =
+dateItem2 : String -> Maybe String -> (String -> Msg) -> Bool -> Maybe String -> H.Html Msg
+dateItem2 title value event checkMissing minValue =
     let
         isMissing =
             value == Nothing
@@ -511,14 +511,19 @@ dateItem2 title value event checkMissing =
                 ""
 
         myInput =
-            H.input [ A.value value_, A.type_ "date", A.class dateClazz, E.onInput event ] []
+            case minValue of
+                Nothing ->
+                    H.input [ A.value value_, A.type_ "date", A.class dateClazz, E.onInput event ] []
+
+                Just mv ->
+                    H.input [ A.min mv, A.value value_, A.type_ "date", A.class dateClazz, E.onInput event ] []
     in
     formGroupItem myClazz title myInput
 
 
 dateItem : String -> Maybe String -> (String -> Msg) -> H.Html Msg
 dateItem title value event =
-    dateItem2 title value event True
+    dateItem2 title value event True Nothing
 
 
 

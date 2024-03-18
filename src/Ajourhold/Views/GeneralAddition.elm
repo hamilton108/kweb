@@ -31,7 +31,7 @@ view model =
 
         date2 =
             VI.gridAjourItem VI.gA2
-                (VI.dateItem2 to_date_str model.dateTo (SimpleDateChanged 2) False)
+                (VI.dateItem2 to_date_str model.dateTo (SimpleDateChanged 2) False Nothing)
 
         workPlace1 =
             VI.workPlace1 model

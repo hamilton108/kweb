@@ -157,6 +157,11 @@ updateWatch1 msg model =
                             , hourTo = Nothing
                         }
 
+                    else if model.dateFrom == myDateFrom then
+                        { model
+                            | dateTo = myDateFrom
+                        }
+
                     else
                         { model
                             | dateTo = myDateFrom
@@ -168,6 +173,7 @@ updateWatch1 msg model =
                 curCmd =
                     C.fetchWatches model.mainUrl model.ajcat model.userId model.selectedWorkPlace myDateFrom model.dateTo
             in
+            -- Debug.log "DateChanged "
             ( curModel, curCmd )
 
         Fetch s ->

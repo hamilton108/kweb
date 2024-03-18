@@ -96,10 +96,6 @@ canSendData3 m =
         && (m.melding /= Nothing)
 
 
-type alias AjCatDict =
-    Dict.Dict Int Int
-
-
 
 {---------------- From KDO.Common --------------------
    public enum MessageType

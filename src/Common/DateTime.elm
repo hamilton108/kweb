@@ -1,8 +1,10 @@
 module Common.DateTime exposing
     ( IsoDateTime
+    , dayMillis
     , hourStrCompare
     , hourStrDiff
     , hs2Tup
+    , incDayStr
     , iso8601diff
     , iso8601diffHours
     , iso8601diffMinutes
@@ -11,6 +13,7 @@ module Common.DateTime exposing
     )
 
 import Iso8601 as I
+import Maybe
 import String as S
 import Time
 
@@ -23,6 +26,11 @@ hourMillis =
 minuteMillis : Float
 minuteMillis =
     60000.0
+
+
+dayMillis : Int
+dayMillis =
+    3600000 * 24
 
 
 type alias IsoDateTime =
@@ -43,6 +51,76 @@ iso8601toMillis iso =
 
         Err _ ->
             0
+
+
+incDayIso : IsoDateTime -> IsoDateTime
+incDayIso iso =
+    let
+        millis =
+            iso8601toMillis iso + dayMillis
+
+        ts =
+            I.fromTime (Time.millisToPosix millis)
+
+        result =
+            case S.split "T" ts of
+                [ d, h ] ->
+                    let
+                        hm =
+                            String.slice 0 5 h
+                    in
+                    { date = d, time = hm }
+
+                _ ->
+                    { date = "2024-01-01", time = "00:00" }
+    in
+    result
+
+
+incDayStr_ : String -> Maybe String
+incDayStr_ sx =
+    let
+        iso =
+            { date = sx, time = "00:00" }
+
+        isoInc =
+            incDayIso iso
+    in
+    Just isoInc.date
+
+
+incDayStr : Maybe String -> Maybe String
+incDayStr s =
+    s |> Maybe.andThen incDayStr_
+
+
+
+{-
+   case s of
+       Nothing ->
+           Nothing
+
+       Just sx ->
+           let
+               iso =
+                   { date = sx, time = "00:00" }
+
+               isoInc =
+                   incDayIso iso
+           in
+           Just isoInc.date
+-}
+-- iso8601toPosix : IsoDateTime -> Maybe Time.Posix
+-- iso8601toPosix iso =
+--     let
+--         posix =
+--             I.toTime <| iso.date ++ "T" ++ iso.time ++ ":00Z"
+--     in
+--     case posix of
+--         Ok p ->
+--             Just p
+--         Err _ ->
+--             Nothing
 
 
 iso8601diff : IsoDateTime -> IsoDateTime -> Int
@@ -84,6 +162,7 @@ iso8601fmt1 iso =
 -- hourStrToTuple : List String -> ( Int, Int )
 
 
+hs2Tup : List String -> ( Int, Int )
 hs2Tup hx =
     case hx of
         [ h, m ] ->

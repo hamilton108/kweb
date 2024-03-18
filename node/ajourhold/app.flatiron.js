@@ -23,7 +23,6 @@ app.router.get(`${homeUrl}/InitData`, function () {
   this.res.json(initData());
 });
 
-
 /*---------------- From KDO.Common --------------------
    public enum MessageType
    {
@@ -90,10 +89,56 @@ const initData = () => {
         vacation: "12"
     };
 };
+const initDataCurDay = () => {
+    const ww = watchesFor(6);
+    return {
+        userId: "KaiDan",
+        curUnitid: "39",
+        curDate: "2024-03-03",
+        watches: ww.watches,
+        watchDefs: ww.watchdefs,
+        /*
+        workPlaces: [{value: "39",text: "Avdeling 1/Hjelpepleier"},
+        
+                     {value: "59",text: "Avdeling 2/Sykepleier"}],
+        */
+        workPlaces: [{value: "39",text: "Avdeling 1/Hjelpepleier"}],
+        reasonCodes: reasonCodesAll()
+    };
+};
+
 const emptyComboBox = () => {
     return {value:"-1",text:"---------------------"}
 }
-const watchesFor = (isSwapTo) => {
+
+const EXTRA = "7"; // Ekstraarbeid
+const ABSENCE = "6"; // Fravær
+const TIMEOFF= "1"; // Avspasering
+const VAC = "18"; // Ferie
+const SWAP = "300"; // Vaktbytte (Swap)
+const SWAP_TO = "301"; // Vaktbytte (Swap)
+const GI = "19"; // Generelt tillegg
+const EMER = "2"; // Uttrykning
+const SLIDE = "150"; // Forskyvning (Slide)
+const SLIDE_TO = "151"; // Forskyvning (Slide)
+const DEFAULT_WATCH = "1001";
+const COVER_FOR = "1002";
+
+const watchDefs =  {
+          "11": {len: "7,5", hourFrom: "07:30", hourTo: "15:00", isExtra: "false", reason: "701" },
+          "22": {len: "8,0", hourFrom: "15:00", hourTo: "22:00", isExtra: "false", reason: "702"},
+          "33": {len: "8,25", hourFrom: "07:45", hourTo: "16:00", isExtra: "false", reason: "703" },
+          "7012": {len: "7,5", hourFrom: "07:30", hourTo: "15:00", isExtra: "false", reason: "701" },
+          "8914": {len: "8,0", hourFrom: "15:00", hourTo: "22:00", isExtra: "false", reason: "702"},
+          "324": {len: "8,25", hourFrom: "07:45", hourTo: "16:00", isExtra: "true", reason: "703" },
+          "888": {len: "9,00", hourFrom: "22:00", hourTo: "07:00", isExtra: "false", reason: "703" },
+          "889": {len: "9,00", hourFrom: "22:00", hourTo: "07:00", isExtra: "false", reason: "703" },
+        };
+const watchDefsEmer =  {
+          "888": {len: "9,00", hourFrom: "22:00", hourTo: "07:00", isExtra: "false", reason: "703", startDate: "2018-10-09" },
+          "889": {len: "9,00", hourFrom: "22:00", hourTo: "07:00", isExtra: "false", reason: "703", startDate: "2018-10-10" },
+        };
+const watchesFor = (ajCat) => {
   /*
   var item = new ComboBoxItem()
      {
@@ -106,58 +151,215 @@ const watchesFor = (isSwapTo) => {
      };
      */
      //const reqParams = url.split('&');
-    if (isSwapTo === true) {
-            /*
-      return  [
-         {value:"889577;07:30;15:30;7,50000;-", text:"Åberg, Camilla - D1 07:30 - 15:30"},
-         {value:"889579;07:30;15:00;7,00000;-",text:"Lie, Trine - D3 07:30 - 15:00"},
-         {value:"889580;07:30;15:00;7,00000;-",text:"Johnsen, Jon - D3 07:30 - 15:00"},
-         {value:"889581;22:45;07:45;9,00000;-",text:"Alsen, Trine - N1 22:45 - 07:45"},
-         {value:"889582;07:30;14:00;6,00000;-",text:"Moe, Kristin - D4 07:30 - 14:00"}
-       ]
-       */
-      return {
-        watchdefs: {
-          "11": {len: "7,5", hourFrom: "07:30", hourTo: "15:00", isExtra: "false", reason: "701" },
-          "22": {len: "8,0", hourFrom: "15:00", hourTo: "22:00", isExtra: "false", reason: "702"},
-          "33": {len: "8,25", hourFrom: "07:45", hourTo: "16:00", isExtra: "false", reason: "703" }
-        },
-        watches: [
-          {value:"11",text:"Guxen, Fredrik - D3 07:30 - 15:00"},
-          {value:"22",text:"Knixen, Tine - A1 15:00 - 22:00"},
-          {value:"33",text:"Kexen, Axel - D1 07:45 - 16:00"}]
-        }
-    }
-    else {
-      return {
-        watchdefs: {
-          "7012": {len: "7,5", hourFrom: "07:30", hourTo: "15:00", isExtra: "false", reason: "701" },
-          "8914": {len: "8,0", hourFrom: "15:00", hourTo: "22:00", isExtra: "false", reason: "702"},
-          "324": {len: "8,25", hourFrom: "07:45", hourTo: "16:00", isExtra: "true", reason: "703" }
-        },
-        watches: [
-          {value:"7012",text:"Hansen, Fredrik - D3 07:30 - 15:00"},
-          {value:"8914",text:"Johnsen, Tine - A1 15:00 - 22:00"},
-          {value:"324",text:"Krais, Axel - D1 07:45 - 16:00"}]
-        }
-    }
+     switch (ajCat) {
+       case EMER:
+              return {
+                watchdefs: watchDefsEmer,
+                watches: [
+                  {value:"888",text:"N1: 09.10 22:00 - 10.10 07:00"},
+                  {value:"889",text:"N1: 10.10 22:00 - 11.10 07:00"}]
+                }
+       case SWAP_TO:
+              return {
+                watchdefs: watchDefs,
+                watches: [
+                  {value:"11",text:"Guxen, Fredrik - D3 07:30 - 15:00"},
+                  {value:"22",text:"Knixen, Tine - A1 15:00 - 22:00"},
+                  {value:"33",text:"Kexen, Axel - D1 07:45 - 16:00"}]
+                }
+       case SLIDE:
+              return {
+                watchdefs: watchDefs,
+                watches: [
+                  {value:"11",text:"D3 07:30 - 15:00"},
+                  {value:"22",text:"A1 15:00 - 22:00"},
+                  {value:"33",text:"D1 07:45 - 16:00"}]
+              }
+       case SLIDE_TO:
+              return {
+                watchdefs: watchDefs,
+                watches: [
+                  {value:"888",text:"N1: 09.10 22:00 - 10.10 07:00"},
+                  {value:"889",text:"N1: 10.10 22:00 - 11.10 07:00"}]
+              }
+       default:
+              return {
+                watchdefs: watchDefs,
+                watches: [
+                  {value:"7012",text:"Hansen, Fredrik - D3 07:30 - 15:00"},
+                  {value:"8914",text:"Johnsen, Tine - A1 15:00 - 22:00"},
+                  {value:"324",text:"Krais, Axel - D1 07:45 - 16:00"}]
+                }
+      };
 };
+
+const curDate = "2024-03-18";
+
+const init_cur_day_1_single = 
+{
+  "userId": "kaidan",
+  "workPlaces": [
+    {
+      "text": "Avdeling 2/Felles 1020/KNA 12",
+      "value": "39"
+    }
+  ],
+  "curDate": curDate,
+  "curUnitid": "39",
+  "curWatchid": "1212488",
+  "curHbank": {
+    "value": 32.2
+  },
+  "watches": [
+    {
+      "text": "A1: 14.03 15:15 - 14.03 23:00",
+      "value": "1212488"
+    }
+  ],
+  "watchdefs": {
+    "1212488": {
+      "len": "7,75",
+      "hourFrom": "15:15",
+      "hourTo": "23:00",
+      "isExtra": "false",
+      "reason": "",
+      "startDate": "2024-03-14"
+    }
+  },
+  "reasonCodes": reasonCodesAll()
+}
+
+const init_cur_day_1_many = 
+{
+  "userId": "jonjoh",
+  "workPlaces": [
+    {
+      "text": "Avdeling 1/Bolig-A/Bolig-A",
+      "value": "59"
+    },
+    {
+      "text": "Avdeling 2/Felles 1020/KNA 12",
+      "value": "39"
+    },
+    {
+      "text": "Avdeling 2/2530 - Dagarbeider/2530 - Dagarbeider",
+      "value": "131"
+    }
+  ],
+  "curDate": curDate,
+  "curUnitid": "-1",
+  "curWatchid": "-1",
+  "curHbank": {
+    "value": 0
+  },
+  "watches": [],
+  "watchdefs": {},
+  "reasonCodes": reasonCodesAll()
+}
+
+const init_cur_day_7_single = 
+{
+  "userId": "kaidan",
+  "workPlaces": [
+    {
+      "text": "Avdeling 2/Felles 1020/KNA 12",
+      "value": "39"
+    }
+  ],
+  "curDate": curDate,
+  "curUnitid": "39",
+  "curWatchid": "-1",
+  "curHbank": {
+    "value": 32.2
+  },
+  "watches": [],
+  "watchdefs": {},
+  "reasonCodes": reasonCodesAll()
+};
+
+const init_cur_day_7_many = 
+{
+  "userId": "jonjoh",
+  "workPlaces": [
+    {
+      "text": "Avdeling 1/Bolig-A/Bolig-A",
+      "value": "59"
+    },
+    {
+      "text": "Avdeling 2/Felles 1020/KNA 12",
+      "value": "39"
+    },
+    {
+      "text": "Avdeling 2/2530 - Dagarbeider/2530 - Dagarbeider",
+      "value": "131"
+    }
+  ],
+  "curDate": curDate,
+  "curUnitid": "-1",
+  "curWatchid": "-1",
+  "curHbank": {
+    "value": 0
+  },
+  "watches": [],
+  "watchdefs": {},
+  "reasonCodes": reasonCodesAll()
+};
+
+const parseReqUrl = function (reqUrl) {
+  console.log(reqUrl);
+  const paramString = reqUrl.split("?")[1];
+  const queryParam = paramString.split("&");
+  console.log(queryParam);
+  return queryParam;
+};
+
+
+app.router.get(`${homeUrl}/InitDataCurDay`, function () {
+  const queryParam = parseReqUrl(this.req.url);
+  const msgType = queryParam[1].split("=")[1];
+  console.log("Message type: " + msgType);
+  //this.res.json(initDataCurDay());
+  if (msgType == "1") {
+    this.res.json(init_cur_day_1_single);
+  }
+  /*
+  else if (msgType == "2") {
+    this.res.json(init_cur_day_2);
+  }
+  */
+  else if (msgType == "6") {
+    this.res.json(init_cur_day_1_single);
+  }
+  else if (msgType == "7") {
+    this.res.json(init_cur_day_7_single);
+  }
+  else {
+    return {};
+  }
+});
+
 app.router.get(`${homeUrl}/CoverFor`, function () {
   console.log(this.req.url);
-  const w = watchesFor(false);
-  console.log(w);
+  const w = watchesFor(COVER_FOR);
   this.res.json(w);
 });
 app.router.get(`${homeUrl}/WatchesFor`, function () {
   console.log(this.req.url);
-  const w = watchesFor(false);
-  console.log(w);
+  const queryParam = parseReqUrl(this.req.url);
+  const msgType = queryParam[0].split("=")[1];
+  const w = watchesFor(msgType); //DEFAULT_WATCH);
   this.res.json(w);
+});
+app.router.get(`${homeUrl}/timebankworkplace`, function () {
+  const queryParam = parseReqUrl(this.req.url);
+  const workPlace = queryParam[1].split("=")[1];
+  console.log(workPlace);
+  const curVal = workPlace === "39" ? 12.45343 : 15.47865;
+  this.res.json({value: curVal});
 });
 app.router.get(`${homeUrl}/WatchesForSwapTo`, function () {
   console.log(this.req.url);
-  const w = watchesFor(true);
-  console.log(w);
+  const w = watchesFor(SWAP_TO);
   this.res.json(w);
 });
 
@@ -180,6 +382,19 @@ app.router.get("/msg", function () {
         "fromDate":"2018-4-28T07:30","toDate":"2018-4-28T15:00","workPlace":"Work Place","cover":"Trine Hex","reason":"Årsak 1",
         "msg":"How do you do?","msgTypeText":"Avspasering","fromStr":"07:30","toStr":"15:30","subItems":null}
      ]);
+});
+
+// Parameterized routes
+app.router.get("/AjourholdRequest/slidefrom/:usr/:workPlace/:curDate", function (usr,workPlace,curDate) {
+  console.log(this.req.url);
+  console.log(`usr: ${usr}, workPlace: ${workPlace}, curDate: ${curDate}`);
+  const w = watchesFor(SLIDE);
+  this.res.json(w);
+});
+
+app.router.get("/AjourholdRequest/slideto/:usr/:workPlace/:curDate", function (usr,workPlace,curDate) {
+  const w = watchesFor(SLIDE_TO);
+  this.res.json(w);
 });
 
 
