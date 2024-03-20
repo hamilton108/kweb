@@ -77,21 +77,32 @@ incDayIso iso =
     result
 
 
-incDayStr_ : String -> Maybe String
-incDayStr_ sx =
-    let
-        iso =
-            { date = sx, time = "00:00" }
 
-        isoInc =
-            incDayIso iso
-    in
-    Just isoInc.date
+-- incDayStr_ : String -> Maybe String
+-- incDayStr_ sx =
+--     let
+--         iso =
+--             { date = sx, time = "00:00" }
+--         isoInc =
+--             incDayIso iso
+--     in
+--     Just isoInc.date
 
 
 incDayStr : Maybe String -> Maybe String
 incDayStr s =
-    s |> Maybe.andThen incDayStr_
+    s
+        |> Maybe.andThen
+            (\sx ->
+                let
+                    iso =
+                        { date = sx, time = "00:00" }
+
+                    isoInc =
+                        incDayIso iso
+                in
+                Just isoInc.date
+            )
 
 
 

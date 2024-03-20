@@ -1,6 +1,5 @@
 module Ajourhold.Views.Absence exposing (view)
 
-import Ajourhold.Commands as C
 import Ajourhold.Types
     exposing
         ( IsDisabled(..)

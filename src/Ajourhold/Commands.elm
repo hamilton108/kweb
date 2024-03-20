@@ -149,16 +149,27 @@ getWatchDef key wdDict =
 
 isExtra : Model -> Maybe String
 isExtra model =
-    case model.selectedWatch of
-        Nothing ->
-            Nothing
+    model.selectedWatch
+        |> Maybe.andThen
+            (\w ->
+                let
+                    curWd =
+                        getWatchDef w model.watchDefs
+                in
+                Just curWd.isExtra
+            )
 
-        Just w ->
-            let
-                curWd =
-                    getWatchDef w model.watchDefs
-            in
-            Just curWd.isExtra
+
+
+-- case model.selectedWatch of
+--     Nothing ->
+--         Nothing
+--     Just w ->
+--         let
+--             curWd =
+--                 getWatchDef w model.watchDefs
+--         in
+--         Just curWd.isExtra
 
 
 isDateFromLess : Model -> Bool
