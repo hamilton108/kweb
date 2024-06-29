@@ -1,7 +1,6 @@
 module Ajourhold.Decoders exposing
     ( myInitDataCurDayDecoder
     , myInitDataDecoder
-    , myWorkPlacesDecoder
     , timebankWorkPlaceDecoder
     , watchDefDecoder
     , watchInfoDecoder
@@ -12,6 +11,7 @@ import Common.ComboBox as CB
 import Json.Decode as JD
 import Json.Decode.Pipeline as JP
 import Result exposing (Result)
+import Dict exposing (Dict)
 
 
 myInitDataDecoder : JD.Value -> Result JD.Error InitData
@@ -23,7 +23,7 @@ myInitDataDecoder =
                 |> JP.required "workPlaces" CB.comboBoxItemListDecoder
                 |> JP.required "saldo" JD.float
                 |> JP.required "vacation" JD.string
-                |> JP.required "reasonCodes" CB.comboBoxItemListDecoder
+                |> JP.required "reasonCodesUnits" (JD.dict CB.comboBoxItemListDecoder)
     in
     JD.decodeValue myDecoder
 
@@ -46,22 +46,23 @@ myInitDataCurDayDecoder =
                 |> JP.required "watchdefs" (JD.dict watchDefDecoder)
                 |> JP.required "workPlaces" CB.comboBoxItemListDecoder
                 |> JP.required "reasonCodes" CB.comboBoxItemListDecoder
+                |> JP.required "reasonCodesUnits" (JD.dict CB.comboBoxItemListDecoder)
     in
     JD.decodeValue myDecoder
 
 
-myWorkPlacesDecoder : JD.Value -> Result JD.Error InitData
-myWorkPlacesDecoder =
-    let
-        myDecoder =
-            JD.succeed InitData
-                |> JP.required "userId" JD.string
-                |> JP.required "workPlaces" CB.comboBoxItemListDecoder
-                |> JP.required "saldo" JD.float
-                |> JP.required "vacation" JD.string
-                |> JP.hardcoded []
-    in
-    JD.decodeValue myDecoder
+-- myWorkPlacesDecoder : JD.Value -> Result JD.Error InitData
+-- myWorkPlacesDecoder =
+--     let
+--         myDecoder =
+--             JD.succeed InitData
+--                 |> JP.required "userId" JD.string
+--                 |> JP.required "workPlaces" CB.comboBoxItemListDecoder
+--                 |> JP.required "saldo" JD.float
+--                 |> JP.required "vacation" JD.string
+--                 |> JP.required "reasonCodesUnits" (JD.dict CB.comboBoxItemListDecoder)
+--     in
+--     JD.decodeValue myDecoder
 
 
 watchDefDecoder : JD.Decoder WatchDef

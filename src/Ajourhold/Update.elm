@@ -36,6 +36,7 @@ initModel mainUrl ajcat lang =
     , lang = lang
     , userId = "-1"
     , reasonCodes = []
+    , reasonCodesUnits = Dict.empty
     , melding = Nothing
     , selectedReasonCode = Nothing
     , workPlaces = Nothing
@@ -94,6 +95,7 @@ resetModel model dlgState =
         , workPlaces2 = model.workPlaces2
         , saldo = model.saldo
         , reasonCodes = model.reasonCodes
+        , reasonCodesUnits = model.reasonCodesUnits
         , dlgAlert = dlgState
     }
 
@@ -199,6 +201,8 @@ updateWatch1 msg model =
                             [ C.fetchWatches model.mainUrl model.ajcat model.userId wp model.dateFrom model.dateTo
                             , C.fetchTimebankWorkPlace model.mainUrl (UserId model.userId) curWp newWp
                             ]
+                crc = 
+                    T.curReasonCodesStr wp model.reasonCodesUnits
             in
             let
                 newModel =
@@ -212,6 +216,7 @@ updateWatch1 msg model =
                             , hourTo = Nothing
                             , sumHours = Nothing
                             , saldo = Nothing
+                            , reasonCodes = crc
                         }
 
                     else
@@ -223,6 +228,7 @@ updateWatch1 msg model =
                             , hourFrom = Nothing
                             , hourTo = Nothing
                             , sumHours = Nothing
+                            , reasonCodes = crc
                         }
             in
             ( newModel, curCmd )
@@ -268,11 +274,15 @@ updateWatch2 msg model =
 
                     else
                         C.fetchWatches2 model.mainUrl model.userId wp model.dateFrom model.dateTo
+
+                crc = 
+                    T.curReasonCodesStr wp model.reasonCodesUnits
             in
             ( { model
                 | selectedWorkPlace2 = wp
                 , selectedWatch2 = Nothing
                 , watches2 = Nothing
+                , reasonCodes = crc
               }
             , curCmd
             )
@@ -346,11 +356,14 @@ updateCoverFor msg model =
 
                             newWp =
                                 T.toWorkPlace wp
+
                         in
                         Cmd.batch
                             [ C.fetchCoverFor model.mainUrl model.userId wp model.dateFrom model.dateTo
                             , C.fetchTimebankWorkPlace model.mainUrl (UserId model.userId) curWp newWp
                             ]
+                crc = 
+                    T.curReasonCodesStr wp model.reasonCodesUnits
             in
             let
                 newModel =
@@ -365,6 +378,7 @@ updateCoverFor msg model =
                             , hourTo = Nothing
                             , sumHours = Nothing
                             , saldo = Nothing
+                            , reasonCodes = crc
                         }
 
                     else
@@ -377,6 +391,7 @@ updateCoverFor msg model =
                             , hourFrom = Nothing
                             , hourTo = Nothing
                             , sumHours = Nothing
+                            , reasonCodes = crc
                         }
             in
             ( newModel, curCmd )
@@ -442,11 +457,15 @@ updateSwap index msg model =
                     Just s
 
                 updMod =
+                    let 
+                        crc = 
+                            T.curReasonCodesStr wp model.reasonCodesUnits
+                    in
                     if index == 1 then
-                        { model | selectedWorkPlace = wp, selectedWatch = Nothing, watches = Nothing }
+                        { model | selectedWorkPlace = wp, selectedWatch = Nothing, watches = Nothing, reasonCodes = crc }
 
                     else
-                        { model | selectedWorkPlace2 = wp, selectedWatch2 = Nothing, watches2 = Nothing }
+                        { model | selectedWorkPlace2 = wp, selectedWatch2 = Nothing, watches2 = Nothing, reasonCodes = crc }
 
                 curCmd =
                     if s == "-1" then
@@ -457,6 +476,7 @@ updateSwap index msg model =
 
                     else
                         C.fetchWatchesSwapTo updMod.mainUrl updMod.userId wp updMod.dateFrom updMod.dateTo updMod.selectedWatch
+
             in
             ( updMod, curCmd )
 
@@ -566,12 +586,15 @@ updateSlide msg model =
                     else
                         C.fetchSlideTo model.mainUrl usr curWp model.selectedWatch curFromDate curDate
 
+                crc = 
+                    T.curReasonCodes curWp model.reasonCodesUnits
+
                 newModel =
                     if index == 1 then
-                        { model | selectedWorkPlace = Just s, selectedWatch = Nothing }
+                        { model | selectedWorkPlace = Just s, selectedWatch = Nothing, reasonCodes = crc }
 
                     else
-                        { model | selectedWorkPlace2 = Just s, selectedWatch2 = Nothing }
+                        { model | selectedWorkPlace2 = Just s, selectedWatch2 = Nothing, reasonCodes = crc }
             in
             ( newModel, slideFn )
 
@@ -652,6 +675,9 @@ updateEmergency msg model =
                             [ C.fetchWatches model.mainUrl model.ajcat model.userId wp model.dateFrom model.dateTo
                             , C.fetchTimebankWorkPlace model.mainUrl (UserId model.userId) curWp newWp
                             ]
+
+                crc = 
+                    T.curReasonCodesStr wp model.reasonCodesUnits
             in
             let
                 newModel =
@@ -665,6 +691,7 @@ updateEmergency msg model =
                             , hourTo = Nothing
                             , sumHours = Nothing
                             , saldo = Nothing
+                            , reasonCodes = crc
                         }
 
                     else
@@ -676,6 +703,7 @@ updateEmergency msg model =
                             , hourFrom = Nothing
                             , hourTo = Nothing
                             , sumHours = Nothing
+                            , reasonCodes = crc
                         }
             in
             ( newModel, curCmd )
@@ -717,14 +745,10 @@ update msg model =
             ( { model | dlgAlert = DLG.DialogHidden }, Cmd.none )
 
         InitDataFetched (Ok s) ->
-            -- let
-            --     mySaldo =
-            --         String.fromFloat (M.toDecimal s.saldo 100.0)
-            -- in
-            -- ( { model | userId = s.userId, vacation = s.vacation, workPlaces = Just s.workPlaces, saldo = Just mySaldo, reasonCodes = s.reasonCodes }, Cmd.none )
-            ( { model | userId = s.userId, vacation = s.vacation, workPlaces = Just s.workPlaces, reasonCodes = s.reasonCodes }, Cmd.none )
+            ( { model | userId = s.userId, vacation = s.vacation, workPlaces = Just s.workPlaces, reasonCodesUnits = s.reasonCodesUnits }, Cmd.none )
 
         InitDataFetched (Err s) ->
+            --Debug.log "InitDataFetched"
             ( { model | dlgAlert = DLG.DialogVisibleAlert "Subscriptions" ("InitDataFetched Error: " ++ JD.errorToString s) DLG.Error }, Cmd.none )
 
         InitDataCurDayFetched (Ok s) ->
@@ -754,7 +778,7 @@ update msg model =
 
                 --x = Debug.log (Debug.toString s) 10
             in
-            --Debug.log "InitDataCurDayFetched "
+            -- Debug.log "InitDataCurDayFetched "
             ( { model
                 | userId = s.userId
                 , selectedWorkPlace = selWorkPlace
@@ -765,6 +789,7 @@ update msg model =
                 , watches = Just s.watches
                 , watchDefs = Just s.watchDefs
                 , reasonCodes = s.reasonCodes
+                , reasonCodesUnits = s.reasonCodesUnits
                 , sumHours = Just sumStr
                 , hourFrom = Just w.hourFrom
                 , hourTo = Just w.hourTo
@@ -776,7 +801,12 @@ update msg model =
             ( { model | dlgAlert = DLG.DialogVisibleAlert "Subscriptions" ("InitDataCurDayFetched Error: " ++ JD.errorToString s) DLG.Error }, Cmd.none )
 
         WorkPlaceChanged s ->
-            ( { model | selectedWorkPlace = Just s }, Cmd.none )
+            let 
+                crc = 
+                    T.curReasonCodesStr (Just s) model.reasonCodesUnits
+            in
+            --Debug.log "WorkPlaceChanged"
+            ( { model | selectedWorkPlace = Just s, reasonCodes = crc }, Cmd.none )
 
         WorkPlacesFetched (Ok s) ->
             let

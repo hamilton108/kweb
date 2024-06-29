@@ -106,7 +106,14 @@ const initDataCurDay = () => {
         reasonCodes: reasonCodesAll()
     };
 };
-
+const SWAP = "300"; // Vaktbytte (Swap)
+const SWAP_TO = "301"; // Vaktbytte (Swap)
+const GI = "19"; // Generelt tillegg
+const EMER = "2"; // Uttrykning
+const SLIDE = "150"; // Forskyvning (Slide)
+const SLIDE_TO = "151"; // Forskyvning (Slide)
+const DEFAULT_WATCH = "1001";
+const COVER_FOR = "1002";
 const emptyComboBox = () => {
     return {value:"-1",text:"---------------------"}
 }

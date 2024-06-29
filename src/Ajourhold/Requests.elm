@@ -23,7 +23,7 @@ subscriptions : Model -> Sub Msg
 subscriptions _ =
     Sub.batch
         [ initDataFetched (DC.myInitDataDecoder >> InitDataFetched)
-        , workPlacesFetched (DC.myWorkPlacesDecoder >> WorkPlacesFetched)
+        , workPlacesFetched (DC.myInitDataDecoder >> WorkPlacesFetched)
         , initDataCurDayFetched (DC.myInitDataCurDayDecoder >> InitDataCurDayFetched)
         ]
 

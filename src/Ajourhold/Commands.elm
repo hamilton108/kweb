@@ -526,12 +526,6 @@ fetchWatches_ (MainUrl mainUrl) ajCat ajaxCall myCmd userId workPlace dateFrom d
                     _ ->
                         mainUrl ++ ajaxCall ++ "?messageType=" ++ (String.fromInt <| ACE.fromEnum ajCat) ++ "&workPlace=" ++ wp ++ "&userid=" ++ userId ++ "&dateFrom=" ++ df ++ "&dateTo=" ++ dt
 
-            {-
-               decoder =
-                   JP.decode WatchInfo
-                       |> JP.required "watches" (JD.nullable CB.comboBoxItemListDecoder)
-                       |> JP.required "watchdefs" (JD.nullable (JD.dict AD.watchDefDecoder))
-            -}
         in
         Http.send myCmd <| Http.get url AD.watchInfoDecoder
 
@@ -568,8 +562,6 @@ fetchSlideFrom (MainUrl mainUrl) (UserId userId) wp cd =
         let
             url =
                 mainUrl ++ "/WatchesFor?messageType=6" ++ "&workPlace=" ++ T.fromWorkPlace wp ++ "&userid=" ++ userId ++ "&dateFrom=" ++ T.fromMyDate cd ++ "&dateTo=" ++ T.fromMyDate cd
-
-            --slideUrl userId wp cd True
         in
         Http.send (SlideMsgFor << SlideWatchFetched 1) <| Http.get url AD.watchInfoDecoder
 

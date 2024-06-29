@@ -23,6 +23,7 @@ view model =
             
         to_date_str =
             getLangValue "til_dato" model.lang
+
         date1 =
             VI.gridAjourItem VI.gA1
                 (VI.dateItem from_date_str model.dateFrom (SimpleDateChanged 1))

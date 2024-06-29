@@ -20,6 +20,8 @@ module Ajourhold.Types exposing
     , WatchInfo
     , WatchMsg(..)
     , WorkPlace(..)
+    , curReasonCodes
+    , curReasonCodesStr
     , defaultWatchDef
     , fromMyDate
     , fromWorkPlace
@@ -146,7 +148,7 @@ type alias InitData =
     , workPlaces : CB.SelectItems
     , saldo : Float
     , vacation : String
-    , reasonCodes : CB.SelectItems
+    , reasonCodesUnits : Dict String CB.SelectItems
     }
 
 
@@ -160,8 +162,26 @@ type alias InitDataCurDay =
     , watchDefs : WatchDefDict
     , workPlaces : CB.SelectItems
     , reasonCodes : CB.SelectItems
+    , reasonCodesUnits : Dict String CB.SelectItems
     }
 
+
+curReasonCodes : WorkPlace -> Dict String CB.SelectItems -> CB.SelectItems
+curReasonCodes wp d = 
+    if wp == NoWorkPlace then
+        []
+    else
+        let 
+            curWp = fromWorkPlace wp
+        in
+        d 
+            |> Dict.get curWp
+            |> Maybe.withDefault []
+
+
+curReasonCodesStr : Maybe String -> Dict String CB.SelectItems -> CB.SelectItems
+curReasonCodesStr s d = 
+    curReasonCodes (toWorkPlace s) d
 
 type alias WatchDef =
     { len : String
@@ -261,6 +281,7 @@ type alias Model =
     , lang : Dict String String
     , userId : String
     , reasonCodes : CB.SelectItems
+    , reasonCodesUnits : Dict String CB.SelectItems
     , selectedReasonCode : Maybe String
     , melding : Maybe String
     , workPlaces : Maybe CB.SelectItems

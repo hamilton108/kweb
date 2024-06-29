@@ -1,0 +1,579 @@
+{
+  "userId": "jonjoh",
+  "workPlaces": [
+    {
+      "text": "Avdeling 1/Bolig-A/Bolig-A",
+      "value": "59"
+    },
+    {
+      "text": "Avdeling 2/Felles 1020/KNA 12",
+      "value": "39"
+    },
+    {
+      "text": "Avdeling 2/2530 - Dagarbeider/2530 - Dagarbeider",
+      "value": "131"
+    }
+  ],
+  "saldo": 35.75927,
+  "reasonCodes": {},
+  "reasonCodesUnits": {
+    "r1": {
+      "59": [
+        {
+          "text": "Avspasering m/trekk tillegg ",
+          "value": "216"
+        },
+        {
+          "text": "Avspasering  16.10.14 flytte annet sted trekk av timer og tillegg",
+          "value": "900"
+        }
+      ],
+      "39": [
+        {
+          "text": "Avspasering m/trekk tillegg ",
+          "value": "216"
+        }
+      ],
+      "131": [
+        {
+          "text": "Avspasering m/trekk tillegg ",
+          "value": "216"
+        }
+      ]
+    },
+    "r2": {
+      "59": [
+        {
+          "text": "Utrykning ",
+          "value": "192"
+        },
+        {
+          "text": "Utrykning2 ",
+          "value": "962"
+        }
+      ],
+      "39": [
+        {
+          "text": "Utrykning ",
+          "value": "192"
+        }
+      ],
+      "131": [
+        {
+          "text": "Utrykning ",
+          "value": "192"
+        },
+        {
+          "text": "Utrykning2 ",
+          "value": "962"
+        }
+      ]
+    },
+    "r3": {
+      "59": [
+        {
+          "text": "Privat vaktbytte ",
+          "value": "-1"
+        }
+      ],
+      "39": [
+        {
+          "text": "Privat vaktbytte ",
+          "value": "-1"
+        }
+      ],
+      "131": [
+        {
+          "text": "Privat vaktbytte ",
+          "value": "-1"
+        }
+      ]
+    },
+    "r6": {
+      "59": [
+        {
+          "text": "Sykemelding 1-16 dager ",
+          "value": "191"
+        },
+        {
+          "text": "Permisjon m/lønn ",
+          "value": "212"
+        },
+        {
+          "text": "Permisjon U/lønn ",
+          "value": "213"
+        },
+        {
+          "text": "Trekk i lønn med ulønnet og trekk i lønn",
+          "value": "431"
+        },
+        {
+          "text": "Ledig stilling vakant",
+          "value": "473"
+        },
+        {
+          "text": "Egenmelding IA ",
+          "value": "719"
+        }
+      ],
+      "39": [
+        {
+          "text": "Permisjon m/lønn ",
+          "value": "212"
+        },
+        {
+          "text": "Permisjon U/lønn ",
+          "value": "213"
+        },
+        {
+          "text": "Trekk i lønn med ulønnet og trekk i lønn",
+          "value": "431"
+        },
+        {
+          "text": "Egenmelding IA ",
+          "value": "719"
+        },
+        {
+          "text": "Permisjon U-lønn (Trekk lønn) ",
+          "value": "839"
+        },
+        {
+          "text": "Frivillig Ja ",
+          "value": "960"
+        }
+      ],
+      "131": [
+        {
+          "text": "Permisjon m/lønn ",
+          "value": "212"
+        },
+        {
+          "text": "Permisjon U/lønn ",
+          "value": "213"
+        },
+        {
+          "text": "Trekk i lønn med ulønnet og trekk i lønn",
+          "value": "431"
+        },
+        {
+          "text": "Ledig stilling vakant",
+          "value": "473"
+        },
+        {
+          "text": "Sykemelding over 16 dager Med refusjon",
+          "value": "560"
+        },
+        {
+          "text": "Egenmelding IA ",
+          "value": "719"
+        },
+        {
+          "text": "Permisjon U-lønn (Trekk lønn) ",
+          "value": "839"
+        },
+        {
+          "text": "Frivillig Ja ",
+          "value": "960"
+        }
+      ]
+    },
+    "r7": {
+      "59": [
+        {
+          "text": "Sykemelding 1-16 dager ",
+          "value": "191"
+        },
+        {
+          "text": "Permisjon m/lønn ",
+          "value": "212"
+        },
+        {
+          "text": "Permisjon U/lønn ",
+          "value": "213"
+        },
+        {
+          "text": "Ferie lønnet ",
+          "value": "231"
+        },
+        {
+          "text": "Ferie Ulønnet ",
+          "value": "232"
+        },
+        {
+          "text": "Møte frivillig Kun ordinære timer",
+          "value": "372"
+        },
+        {
+          "text": "Trekk i lønn med ulønnet og trekk i lønn",
+          "value": "431"
+        },
+        {
+          "text": "Ledig stilling vakant",
+          "value": "473"
+        },
+        {
+          "text": "Ekstrapersonell Styrket bemanning",
+          "value": "659"
+        },
+        {
+          "text": "Opplæring Opplæring av nyansatte",
+          "value": "660"
+        },
+        {
+          "text": "Ekstra pga uro ",
+          "value": "661"
+        },
+        {
+          "text": "Beredskapsvakt ",
+          "value": "679"
+        },
+        {
+          "text": "Egenmelding IA ",
+          "value": "719"
+        },
+        {
+          "text": "Møte pålagt Gir overtid",
+          "value": "759"
+        },
+        {
+          "text": "Avspasering  16.10.14 flytte annet sted trekk av timer og tillegg",
+          "value": "900"
+        }
+      ],
+      "39": [
+        {
+          "text": "Permisjon m/lønn ",
+          "value": "212"
+        },
+        {
+          "text": "Permisjon U/lønn ",
+          "value": "213"
+        },
+        {
+          "text": "Ferie lønnet ",
+          "value": "231"
+        },
+        {
+          "text": "Ferie Ulønnet ",
+          "value": "232"
+        },
+        {
+          "text": "Ferievikarer ",
+          "value": "291"
+        },
+        {
+          "text": "Møte frivillig Kun ordinære timer",
+          "value": "372"
+        },
+        {
+          "text": "Trekk i lønn med ulønnet og trekk i lønn",
+          "value": "431"
+        },
+        {
+          "text": "Ekstrapersonell Styrket bemanning",
+          "value": "659"
+        },
+        {
+          "text": "Ekstra pga uro ",
+          "value": "661"
+        },
+        {
+          "text": "Egenmelding IA ",
+          "value": "719"
+        },
+        {
+          "text": "Møte pålagt Gir overtid",
+          "value": "759"
+        },
+        {
+          "text": "Permisjon U-lønn (Trekk lønn) ",
+          "value": "839"
+        }
+      ],
+      "131": [
+        {
+          "text": "Permisjon m/lønn ",
+          "value": "212"
+        },
+        {
+          "text": "Permisjon U/lønn ",
+          "value": "213"
+        },
+        {
+          "text": "Ferie lønnet ",
+          "value": "231"
+        },
+        {
+          "text": "Ferie Ulønnet ",
+          "value": "232"
+        },
+        {
+          "text": "Ferievikarer ",
+          "value": "291"
+        },
+        {
+          "text": "Møte frivillig Kun ordinære timer",
+          "value": "372"
+        },
+        {
+          "text": "Trekk i lønn med ulønnet og trekk i lønn",
+          "value": "431"
+        },
+        {
+          "text": "Ledig stilling vakant",
+          "value": "473"
+        },
+        {
+          "text": "Sykemelding over 16 dager Med refusjon",
+          "value": "560"
+        },
+        {
+          "text": "Ekstrapersonell Styrket bemanning",
+          "value": "659"
+        },
+        {
+          "text": "Opplæring Opplæring av nyansatte",
+          "value": "660"
+        },
+        {
+          "text": "Ekstra pga uro ",
+          "value": "661"
+        },
+        {
+          "text": "Beredskapsvakt ",
+          "value": "679"
+        },
+        {
+          "text": "Egenmelding IA ",
+          "value": "719"
+        },
+        {
+          "text": "Møte pålagt Gir overtid",
+          "value": "759"
+        },
+        {
+          "text": "Permisjon U-lønn (Trekk lønn) ",
+          "value": "839"
+        }
+      ]
+    },
+    "r11": {
+      "59": [],
+      "39": [],
+      "131": []
+    },
+    "r15": {
+      "59": [
+        {
+          "text": "Sykemelding 1-16 dager ",
+          "value": "191"
+        },
+        {
+          "text": "Permisjon m/lønn ",
+          "value": "212"
+        },
+        {
+          "text": "Permisjon U/lønn ",
+          "value": "213"
+        },
+        {
+          "text": "Møte frivillig Kun ordinære timer",
+          "value": "372"
+        },
+        {
+          "text": "Trekk i lønn med ulønnet og trekk i lønn",
+          "value": "431"
+        },
+        {
+          "text": "Ledig stilling vakant",
+          "value": "473"
+        },
+        {
+          "text": "Ekstrapersonell Styrket bemanning",
+          "value": "659"
+        },
+        {
+          "text": "Opplæring Opplæring av nyansatte",
+          "value": "660"
+        },
+        {
+          "text": "Ekstra pga uro ",
+          "value": "661"
+        },
+        {
+          "text": "Egenmelding IA ",
+          "value": "719"
+        },
+        {
+          "text": "Møte pålagt Gir overtid",
+          "value": "759"
+        }
+      ],
+      "39": [
+        {
+          "text": "Permisjon m/lønn ",
+          "value": "212"
+        },
+        {
+          "text": "Permisjon U/lønn ",
+          "value": "213"
+        },
+        {
+          "text": "Ferievikarer ",
+          "value": "291"
+        },
+        {
+          "text": "Møte frivillig Kun ordinære timer",
+          "value": "372"
+        },
+        {
+          "text": "Trekk i lønn med ulønnet og trekk i lønn",
+          "value": "431"
+        },
+        {
+          "text": "Ekstrapersonell Styrket bemanning",
+          "value": "659"
+        },
+        {
+          "text": "Ekstra pga uro ",
+          "value": "661"
+        },
+        {
+          "text": "Egenmelding IA ",
+          "value": "719"
+        },
+        {
+          "text": "Møte pålagt Gir overtid",
+          "value": "759"
+        },
+        {
+          "text": "Permisjon U-lønn (Trekk lønn) ",
+          "value": "839"
+        },
+        {
+          "text": "Frivillig Ja ",
+          "value": "960"
+        }
+      ],
+      "131": [
+        {
+          "text": "Permisjon m/lønn ",
+          "value": "212"
+        },
+        {
+          "text": "Permisjon U/lønn ",
+          "value": "213"
+        },
+        {
+          "text": "Ferievikarer ",
+          "value": "291"
+        },
+        {
+          "text": "Møte frivillig Kun ordinære timer",
+          "value": "372"
+        },
+        {
+          "text": "Trekk i lønn med ulønnet og trekk i lønn",
+          "value": "431"
+        },
+        {
+          "text": "Ledig stilling vakant",
+          "value": "473"
+        },
+        {
+          "text": "Sykemelding over 16 dager Med refusjon",
+          "value": "560"
+        },
+        {
+          "text": "Ekstrapersonell Styrket bemanning",
+          "value": "659"
+        },
+        {
+          "text": "Opplæring Opplæring av nyansatte",
+          "value": "660"
+        },
+        {
+          "text": "Ekstra pga uro ",
+          "value": "661"
+        },
+        {
+          "text": "Egenmelding IA ",
+          "value": "719"
+        },
+        {
+          "text": "Møte pålagt Gir overtid",
+          "value": "759"
+        },
+        {
+          "text": "Permisjon U-lønn (Trekk lønn) ",
+          "value": "839"
+        },
+        {
+          "text": "Frivillig Ja ",
+          "value": "960"
+        }
+      ]
+    },
+    "r18": {
+      "59": [
+        {
+          "text": "Ferie lønnet ",
+          "value": "231"
+        },
+        {
+          "text": "Ferie Ulønnet ",
+          "value": "232"
+        }
+      ],
+      "39": [
+        {
+          "text": "Ferie lønnet ",
+          "value": "231"
+        },
+        {
+          "text": "Ferie Ulønnet ",
+          "value": "232"
+        },
+        {
+          "text": "Ferievikarer ",
+          "value": "291"
+        }
+      ],
+      "131": [
+        {
+          "text": "Ferie lønnet ",
+          "value": "231"
+        },
+        {
+          "text": "Ferie Ulønnet ",
+          "value": "232"
+        },
+        {
+          "text": "Ferievikarer ",
+          "value": "291"
+        }
+      ]
+    },
+    "r19": {
+      "59": [
+        {
+          "text": "Generelt tillegg ",
+          "value": "10963"
+        }
+      ],
+      "39": [
+        {
+          "text": "Generelt tillegg ",
+          "value": "10963"
+        }
+      ],
+      "131": [
+        {
+          "text": "Generelt tillegg ",
+          "value": "10963"
+        }
+      ]
+    }
+  },
+  "vacation": "30"
+}
