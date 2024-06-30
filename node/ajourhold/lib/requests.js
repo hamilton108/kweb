@@ -33,14 +33,10 @@ jQuery(document).ready(function () {
           .then(data => {
             return data.json();
           }).then(result => {
-            //app7.ports.initDataFetched.send(initDataFor("r7", result));
-            //app6.ports.initDataFetched.send(initDataFor("r6", result));
-            //app1.ports.initDataFetched.send(initDataFor("r1", result));
-            app18.ports.initDataFetched.send(initDataFor("r18", result));
-            app19.ports.initDataFetched.send(initDataFor("r19", result));
-            //app2.ports.initDataFetched.send(initDataFor("r2", result));
-            app15.ports.initDataFetched.send(initDataFor("r15", result));
-            app3.ports.workPlacesFetched.send(result);
+            app18.ports.initDataFetched.send(initDataFor(18, result));
+            app19.ports.initDataFetched.send(initDataFor(19, result));
+            app15.ports.initDataFetched.send(initDataFor(15, result));
+            app3.ports.workPlacesFetched.send(initDataFor(3,result));
           });
 
         const fetchCurDayInitData = function (userId, messageType) {
@@ -48,7 +44,6 @@ jQuery(document).ready(function () {
             .then(data => {
               return data.json();
             }).then(result => {
-              //console.log(result);
               switch (messageType) {
                 case 1:
                   app1.ports.initDataCurDayFetched.send(curDayInitDataFor(messageType, result));
@@ -80,8 +75,6 @@ jQuery(document).ready(function () {
   var locale = getLocale();
 
 
-  //var formatMessage = DevExpress.localization.formatMessage;
-
   const setTabHeader = (heading) => {
     const header = document.getElementById("tab-header");
     header.text = heading;
@@ -112,10 +105,7 @@ jQuery(document).ready(function () {
     setTabHeader(curDic.Forskyvning);
   });
 
-  //const mainUrl = "http://172.17.0.2:3000";
-  //const mainUrl = "http://localhost:3000";
-    //const myUrl = `${mainUrl}/AjourholdRequest/InitData`;
-    const myCurDayInitUrl = `${KDO.mainUrl}/AjourholdRequest/InitDataCurDay`;
+  const myCurDayInitUrl = `${KDO.mainUrl}/AjourholdRequest/InitDataCurDay`;
 
   const myUrl = `${KDO.mainUrl}/AjourholdRequest/InitData`;
   const initElm = (category) => {
@@ -129,28 +119,31 @@ jQuery(document).ready(function () {
     return app;
   };
 
-  const initDataFor = function (ajCat, myData) {
+  const curDayInitDataFor = function(ajCat, myData) {
+    const result = {
+      "userId": myData.userId,
+      "curUnitid": myData.curUnitid,
+      "curWatchid": myData.curWatchid,
+      "curDate": myData.curDate,
+      "curHbank": myData.curHbank,
+      "watches": myData.watches,
+      "watchdefs": myData.watchdefs,
+      "workPlaces": myData.workPlaces,
+      "reasonCodes": myData["reasonCodes"][`r${ajCat}`],
+      "reasonCodesUnits": myData["reasonCodesUnits"][`r${ajCat}`]
+    }
+    return result;
+  }
+  const initDataFor = function(ajCat, myData) {
     const result = {
       "userId": myData.userId,
       "workPlaces": myData.workPlaces,
       "saldo": myData.saldo,
       "vacation": myData.vacation,
-      "reasonCodes": myData["reasonCodes"][ajCat]
+      "reasonCodes": [],
+      "reasonCodesUnits": myData["reasonCodesUnits"][`r${ajCat}`]
     }
     return result;
-  };
-  const curDayInitDataFor = function(ajCat, myData) {
-    const result = {
-      "userId": myData.userId,
-      "curUnitid": myData.curUnitid,
-      "curDate": myData.curDate,
-      "watches": myData.watches,
-      "watchdefs": myData.watchdefs,
-        "workPlaces": myData.workPlaces,
-        "curHbank": myData.curHbank,
-        "curWatchid": myData.curWatchid,
-      "reasonCodes": myData["reasonCodes"][`r${ajCat}`]
-    }
-    return result;
-  };
+  }
+
 })

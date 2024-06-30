@@ -78,14 +78,13 @@ jQuery(document).ready(function() {
     .then(data => {
       return data.json();
     }).then(result => {
-      //console.log(result);
-      app18.ports.initDataFetched.send(initDataFor("r18", result));
-      app19.ports.initDataFetched.send(initDataFor("r19", result));
-      app15.ports.initDataFetched.send(initDataFor("r15", result));
-      app3.ports.workPlacesFetched.send(result);
+
+      app18.ports.initDataFetched.send(initDataFor(18, result));
+      app19.ports.initDataFetched.send(initDataFor(19, result));
+      app15.ports.initDataFetched.send(initDataFor(15, result));
+      app3.ports.workPlacesFetched.send(initDataFor(3,result));
     });
-
-
+    
   const fetchCurDayInitData = function (userId, messageType) {
     fetch(myCurDayInitUrl + "?userId=" + userid + "&messageType=" + messageType)
       .then(data => {
@@ -124,7 +123,8 @@ jQuery(document).ready(function() {
       "watches": myData.watches,
       "watchdefs": myData.watchdefs,
       "workPlaces": myData.workPlaces,
-      "reasonCodes": myData["reasonCodes"][`r${ajCat}`]
+      "reasonCodes": myData["reasonCodes"][`r${ajCat}`],
+      "reasonCodesUnits": myData["reasonCodesUnits"][`r${ajCat}`]
     }
     return result;
   }
@@ -134,7 +134,8 @@ jQuery(document).ready(function() {
       "workPlaces": myData.workPlaces,
       "saldo": myData.saldo,
       "vacation": myData.vacation,
-      "reasonCodes": myData["reasonCodes"][ajCat]
+      "reasonCodes": [],
+      "reasonCodesUnits": myData["reasonCodesUnits"][`r${ajCat}`]
     }
     return result;
   }
